@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QgsWcsClient2</class>
+ <widget class="QDialog" name="QgsWcsClient2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>799</width>
+    <height>678</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QgsWcsClient2</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget_EOWcsClient2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>781</width>
+     <height>651</height>
+    </rect>
+   </property>
+   <property name="locale">
+    <locale language="English" country="Belgium"/>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab_Serv">
+    <attribute name="title">
+     <string>Server </string>
+    </attribute>
+    <widget class="QGroupBox" name="GroupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>7</x>
+       <y>20</y>
+       <width>762</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Server Connections:</string>
+     </property>
+     <layout class="QGridLayout" name="_6">
+      <property name="margin">
+       <number>9</number>
+      </property>
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="btnNew_Serv">
+        <property name="text">
+         <string>&amp;New</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <spacer>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>171</width>
+          <height>30</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnEdit_Serv">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Edit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnTestServer_Serv">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Test the Server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="6">
+       <widget class="QComboBox" name="cmbConnections_Serv"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="btnDelete_Serv">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Delete</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTextBrowser" name="textBrowser_Serv">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>160</y>
+       <width>731</width>
+       <height>191</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnClose_Serv">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>570</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_GCa">
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <attribute name="title">
+     <string>GetCapabilities</string>
+    </attribute>
+    <widget class="QGroupBox" name="GroupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>30</y>
+       <width>741</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Capabilities Document - Select Sections:</string>
+     </property>
+     <widget class="QWidget" name="gridLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>651</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBox_GCaDaSerSum">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>DatasetSeriesSummary</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="checkBox_GCaCovSum">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>CoverageSummary</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QCheckBox" name="checkBox_GCaServProv">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>ServiceProvider</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_GCaAll">
+         <property name="text">
+          <string>All</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="checkBox_GCaServId">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>ServiceIdentification</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QCheckBox" name="checkBox_GCaLang">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Languages</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="checkBox_GCaCont">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Contents</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_GCaOpMeta">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>OperationsMetadata</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="checkBox_GCaServMeta">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>ServiceMetadata</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="GroupBox_5">
+     <property name="geometry">
+      <rect>
+       <x>1</x>
+       <y>160</y>
+       <width>431</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="label_GCsInfo1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>6</y>
+        <width>241</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Document UpdateSequence - 
+only update when newer then:</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit_GCaDocUpdate">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>6</y>
+        <width>131</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="date">
+       <date>
+        <year>2014</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+      <property name="minimumDateTime">
+       <datetime>
+        <hour>0</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>1752</year>
+        <month>9</month>
+        <day>14</day>
+       </datetime>
+      </property>
+      <property name="maximumTime">
+       <time>
+        <hour>23</hour>
+        <minute>59</minute>
+        <second>59</second>
+       </time>
+      </property>
+      <property name="currentSection">
+       <enum>QDateTimeEdit::YearSection</enum>
+      </property>
+      <property name="displayFormat">
+       <string>yyyy-MM-dd</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QPushButton" name="pushButton_GCa">
+     <property name="geometry">
+      <rect>
+       <x>597</x>
+       <y>568</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>GetCapabilities</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnClose_GCa">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>576</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+    <widget class="QTreeWidget" name="treeWidget_GCa">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>762</width>
+       <height>341</height>
+      </rect>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Choice</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Identifier</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Abstract</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_DC">
+    <attribute name="title">
+     <string>DescribeCoverage</string>
+    </attribute>
+    <widget class="QTreeWidget" name="treeWidget_DC">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>76</y>
+       <width>762</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Choice</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Identifier</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Abstract</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_DCInfo1">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>18</y>
+       <width>331</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Describe a Coverage or a Stitched Mosaic:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DCInfo2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>43</y>
+       <width>581</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select the CoverageID's of interest, then press the DescribeCoverage button.</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_DC">
+     <property name="geometry">
+      <rect>
+       <x>599</x>
+       <y>565</y>
+       <width>171</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>DescribeCoverage</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnClose_DC">
+     <property name="geometry">
+      <rect>
+       <x>484</x>
+       <y>575</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_DCS">
+    <attribute name="title">
+     <string>DescribeEOCoverageSet</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButton_DCS">
+     <property name="geometry">
+      <rect>
+       <x>558</x>
+       <y>568</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>DescribeEOCoverageSet</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DCSInfo2">
+     <property name="geometry">
+      <rect>
+       <x>29</x>
+       <y>44</y>
+       <width>661</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select the ID's of interest, choose AOI and TOI, then press the DescribeEOCoverageSet button.</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_DCSInfo1">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>19</y>
+       <width>451</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Describe a DatsetSeries,  a Coverage, or a Stitched Mosaic:</string>
+     </property>
+    </widget>
+    <widget class="QTreeWidget" name="treeWidget_DCS">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>762</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Choice</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Identifier</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Abstract</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="btnClose_DCS">
+     <property name="geometry">
+      <rect>
+       <x>439</x>
+       <y>575</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_11">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>350</y>
+       <width>481</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Area of Interest  (AOI in WGS-84):</string>
+     </property>
+     <widget class="QLineEdit" name="lineEdit_DCSMinLon">
+      <property name="geometry">
+       <rect>
+        <x>81</x>
+        <y>78</y>
+        <width>146</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_DCSMaxLon">
+      <property name="geometry">
+       <rect>
+        <x>245</x>
+        <y>78</y>
+        <width>146</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_DCSMinLat">
+      <property name="geometry">
+       <rect>
+        <x>161</x>
+        <y>111</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSMaxLon">
+      <property name="geometry">
+       <rect>
+        <x>396</x>
+        <y>71</y>
+        <width>71</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Max. 
+Longitude</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSMinLat">
+      <property name="geometry">
+       <rect>
+        <x>186</x>
+        <y>144</y>
+        <width>89</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Min. Latitude</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_DCSMaxLat">
+      <property name="geometry">
+       <rect>
+        <x>161</x>
+        <y>45</y>
+        <width>151</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSMinLon">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>1</x>
+        <y>71</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Min. 
+Longitude</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSMaxLat">
+      <property name="geometry">
+       <rect>
+        <x>189</x>
+        <y>22</y>
+        <width>92</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Max. Latitude</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>516</y>
+       <width>391</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Time of Interrest (TOI):</string>
+     </property>
+     <widget class="QDateTimeEdit" name="dateTimeEdit_DCSBegin">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>21</y>
+        <width>194</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="locale">
+       <locale language="English" country="UnitedStates"/>
+      </property>
+      <property name="dateTime">
+       <datetime>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>2013</year>
+        <month>12</month>
+        <day>31</day>
+       </datetime>
+      </property>
+      <property name="date">
+       <date>
+        <year>2013</year>
+        <month>12</month>
+        <day>31</day>
+       </date>
+      </property>
+      <property name="minimumDateTime">
+       <datetime>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>1752</year>
+        <month>10</month>
+        <day>12</day>
+       </datetime>
+      </property>
+      <property name="minimumTime">
+       <time>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+       </time>
+      </property>
+      <property name="displayFormat">
+       <string>yyyy-MM-ddThh:mm </string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="timeSpec">
+       <enum>Qt::UTC</enum>
+      </property>
+     </widget>
+     <widget class="QDateTimeEdit" name="dateTimeEdit_DCSEnd">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>61</y>
+        <width>194</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="dateTime">
+       <datetime>
+        <hour>16</hour>
+        <minute>59</minute>
+        <second>59</second>
+        <year>2014</year>
+        <month>1</month>
+        <day>2</day>
+       </datetime>
+      </property>
+      <property name="date">
+       <date>
+        <year>2014</year>
+        <month>1</month>
+        <day>2</day>
+       </date>
+      </property>
+      <property name="time">
+       <time>
+        <hour>16</hour>
+        <minute>59</minute>
+        <second>59</second>
+       </time>
+      </property>
+      <property name="minimumDateTime">
+       <datetime>
+        <hour>17</hour>
+        <minute>0</minute>
+        <second>0</second>
+        <year>1752</year>
+        <month>10</month>
+        <day>12</day>
+       </datetime>
+      </property>
+      <property name="maximumTime">
+       <time>
+        <hour>16</hour>
+        <minute>59</minute>
+        <second>59</second>
+       </time>
+      </property>
+      <property name="currentSection">
+       <enum>QDateTimeEdit::YearSection</enum>
+      </property>
+      <property name="displayFormat">
+       <string>yyyy-MM-ddThh:mm </string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="timeSpec">
+       <enum>Qt::UTC</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSBegin">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>25</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Begin Time:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_DCSEnd">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>64</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>End Time:</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="geometry">
+      <rect>
+       <x>566</x>
+       <y>293</y>
+       <width>181</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Containment:</string>
+     </property>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>24</y>
+        <width>160</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="radioButton_ContOver">
+         <property name="text">
+          <string>overlaps</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioButton_ContCont">
+         <property name="text">
+          <string>contains</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_14">
+     <property name="geometry">
+      <rect>
+       <x>568</x>
+       <y>390</y>
+       <width>121</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Hits Count: </string>
+     </property>
+     <widget class="QSpinBox" name="spinBox_DCSCount">
+      <property name="geometry">
+       <rect>
+        <x>18</x>
+        <y>30</y>
+        <width>101</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>99999</number>
+      </property>
+      <property name="value">
+       <number>100</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="GroupBox_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>511</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Capabilities Document - Select Sections:</string>
+     </property>
+     <widget class="QWidget" name="gridLayoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>23</y>
+        <width>481</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_DCSAll">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>All</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QCheckBox" name="checkBox_DCSDatSerSum">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>DatasetSeriesSummary</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_DCCovSum">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>CoverageSummary</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QCheckBox" name="checkBox_DCSIDonly">
+     <property name="geometry">
+      <rect>
+       <x>564</x>
+       <y>500</y>
+       <width>191</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>coverage IDs only</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_GCov">
+    <attribute name="title">
+     <string>GetCoverage</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButton_GCov">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>566</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>GetCoverage</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnClose_GCov">
+     <property name="geometry">
+      <rect>
+       <x>431</x>
+       <y>573</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+    <widget class="QTreeWidget" name="treeWidget_GCov">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>762</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="columnCount">
+      <number>4</number>
+     </property>
+     <column>
+      <property name="text">
+       <string>Choice</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Identifier</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Abstract</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_GCovInfo1">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>281</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>GetCoverage:   download a Coverage </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_GCOvInfo2">
+     <property name="geometry">
+      <rect>
+       <x>43</x>
+       <y>46</y>
+       <width>661</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select the ID's of interest, then press the GetCoverager button.</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_15">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>260</y>
+       <width>401</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Output Subset:</string>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+     <widget class="QGroupBox" name="groupBox_16">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>120</y>
+        <width>381</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>    Coordinates:</string>
+      </property>
+      <widget class="QLabel" name="label_GCovMinLat">
+       <property name="geometry">
+        <rect>
+         <x>146</x>
+         <y>120</y>
+         <width>89</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min. Latitude</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_GCovMaxLat">
+       <property name="geometry">
+        <rect>
+         <x>149</x>
+         <y>-2</y>
+         <width>92</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Max. Latitude</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_GCovMinLat">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>87</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_GCovMaxLon">
+       <property name="geometry">
+        <rect>
+         <x>306</x>
+         <y>47</y>
+         <width>71</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Max. 
+Longitude</string>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_GCovMinLon">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>-4</x>
+         <y>47</y>
+         <width>81</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Min. 
+Longitude</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_GCovMaxLat">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>21</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_GCovMinLon">
+       <property name="geometry">
+        <rect>
+         <x>76</x>
+         <y>54</y>
+         <width>101</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_GCovMaxLon">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>54</y>
+         <width>101</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_17">
+      <property name="geometry">
+       <rect>
+        <x>2</x>
+        <y>20</y>
+        <width>411</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="title">
+       <string>   Type of subsetting:</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton_GCovSubOrig">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>116</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Original</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_GCovSubCRS">
+       <property name="geometry">
+        <rect>
+         <x>153</x>
+         <y>20</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CRS</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_GCovSubPixel">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>20</y>
+         <width>71</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Pixel</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_GCovSubEPSG">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>62</y>
+         <width>111</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_GCovSubEPSG">
+       <property name="geometry">
+        <rect>
+         <x>161</x>
+         <y>41</y>
+         <width>66</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>EPSG No.:</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_GCovBands">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>539</y>
+       <width>211</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_GCOvBands">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>543</y>
+       <width>66</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Bands:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_GCovOutCRS">
+     <property name="geometry">
+      <rect>
+       <x>23</x>
+       <y>583</y>
+       <width>171</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Output CRS (EPSG) No:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_GCovOutCRS">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>580</y>
+       <width>121</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_GCovOutFormat">
+     <property name="geometry">
+      <rect>
+       <x>498</x>
+       <y>273</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Output Format:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_GCOvOutFormat">
+     <property name="geometry">
+      <rect>
+       <x>624</x>
+       <y>270</y>
+       <width>131</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_GCovInterpol">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>320</y>
+       <width>111</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Interpolation: </string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_GCovInterpol">
+     <property name="geometry">
+      <rect>
+       <x>614</x>
+       <y>317</y>
+       <width>141</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>nearest (default)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>bilinear</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>average (slow)</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_18">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>369</y>
+       <width>361</width>
+       <height>191</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Output SIze:</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_19">
+      <property name="geometry">
+       <rect>
+        <x>29</x>
+        <y>23</y>
+        <width>341</width>
+        <height>86</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>X-Dimension</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="1" column="1" rowspan="2">
+        <widget class="QLineEdit" name="lineEdit_GCovXAxisLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QRadioButton" name="radioButton_GCovXRes">
+         <property name="text">
+          <string>X-Resolution</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_GCovXRes">
+         <property name="text">
+          <string>X-Axis Label:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QRadioButton" name="radioButton_GCovXSize">
+         <property name="text">
+          <string>X-Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_GCovXSize">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>Size: </string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" rowspan="2">
+        <widget class="QLineEdit" name="lineEdit_GCovXSize">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_20">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>100</y>
+        <width>341</width>
+        <height>86</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Y-Dimension</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="1" column="1" rowspan="2">
+        <widget class="QLineEdit" name="lineEdit_GCovYAxisLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="label_GCovYSize">
+         <property name="text">
+          <string>Size: </string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QRadioButton" name="radioButton_GCovYSize">
+         <property name="text">
+          <string>Y-Size</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_GCovYAxisLabel">
+         <property name="text">
+          <string>Y-Axis Label:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QRadioButton" name="radioButton_GCovYRes">
+         <property name="text">
+          <string>Y-Resolution</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" rowspan="2">
+        <widget class="QLineEdit" name="lineEdit_GCovYSize">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_Help">
+    <attribute name="title">
+     <string>About / Help</string>
+    </attribute>
+    <widget class="QPushButton" name="btnClose_Help">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>570</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>btnClose_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_GCa</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_DC</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_DCS</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_GCov</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_Help</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>708</x>
+     <y>630</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnNew_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>newServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTestServer_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>testServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEdit_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>editServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDelete_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>deleteServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>newServer()</slot>
+  <slot>testServer()</slot>
+  <slot>editServer()</slot>
+  <slot>deleteServer()</slot>
+ </slots>
+</ui>
