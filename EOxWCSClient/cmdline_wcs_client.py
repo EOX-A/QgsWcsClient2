@@ -124,6 +124,25 @@ def _get_cmdline():
             setattr(namespace, self.dest, out)
 
     #---------------
+    class _chk_format(argparse.Action):
+        """
+            adapts format input to --> image/format
+        """
+        def __call__(self, cl_parser, namespace, values, option_string=None):
+            print 'FFF: ',values
+            
+            if values == 'tiff':
+                out = 'image/tiff'
+            if values == 'jpeg':
+                out = 'image/jpeg'    
+            if values == 'png':
+                out = 'image/png'
+            if values == 'gif':
+                out = 'image/gif'
+
+            setattr(namespace, self.dest, out)
+
+    #---------------
     class _chk_coord(argparse.Action):
         """
             checks and reformats the recieved coordinates and provides the corrcet Axis syntax
@@ -286,7 +305,7 @@ def _get_cmdline():
 
     mandatory.add_argument('--coverageID', metavar='coverageID', required=True, help='a valid coverageID')
 
-    mandatory.add_argument('--format', choices=['tiff', 'jpeg', 'png', 'gif'],
+    mandatory.add_argument('--format', choices=['tiff', 'jpeg', 'png', 'gif'], action=_chk_format, 
                         required=True, help='requested format of coverage to be returned')
 
     mandatory.add_argument('-o', '--output', metavar='output', dest='output', action='store',

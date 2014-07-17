@@ -1,5 +1,0 @@
-#global setttings 
-#global srv_list
-
-settings = {}
-srv_list = []

@@ -7,19 +7,22 @@
     <x>0</x>
     <y>0</y>
     <width>799</width>
-    <height>678</height>
+    <height>675</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>QgsWcsClient2</string>
   </property>
   <widget class="QTabWidget" name="tabWidget_EOWcsClient2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
+     <y>0</y>
      <width>781</width>
-     <height>651</height>
+     <height>661</height>
     </rect>
    </property>
    <property name="locale">
@@ -30,7 +33,7 @@
    </property>
    <widget class="QWidget" name="tab_Serv">
     <attribute name="title">
-     <string>Server </string>
+     <string>Server / Storage</string>
     </attribute>
     <widget class="QGroupBox" name="GroupBox_9">
      <property name="geometry">
@@ -56,6 +59,48 @@
         <property name="text">
          <string>&amp;New</string>
         </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="btnEdit_Serv">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Edit</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btnConnectServer_Serv">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Connect to Server</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="5">
+       <widget class="QComboBox" name="cmbConnections_Serv"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="btnDelete_Serv">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>&amp;Delete</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item row="1" column="4">
@@ -68,44 +113,11 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>171</width>
-          <height>30</height>
+          <width>258</width>
+          <height>27</height>
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="btnEdit_Serv">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Edit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="btnTestServer_Serv">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Test the Server</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="6">
-       <widget class="QComboBox" name="cmbConnections_Serv"/>
-      </item>
-      <item row="1" column="3">
-       <widget class="QPushButton" name="btnDelete_Serv">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>&amp;Delete</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
@@ -113,9 +125,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>160</y>
+       <y>153</y>
        <width>731</width>
-       <height>191</height>
+       <height>321</height>
       </rect>
      </property>
     </widget>
@@ -123,7 +135,7 @@
      <property name="geometry">
       <rect>
        <x>650</x>
-       <y>570</y>
+       <y>582</y>
        <width>98</width>
        <height>27</height>
       </rect>
@@ -132,8 +144,72 @@
       <string>Close</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>24</x>
+       <y>130</y>
+       <width>321</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>General Information  / Errors / etc.</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>501</y>
+       <width>741</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="title">
+      <string>Local Storage Path  (only required for downloading with GetCoverage): </string>
+     </property>
+     <widget class="QToolButton" name="toolButton_Serv_OutputLoc">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>30</y>
+        <width>23</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_Serv_OutputLoc">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>641</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_GCa">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="mouseTracking">
      <bool>false</bool>
     </property>
@@ -147,9 +223,9 @@
      <property name="geometry">
       <rect>
        <x>9</x>
-       <y>30</y>
+       <y>10</y>
        <width>741</width>
-       <height>111</height>
+       <height>131</height>
       </rect>
      </property>
      <property name="title">
@@ -159,7 +235,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>50</y>
         <width>651</width>
         <height>81</height>
        </rect>
@@ -175,6 +251,9 @@
          </property>
          <property name="text">
           <string>DatasetSeriesSummary</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -281,6 +360,19 @@
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>25</y>
+        <width>651</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>( Note:  some WCS Servers might not respect these section parameters )</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="GroupBox_5">
      <property name="geometry">
@@ -294,7 +386,7 @@
      <property name="title">
       <string/>
      </property>
-     <widget class="QLabel" name="label_GCsInfo1">
+     <widget class="QLabel" name="label_GCaInfo1">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -314,44 +406,20 @@
 only update when newer then:</string>
       </property>
      </widget>
-     <widget class="QDateEdit" name="dateEdit_GCaDocUpdate">
+     <widget class="QCheckBox" name="checkBox_GCa_ActiveDate">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>6</y>
-        <width>131</width>
-        <height>27</height>
+        <x>246</x>
+        <y>10</y>
+        <width>31</width>
+        <height>22</height>
        </rect>
       </property>
-      <property name="date">
-       <date>
-        <year>2014</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-      <property name="minimumDateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>1752</year>
-        <month>9</month>
-        <day>14</day>
-       </datetime>
-      </property>
-      <property name="maximumTime">
-       <time>
-        <hour>23</hour>
-        <minute>59</minute>
-        <second>59</second>
-       </time>
-      </property>
-      <property name="currentSection">
-       <enum>QDateTimeEdit::YearSection</enum>
-      </property>
-      <property name="displayFormat">
-       <string>yyyy-MM-dd</string>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -391,40 +459,127 @@ only update when newer then:</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>220</y>
+       <y>240</y>
        <width>762</width>
-       <height>341</height>
+       <height>321</height>
       </rect>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::DoubleClicked</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="autoExpandDelay">
+      <number>-1</number>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>3</number>
      </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="headerStretchLastSection">
+      <bool>true</bool>
+     </attribute>
      <column>
       <property name="text">
-       <string>Choice</string>
+       <string>CoverageID/DataSetSeriesID</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Identifier</string>
+       <string>BeginTime</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Abstract</string>
+       <string>EndTime</string>
       </property>
      </column>
     </widget>
+    <widget class="QDateEdit" name="dateEdit_GCaDocUpdate">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>282</x>
+       <y>168</y>
+       <width>131</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="specialValueText">
+      <string>1900-01-01</string>
+     </property>
+     <property name="date">
+      <date>
+       <year>2014</year>
+       <month>1</month>
+       <day>1</day>
+      </date>
+     </property>
+     <property name="minimumDateTime">
+      <datetime>
+       <hour>0</hour>
+       <minute>0</minute>
+       <second>0</second>
+       <year>1753</year>
+       <month>9</month>
+       <day>14</day>
+      </datetime>
+     </property>
+     <property name="maximumTime">
+      <time>
+       <hour>23</hour>
+       <minute>59</minute>
+       <second>59</second>
+      </time>
+     </property>
+     <property name="currentSection">
+      <enum>QDateTimeEdit::YearSection</enum>
+     </property>
+     <property name="displayFormat">
+      <string>yyyy-MM-dd</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>491</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Results of GetCapabilities Request  &amp;  Selection for further usage:</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_DC">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <attribute name="title">
      <string>DescribeCoverage</string>
     </attribute>
@@ -432,35 +587,26 @@ only update when newer then:</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>76</y>
+       <y>106</y>
        <width>762</width>
-       <height>471</height>
+       <height>431</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>1</number>
      </property>
      <column>
       <property name="text">
-       <string>Choice</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Identifier</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Abstract</string>
+       <string>CoverageIDs</string>
       </property>
      </column>
     </widget>
@@ -528,8 +674,24 @@ only update when newer then:</string>
       <string>Close</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>83</y>
+       <width>411</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Selection for DescribeCoverage Requests:</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_DCS">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <attribute name="title">
      <string>DescribeEOCoverageSet</string>
     </attribute>
@@ -557,12 +719,12 @@ only update when newer then:</string>
       <rect>
        <x>29</x>
        <y>44</y>
-       <width>661</width>
+       <width>721</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Select the ID's of interest, choose AOI and TOI, then press the DescribeEOCoverageSet button.</string>
+      <string>Select the ID of interest, choose optional AOI and TOI, then press the DescribeEOCoverageSet button.</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_DCSInfo1">
@@ -588,35 +750,33 @@ only update when newer then:</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>100</y>
        <width>762</width>
-       <height>211</height>
+       <height>181</height>
       </rect>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>3</number>
      </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>200</number>
+     </attribute>
      <column>
       <property name="text">
-       <string>Choice</string>
+       <string>CoverageID/DataSeriesID</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Identifier</string>
+       <string>BeginTime</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Abstract</string>
+       <string>EndTime</string>
       </property>
      </column>
     </widget>
@@ -666,6 +826,12 @@ only update when newer then:</string>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_DCSMaxLon">
       <property name="geometry">
@@ -682,6 +848,12 @@ only update when newer then:</string>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
      </widget>
      <widget class="QLineEdit" name="lineEdit_DCSMinLat">
       <property name="geometry">
@@ -697,6 +869,12 @@ only update when newer then:</string>
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
       </property>
      </widget>
      <widget class="QLabel" name="label_DCSMaxLon">
@@ -771,11 +949,14 @@ Longitude</string>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
      </widget>
      <widget class="QLabel" name="label_DCSMinLon">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
       <property name="geometry">
        <rect>
         <x>1</x>
@@ -834,9 +1015,9 @@ Longitude</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>516</y>
+       <y>510</y>
        <width>391</width>
-       <height>91</height>
+       <height>101</height>
       </rect>
      </property>
      <property name="font">
@@ -851,8 +1032,8 @@ Longitude</string>
      <widget class="QDateTimeEdit" name="dateTimeEdit_DCSBegin">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>21</y>
+        <x>164</x>
+        <y>32</y>
         <width>194</width>
         <height>27</height>
        </rect>
@@ -862,7 +1043,7 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>17</hour>
+        <hour>7</hour>
         <minute>0</minute>
         <second>0</second>
         <year>2013</year>
@@ -879,7 +1060,7 @@ Longitude</string>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>17</hour>
+        <hour>7</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1752</year>
@@ -889,7 +1070,7 @@ Longitude</string>
       </property>
       <property name="minimumTime">
        <time>
-        <hour>17</hour>
+        <hour>7</hour>
         <minute>0</minute>
         <second>0</second>
        </time>
@@ -907,15 +1088,15 @@ Longitude</string>
      <widget class="QDateTimeEdit" name="dateTimeEdit_DCSEnd">
       <property name="geometry">
        <rect>
-        <x>121</x>
-        <y>61</y>
+        <x>164</x>
+        <y>72</y>
         <width>194</width>
         <height>27</height>
        </rect>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>16</hour>
+        <hour>6</hour>
         <minute>59</minute>
         <second>59</second>
         <year>2014</year>
@@ -932,14 +1113,14 @@ Longitude</string>
       </property>
       <property name="time">
        <time>
-        <hour>16</hour>
+        <hour>6</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>17</hour>
+        <hour>7</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1752</year>
@@ -949,7 +1130,7 @@ Longitude</string>
       </property>
       <property name="maximumTime">
        <time>
-        <hour>16</hour>
+        <hour>6</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
@@ -970,8 +1151,8 @@ Longitude</string>
      <widget class="QLabel" name="label_DCSBegin">
       <property name="geometry">
        <rect>
-        <x>11</x>
-        <y>25</y>
+        <x>54</x>
+        <y>36</y>
         <width>111</width>
         <height>20</height>
        </rect>
@@ -983,14 +1164,33 @@ Longitude</string>
      <widget class="QLabel" name="label_DCSEnd">
       <property name="geometry">
        <rect>
-        <x>11</x>
-        <y>64</y>
+        <x>54</x>
+        <y>75</y>
         <width>111</width>
         <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>End Time:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_DCS_ActiveDate">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>55</y>
+        <width>31</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -1024,6 +1224,9 @@ Longitude</string>
          <property name="checked">
           <bool>true</bool>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -1041,7 +1244,7 @@ Longitude</string>
       <rect>
        <x>568</x>
        <y>390</y>
-       <width>121</width>
+       <width>191</width>
        <height>71</height>
       </rect>
      </property>
@@ -1049,9 +1252,12 @@ Longitude</string>
       <string>Hits Count: </string>
      </property>
      <widget class="QSpinBox" name="spinBox_DCSCount">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>18</x>
+        <x>55</x>
         <y>30</y>
         <width>101</width>
         <height>27</height>
@@ -1061,10 +1267,26 @@ Longitude</string>
        <number>1</number>
       </property>
       <property name="maximum">
-       <number>99999</number>
+       <number>9999</number>
       </property>
       <property name="value">
-       <number>100</number>
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_DCS_ActiveCount">
+      <property name="geometry">
+       <rect>
+        <x>22</x>
+        <y>33</y>
+        <width>31</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -1117,7 +1339,7 @@ Longitude</string>
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QCheckBox" name="checkBox_DCCovSum">
+        <widget class="QCheckBox" name="checkBox_DCSCovSum">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -1150,9 +1372,34 @@ Longitude</string>
      <property name="text">
       <string>coverage IDs only</string>
      </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>77</y>
+       <width>731</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Selection for DescribeEOCoverageSet Request  &amp;  Selection of Resulting CoverageIDs for further usage:</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_GCov">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <attribute name="title">
      <string>GetCoverage</string>
     </attribute>
@@ -1197,37 +1444,28 @@ Longitude</string>
        <height>181</height>
       </rect>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>1</number>
      </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>200</number>
+     </attribute>
      <column>
       <property name="text">
-       <string>Choice</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Identifier</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Abstract</string>
+       <string>CoverageID</string>
       </property>
      </column>
     </widget>
     <widget class="QLabel" name="label_GCovInfo1">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>17</x>
        <y>20</y>
        <width>281</width>
        <height>17</height>
@@ -1246,23 +1484,23 @@ Longitude</string>
     <widget class="QLabel" name="label_GCOvInfo2">
      <property name="geometry">
       <rect>
-       <x>43</x>
+       <x>30</x>
        <y>46</y>
        <width>661</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Select the ID's of interest, then press the GetCoverager button.</string>
+      <string>Select the ID's of interest, choose optional parameters and then press the GetCoverager button.</string>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox_15">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>7</x>
        <y>260</y>
        <width>401</width>
-       <height>271</height>
+       <height>361</height>
       </rect>
      </property>
      <property name="font">
@@ -1280,8 +1518,8 @@ Longitude</string>
      <widget class="QGroupBox" name="groupBox_16">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>120</y>
+        <x>10</x>
+        <y>23</y>
         <width>381</width>
         <height>151</height>
        </rect>
@@ -1380,17 +1618,11 @@ Longitude</string>
         <string>Max. 
 Longitude</string>
        </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
       <widget class="QLabel" name="label_GCovMinLon">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
        <property name="geometry">
         <rect>
          <x>-4</x>
@@ -1467,228 +1699,147 @@ Longitude</string>
         </sizepolicy>
        </property>
       </widget>
+      <zorder>label_GCovMinLat</zorder>
+      <zorder>label_GCovMaxLat</zorder>
+      <zorder>lineEdit_GCovMinLat</zorder>
+      <zorder>lineEdit_GCovMaxLat</zorder>
+      <zorder>lineEdit_GCovMinLon</zorder>
+      <zorder>lineEdit_GCovMaxLon</zorder>
+      <zorder>label_GCovMinLon</zorder>
+      <zorder>label_GCovMaxLon</zorder>
      </widget>
-     <widget class="QGroupBox" name="groupBox_17">
+     <widget class="QLabel" name="label_GCOvBands">
       <property name="geometry">
        <rect>
-        <x>2</x>
-        <y>20</y>
-        <width>411</width>
-        <height>91</height>
+        <x>30</x>
+        <y>182</y>
+        <width>121</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
-        <weight>50</weight>
-        <italic>false</italic>
-        <bold>false</bold>
-        <kerning>true</kerning>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
-      <property name="title">
-       <string>   Type of subsetting:</string>
+      <property name="text">
+       <string>List of Band No.:</string>
       </property>
-      <widget class="QRadioButton" name="radioButton_GCovSubOrig">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>20</y>
-         <width>116</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Original</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton_GCovSubCRS">
-       <property name="geometry">
-        <rect>
-         <x>153</x>
-         <y>20</y>
-         <width>81</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>CRS</string>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="radioButton_GCovSubPixel">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>20</y>
-         <width>71</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Pixel</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_GCovSubEPSG">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>62</y>
-         <width>111</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_GCovSubEPSG">
-       <property name="geometry">
-        <rect>
-         <x>161</x>
-         <y>41</y>
-         <width>66</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>EPSG No.:</string>
-       </property>
-      </widget>
      </widget>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_GCovBands">
-     <property name="geometry">
-      <rect>
-       <x>113</x>
-       <y>539</y>
-       <width>211</width>
-       <height>27</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_GCOvBands">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>543</y>
-       <width>66</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Bands:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_GCovOutCRS">
-     <property name="geometry">
-      <rect>
-       <x>23</x>
-       <y>583</y>
-       <width>171</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Output CRS (EPSG) No:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_GCovOutCRS">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>580</y>
-       <width>121</width>
-       <height>27</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_GCovOutFormat">
-     <property name="geometry">
-      <rect>
-       <x>498</x>
-       <y>273</y>
-       <width>141</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Output Format:</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_GCOvOutFormat">
-     <property name="geometry">
-      <rect>
-       <x>624</x>
-       <y>270</y>
-       <width>131</width>
-       <height>27</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_GCovInterpol">
-     <property name="geometry">
-      <rect>
-       <x>500</x>
-       <y>320</y>
-       <width>111</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Interpolation: </string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_GCovInterpol">
-     <property name="geometry">
-      <rect>
-       <x>614</x>
-       <y>317</y>
-       <width>141</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>nearest (default)</string>
+     <widget class="QLineEdit" name="lineEdit_GCovBands">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>183</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
       </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>bilinear</string>
+     </widget>
+     <widget class="QLabel" name="label_GCovInterpol">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>230</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
       </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>average (slow)</string>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
-     </item>
+      <property name="text">
+       <string>Interpolation: </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_GCovOutFormat">
+      <property name="geometry">
+       <rect>
+        <x>28</x>
+        <y>279</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Output Format:</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_GCOvOutFormat">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>276</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_GCovInterpol">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>227</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>nearest (default)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>bilinear</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>average (slow)</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBox_GCovOutCRS">
+      <property name="geometry">
+       <rect>
+        <x>171</x>
+        <y>321</y>
+        <width>141</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_GCovOutCRS">
+      <property name="geometry">
+       <rect>
+        <x>29</x>
+        <y>320</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Output CRS
+ (EPSG):</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_18">
      <property name="geometry">
@@ -1727,6 +1878,9 @@ Longitude</string>
          <property name="text">
           <string>X-Resolution</string>
          </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -1743,6 +1897,9 @@ Longitude</string>
         <widget class="QRadioButton" name="radioButton_GCovXSize">
          <property name="text">
           <string>X-Size</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1803,6 +1960,9 @@ Longitude</string>
          <property name="text">
           <string>Y-Size</string>
          </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -1820,6 +1980,9 @@ Longitude</string>
          <property name="text">
           <string>Y-Resolution</string>
          </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="3" rowspan="2">
@@ -1831,13 +1994,140 @@ Longitude</string>
        </item>
       </layout>
      </widget>
+     <widget class="QRadioButton" name="radioButton_GCov_OutSizeOrig">
+      <property name="geometry">
+       <rect>
+        <x>134</x>
+        <y>1</y>
+        <width>151</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Original Outsize:</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_17">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>262</y>
+       <width>371</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="title">
+      <string>   Type of subsetting:</string>
+     </property>
+     <widget class="QRadioButton" name="radioButton_GCovSubOrig">
+      <property name="geometry">
+       <rect>
+        <x>54</x>
+        <y>23</y>
+        <width>116</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Original</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_GCovSubCRS">
+      <property name="geometry">
+       <rect>
+        <x>185</x>
+        <y>23</y>
+        <width>81</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CRS</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_GCovSubPixel">
+      <property name="geometry">
+       <rect>
+        <x>288</x>
+        <y>23</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pixel</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_GCovSubEPSG">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>185</x>
+        <y>71</y>
+        <width>101</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_GCovSubEPSG">
+      <property name="geometry">
+       <rect>
+        <x>187</x>
+        <y>51</y>
+        <width>66</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>EPSG No.:</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_Help">
     <attribute name="title">
-     <string>About / Help</string>
+     <string>Help</string>
     </attribute>
     <widget class="QPushButton" name="btnClose_Help">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>570</y>
+       <width>98</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_About">
+    <attribute name="title">
+     <string>About</string>
+    </attribute>
+    <widget class="QPushButton" name="btnClose_About">
      <property name="geometry">
       <rect>
        <x>650</x>
@@ -1878,8 +2168,24 @@ Longitude</string>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>630</y>
+     <x>589</x>
+     <y>643</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_GCa_ActiveDate</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>updateDateChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1894,40 +2200,8 @@ Longitude</string>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>708</x>
-     <y>630</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>338</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnClose_DCS</sender>
-   <signal>clicked()</signal>
-   <receiver>QgsWcsClient2</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>708</x>
-     <y>630</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>338</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnClose_GCov</sender>
-   <signal>clicked()</signal>
-   <receiver>QgsWcsClient2</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>708</x>
-     <y>630</y>
+     <x>593</x>
+     <y>642</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -1952,13 +2226,45 @@ Longitude</string>
    </hints>
   </connection>
   <connection>
-   <sender>btnNew_Serv</sender>
+   <sender>btnClose_GCov</sender>
    <signal>clicked()</signal>
    <receiver>QgsWcsClient2</receiver>
-   <slot>newServer()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>201</x>
+     <x>540</x>
+     <y>640</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_GCa</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>exeGetCapabilities()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>694</x>
+     <y>629</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnDelete_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>deleteServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>383</x>
      <y>147</y>
     </hint>
     <hint type="destinationlabel">
@@ -1968,14 +2274,14 @@ Longitude</string>
    </hints>
   </connection>
   <connection>
-   <sender>btnTestServer_Serv</sender>
+   <sender>btnClose_About</sender>
    <signal>clicked()</signal>
    <receiver>QgsWcsClient2</receiver>
-   <slot>testServer()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>93</x>
-     <y>147</y>
+     <x>710</x>
+     <y>624</y>
     </hint>
     <hint type="destinationlabel">
      <x>399</x>
@@ -2000,13 +2306,61 @@ Longitude</string>
    </hints>
   </connection>
   <connection>
-   <sender>btnDelete_Serv</sender>
+   <sender>pushButton_GCov</sender>
    <signal>clicked()</signal>
    <receiver>QgsWcsClient2</receiver>
-   <slot>deleteServer()</slot>
+   <slot>exeGetCoverage()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>383</x>
+     <x>667</x>
+     <y>627</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_DC</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>exeDescribeCoverage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>696</x>
+     <y>626</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose_DCS</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnNew_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>newServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
      <y>147</y>
     </hint>
     <hint type="destinationlabel">
@@ -2015,11 +2369,235 @@ Longitude</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_DCS</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>exeDescribeEOCoverageSet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>675</x>
+     <y>629</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnConnectServer_Serv</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>connectServer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_DCS_ActiveDate</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableDCS_ActiveDate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>616</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_DCS_ActiveCount</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableDCS_ActiveCount()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>617</x>
+     <y>474</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovSubOrig</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_SubOrig()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovSubCRS</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_SubCRS()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovSubPixel</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_SubPixel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>341</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovXSize</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_XSize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>490</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovXRes</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_XResolution()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>490</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovYSize</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_YSize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>491</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCovYRes</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>enableGCov_YResolution()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>491</x>
+     <y>514</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radioButton_GCov_OutSizeOrig</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>disableGCov_OutSize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>621</x>
+     <y>411</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_Serv_OutputLoc</sender>
+   <signal>clicked()</signal>
+   <receiver>QgsWcsClient2</receiver>
+   <slot>get_outputLoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>693</x>
+     <y>574</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newServer()</slot>
-  <slot>testServer()</slot>
+  <slot>connectServer()</slot>
   <slot>editServer()</slot>
   <slot>deleteServer()</slot>
+  <slot>exeGetCapabilities()</slot>
+  <slot>exeDescribeCoverage()</slot>
+  <slot>exeDescribeEOCoverageSet()</slot>
+  <slot>exeGetCoverage()</slot>
+  <slot>updateDateChanged()</slot>
+  <slot>enableDCS_ActiveDate()</slot>
+  <slot>enableDCS_ActiveCount()</slot>
+  <slot>enableGCov_SubCRS()</slot>
+  <slot>enableGCov_SubPixel()</slot>
+  <slot>enableGCov_SubOrig()</slot>
+  <slot>enableGCov_XSize()</slot>
+  <slot>enableGCov_XResolution()</slot>
+  <slot>enableGCov_YSize()</slot>
+  <slot>enableGCov_YResolution()</slot>
+  <slot>disableGCov_OutSize()</slot>
+  <slot>get_outputLoc()</slot>
  </slots>
 </ui>

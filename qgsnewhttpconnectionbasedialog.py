@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- TestDialog
-                                 A QGIS plugin
- Test
+ qgsnewhttpconnectionbase
+                              WCS 2.0 / EO-WCS  QGIS plugin
+ 
                              -------------------
         begin                : 2014-06-27
-        copyright            : (C) 2014 by Fabian Schindler
-        email                : fabian.schindler@eox.at
+        copyright            : (C) 2014 by Christian Schiller
+        email                : christian.schiller@eox.at
  ***************************************************************************/
 
 /***************************************************************************

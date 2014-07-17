@@ -241,7 +241,7 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        base_request = {'service': 'service=wcs',
+        base_request = {'service': 'service=WCS',
                 'version': '&version=2.0.1'}
 
 
@@ -317,7 +317,7 @@ class wcsClient(object):
         getcov_dict = {'request': '&request=',
             'server_url': '',
             'coverageID': '&coverageid=',
-            'format': '&format=image/',
+            'format': '&format=',
             'subset_x': '&subset=',
             'subset_y': '&subset=',
             'rangesubset': '&rangesubset=',
@@ -348,7 +348,7 @@ class wcsClient(object):
                     updateSequence:   Receive a new document only if it has changed since last
                         requested (expressed in ISO-8601 date format e.g. 2007-04-05)
                     sections:         Request one or more section(s) of a Capabilities Document
-                        possible sections: [ DatasetSeriesSummary, CoverageSummary, Content,
+                        possible sections: [ DatasetSeriesSummary, CoverageSummary, Content, ServiceMetadata, 
                         ServiceIdentification, ServiceProvider, OperationsMetadata, Languages, All ]
             Example:
                 input_params= {'request': 'GetCapabilities',
@@ -386,9 +386,9 @@ class wcsClient(object):
                 Optional prameters:
                     None
             Example:
-                input_params={'request': 'DescribeEOCoverageSet',
+                input_params={'request': 'DescribeCoverage',
                                'server_url': 'http://some.where.org/ows?' ,
-                               'coverageid': 'some_Coverage_ID_yxyxyx_yxyxyx' }
+                               'coverageID': 'some_Coverage_ID_yxyxyx_yxyxyx' }
             Returns:   XML DescribeCoverage response
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
@@ -443,18 +443,19 @@ class wcsClient(object):
        # print "I'm in "+sys._getframe().f_code.co_name
 
             # validate that the provided date/time stings are in ISO8601
-        res_in = self._valid_time_wrapper(list(input_params.get('subset_time').split(',')))
-        input_params['subset_time'] = ','.join(res_in)
+        if input_params.has_key('subset_time') and input_params['subset_time'] is not None:
+            res_in = self._valid_time_wrapper(list(input_params.get('subset_time').split(',')))
+            input_params['subset_time'] = ','.join(res_in)
 
         procedure_dict = self._set_base_desceocoverageset()
         http_request = self._create_request(input_params, procedure_dict)
 
         if input_params.has_key('IDs_only') and input_params['IDs_only'] == True:
-            result_list = wcsClient._execute_xml_request(self, http_request, IDs_only=True)
+            result_list, axis_labels, offered_crs = wcsClient._execute_xml_request(self, http_request, IDs_only=True)
+            return result_list, axis_labels, offered_crs
         else:
             result_list = wcsClient._execute_xml_request(self, http_request)
-
-        return result_list
+            return result_list
 
 
     #/************************************************************************/
@@ -511,13 +512,13 @@ class wcsClient(object):
 
             # provide the same functionality for input as for the cmd-line
             # (to get around the url-notation for input)
-        if input_params['subset_x'].startswith('epsg'):
+        if input_params.has_key('subset_x') and input_params['subset_x'].startswith('epsg'):
             crs = input_params['subset_x'].split(':')[1].split(' ')[0]
             label = input_params['subset_x'].split(':')[1].split(' ')[1]
             coord = input_params['subset_x'].split(':')[1].split(' ')[2]
             out = label+','+crs_url+crs+'('+coord
             input_params['subset_x'] = out
-        elif input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori'):
+        elif input_params.has_key('subset_x') and (input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori')):
             label = input_params['subset_x'].split(' ')[1]
             coord = input_params['subset_x'].split(' ')[2]
             out = label+'('+coord
@@ -525,19 +526,36 @@ class wcsClient(object):
         else:
             pass
 
-        if input_params['subset_y'].startswith('epsg'):
+        if input_params.has_key('subset_y') and input_params['subset_y'].startswith('epsg'):
             crs = input_params['subset_y'].split(':')[1].split(' ')[0]
             label = input_params['subset_y'].split(':')[1].split(' ')[1]
             coord = input_params['subset_y'].split(':')[1].split(' ')[2]
             out = label+','+crs_url+crs+'('+coord
             input_params['subset_y'] = out
-        elif input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori'):
+        elif input_params.has_key('subset_y') and (input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori')):
             label = input_params['subset_y'].split(' ')[1]
             coord = input_params['subset_y'].split(' ')[2]
             out = label+'('+coord
             input_params['subset_y'] = out
         else:
             pass
+
+
+        if input_params.has_key('size_x'): 
+            if input_params['size_x'].startswith('siz'):
+                out = "size="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
+                input_params['size_x'] = out
+            elif input_params['size_x'].startswith('res'):
+                out = "resolution="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
+                input_params['size_x'] = out
+         
+        if input_params.has_key('size_y'): 
+            if input_params['size_y'].startswith('siz'):
+                out = "size="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
+                input_params['size_y'] = out
+            elif input_params['size_y'].startswith('res'):
+                out = "resolution="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
+                input_params['size_y'] = out
 
 
         procedure_dict = self._set_base_getcov()
@@ -570,9 +588,22 @@ class wcsClient(object):
             # store the found items
         for n  in range(0, n_elem):
             tag_ids.append(tagid_node[n].childNodes.item(0).data)
-
+        
+            # also read out (only once) the gml:Envelope axisLabels 
+        axis_tag = "gml:Envelope"
+        axis_node =  xmldoc.getElementsByTagName(axis_tag)
+        if axis_node.length > 0:
+            axis_labels = axis_node[0].getAttribute("axisLabels")
+            axis_labels = axis_labels.encode().split(" ")
+            offered_crs = axis_node[0].getAttribute("srsName")
+            offered_crs = os.path.basename(offered_crs)
+        else:
+            axis_labels = ["",""]
+            offered_crs = '4326'
+        #print "11x",type(axis_labels), axis_labels
+       
             # return the found items
-        return tag_ids
+        return tag_ids, axis_labels, offered_crs
 
 
 
@@ -598,9 +629,9 @@ class wcsClient(object):
 
                 # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
-                cids = self._parse_xml(result_xml, self._xml_ID_tag[1])
+                cids, axis_labels, offered_crs = self._parse_xml(result_xml, self._xml_ID_tag[1])
                 request_handle.close()
-                return cids
+                return cids, axis_labels, offered_crs
             else:
                 request_handle.close()
                 return result_xml
@@ -657,11 +688,24 @@ class wcsClient(object):
         print http_request
 
         now = time.strftime('_%Y%m%dT%H%M%S')
-
+        
+        if input_params['format'].find('/') != -1:
+            out_format_ext = os.path.basename(input_params['format'])
+            if out_format_ext == "tiff":
+                out_format_ext = "tif"
+            elif out_format_ext == "x-netcdf":
+                out_format_ext = "nc"
+            elif out_format_ext == "jpeg":
+                out_format_ext = "jpg"
+            elif out_format_ext == "x-hdf":
+                out_format_ext = "hdf"
+        else:
+            out_format_ext = input_params['format']
+            
         if not (input_params['coverageID'].endswith('tif') or input_params['coverageID'].endswith('tiff') or \
-        input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
-        input_params['coverageID'].endswith('gif')):
-            out_coverageID = input_params['coverageID']+now+'.'+input_params['format']
+                input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
+                input_params['coverageID'].endswith('gif')):
+            out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
 
         if input_params.has_key('output') and input_params['output'] is not None:
             outfile = input_params['output']+dsep+out_coverageID
