@@ -14,7 +14,7 @@ qgisMinimumVersion=2.0
 description=A OGC WCS 2.0/EO-WCS Client 
 version=0.1
 author=Christian Schiller / EOX IT Services GmbH, Vienna, Austria
-email=christian.schiller@eox.at
+email=christian dot schiller at eox dot at
 
 # end of mandatory metadata
 

@@ -1,32 +1,47 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- qgsnewhttpconnectionbase
-                              WCS 2.0 / EO-WCS  QGIS plugin
- 
+ QgsWcsClient2
+                                 A QGIS plugin
+ A OGC WCS 2.0/EO-WCS Client 
                              -------------------
-        begin                : 2014-06-27
-        copyright            : (C) 2014 by Christian Schiller
-        email                : christian.schiller@eox.at
+        begin                : 2014-06-26
+        copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
+        email                : christian dot schiller at eox dot at
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*********************************************************************************/
+ *  The MIT License (MIT)                                                         *
+ *                                                                                *
+ *  Copyright (c) 2014 EOX IT Services GmbH                                       *
+ *                                                                                *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy  *
+ *  of this software and associated documentation files (the "Software"), to deal *
+ *  in the Software without restriction, including without limitation the rights  *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
+ *  copies of the Software, and to permit persons to whom the Software is         *
+ *  furnished to do so, subject to the following conditions:                      *
+ *                                                                                *
+ *  The above copyright notice and this permission notice shall be included in    *
+ *  all copies or substantial portions of the Software.                           *
+ *                                                                                *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE *
+ *  SOFTWARE.                                                                     *
+ *                                                                                *
+ *********************************************************************************/
+ Function for the Server / Url  setup dialog
 """
 
 import os, pickle
-#from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from PyQt4 import QtCore, QtGui
 from ui_qgswcsclient2 import Ui_QgsWcsClient2
-# create the dialog for zoom to point
 from qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
 
 #global setttings and saved server list
@@ -55,7 +70,7 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         srv_name = self.txt_NewSrvName.text()
         srv_url = self.txt_NewSrvUrl.text()
         
-            # verify that URL start with http://
+            # verify that URL starts with http://
         while not srv_url.startswith("http://"):
             info = "Sorry, but the 'Server URL' has to start with http://.\n"
             self.warning_msg(info)
@@ -93,7 +108,6 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
 
     def warning_msg(self, msg):
         msgBox = QtGui.QMessageBox()
-        #msgBox.setText("Sorry, but the 'Server Name' has to be unique.\n      A   '_1'   has been added to the name.")
         msgBox.setText(msg)
         msgBox.addButton(QtGui.QPushButton('OK'), QtGui.QMessageBox.YesRole)
         msgBox.exec_()

@@ -4,20 +4,37 @@
  QgsWcsClient2
                                  A QGIS plugin
  A OGC WCS 2.0/EO-WCS Client 
-                              -------------------
+                             -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
-        email                : christian.schiller@eox.at
+        email                : christian dot schiller at eox dot at
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*********************************************************************************/
+ *  The MIT License (MIT)                                                         *
+ *                                                                                *
+ *  Copyright (c) 2014 EOX IT Services GmbH                                       *
+ *                                                                                *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy  *
+ *  of this software and associated documentation files (the "Software"), to deal *
+ *  in the Software without restriction, including without limitation the rights  *
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
+ *  copies of the Software, and to permit persons to whom the Software is         *
+ *  furnished to do so, subject to the following conditions:                      *
+ *                                                                                *
+ *  The above copyright notice and this permission notice shall be included in    *
+ *  all copies or substantial portions of the Software.                           *
+ *                                                                                *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE *
+ *  SOFTWARE.                                                                     *
+ *                                                                                *
+ *********************************************************************************/
+ initialisation, etc.  of the QgsWcsClient2 plugin 
 """
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
@@ -29,8 +46,6 @@ import resources_rc
 from qgswcsclient2dialog import QgsWcsClient2Dialog
 from qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
 from EOxWCSClient.wcs_client  import wcsClient
-#from EOxWCSClient.cmdline_wcs_client import  _get_cmdline
-
 import os.path
 
 #global setttings and saved server list
@@ -45,19 +60,9 @@ class QgsWcsClient2:
         # Save reference to the QGIS interface
         self.iface = iface
 
-        #print "3434: ", config.srv_list
-        #print "4455: ", config.plugin_dir
-        
-        
         # initialize locale
         locale = QSettings().value("locale/userLocale")[0:2]
         localePath = os.path.join(config.plugin_dir, 'i18n', 'qgswcsclient2_{}.qm'.format(locale))
-            #Initialise the environment    
-        #userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/wps"  
-        #systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/wps"
-
-
-
 
         if os.path.exists(localePath):
             self.translator = QTranslator()
