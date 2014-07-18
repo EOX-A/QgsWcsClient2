@@ -1,44 +1,8 @@
 # -*- coding: utf-8 -*-
-"""
-/***************************************************************************
- QgsWcsClient2
-                                 A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
-                             -------------------
-        begin                : 2014-06-26
-        copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
-        email                : christian dot schiller at eox dot at
- ***************************************************************************/
 
-/*********************************************************************************/
- *  The MIT License (MIT)                                                         *
- *                                                                                *
- *  Copyright (c) 2014 EOX IT Services GmbH                                       *
- *                                                                                *
- *  Permission is hereby granted, free of charge, to any person obtaining a copy  *
- *  of this software and associated documentation files (the "Software"), to deal *
- *  in the Software without restriction, including without limitation the rights  *
- *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     *
- *  copies of the Software, and to permit persons to whom the Software is         *
- *  furnished to do so, subject to the following conditions:                      *
- *                                                                                *
- *  The above copyright notice and this permission notice shall be included in    *
- *  all copies or substantial portions of the Software.                           *
- *                                                                                *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    *
- *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      *
- *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   *
- *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        *
- *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
- *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE *
- *  SOFTWARE.                                                                     *
- *                                                                                *
- *********************************************************************************/
- the main GUI for the QgsWcsClient2 plugin Application
- """
 # Form implementation generated from reading ui file 'ui_qgswcsclient2.ui'
 #
-# Created: Wed Jul 16 18:44:08 2014
+# Created: Fri Jul 18 17:02:26 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -246,7 +210,7 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_GCa.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.treeWidget_GCa.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self.treeWidget_GCa.setAutoExpandDelay(-1)
-        self.treeWidget_GCa.setColumnCount(3)
+        self.treeWidget_GCa.setColumnCount(4)
         self.treeWidget_GCa.setObjectName(_fromUtf8("treeWidget_GCa"))
         self.treeWidget_GCa.header().setDefaultSectionSize(200)
         self.treeWidget_GCa.header().setStretchLastSection(True)
@@ -444,20 +408,20 @@ class Ui_QgsWcsClient2(object):
         self.dateTimeEdit_DCSBegin = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSBegin.setGeometry(QtCore.QRect(164, 32, 194, 27))
         self.dateTimeEdit_DCSBegin.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2013, 12, 31), QtCore.QTime(7, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2013, 12, 31), QtCore.QTime(4, 0, 0)))
         self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2013, 12, 31))
-        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(7, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(7, 0, 0))
+        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(4, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(4, 0, 0))
         self.dateTimeEdit_DCSBegin.setCalendarPopup(True)
         self.dateTimeEdit_DCSBegin.setTimeSpec(QtCore.Qt.UTC)
         self.dateTimeEdit_DCSBegin.setObjectName(_fromUtf8("dateTimeEdit_DCSBegin"))
         self.dateTimeEdit_DCSEnd = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSEnd.setGeometry(QtCore.QRect(164, 72, 194, 27))
-        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 2), QtCore.QTime(6, 59, 59)))
+        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 2), QtCore.QTime(3, 59, 59)))
         self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2014, 1, 2))
-        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(6, 59, 59))
-        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(7, 0, 0)))
-        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(6, 59, 59))
+        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(3, 59, 59))
+        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(4, 0, 0)))
+        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(3, 59, 59))
         self.dateTimeEdit_DCSEnd.setCurrentSection(QtGui.QDateTimeEdit.YearSection)
         self.dateTimeEdit_DCSEnd.setCalendarPopup(True)
         self.dateTimeEdit_DCSEnd.setTimeSpec(QtCore.Qt.UTC)
@@ -858,6 +822,76 @@ class Ui_QgsWcsClient2(object):
         QtCore.QObject.connect(self.radioButton_GCov_OutSizeOrig, QtCore.SIGNAL(_fromUtf8("clicked()")), QgsWcsClient2.disableGCov_OutSize)
         QtCore.QObject.connect(self.toolButton_Serv_OutputLoc, QtCore.SIGNAL(_fromUtf8("clicked()")), QgsWcsClient2.get_outputLoc)
         QtCore.QMetaObject.connectSlotsByName(QgsWcsClient2)
+        QgsWcsClient2.setTabOrder(self.tabWidget_EOWcsClient2, self.btnNew_Serv)
+        QgsWcsClient2.setTabOrder(self.btnNew_Serv, self.btnEdit_Serv)
+        QgsWcsClient2.setTabOrder(self.btnEdit_Serv, self.btnConnectServer_Serv)
+        QgsWcsClient2.setTabOrder(self.btnConnectServer_Serv, self.cmbConnections_Serv)
+        QgsWcsClient2.setTabOrder(self.cmbConnections_Serv, self.btnDelete_Serv)
+        QgsWcsClient2.setTabOrder(self.btnDelete_Serv, self.textBrowser_Serv)
+        QgsWcsClient2.setTabOrder(self.textBrowser_Serv, self.btnClose_Serv)
+        QgsWcsClient2.setTabOrder(self.btnClose_Serv, self.toolButton_Serv_OutputLoc)
+        QgsWcsClient2.setTabOrder(self.toolButton_Serv_OutputLoc, self.lineEdit_Serv_OutputLoc)
+        QgsWcsClient2.setTabOrder(self.lineEdit_Serv_OutputLoc, self.checkBox_GCaDaSerSum)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaDaSerSum, self.checkBox_GCaCovSum)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaCovSum, self.checkBox_GCaServProv)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaServProv, self.checkBox_GCaAll)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaAll, self.checkBox_GCaServId)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaServId, self.checkBox_GCaLang)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaLang, self.checkBox_GCaCont)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaCont, self.checkBox_GCaOpMeta)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaOpMeta, self.checkBox_GCaServMeta)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCaServMeta, self.checkBox_GCa_ActiveDate)
+        QgsWcsClient2.setTabOrder(self.checkBox_GCa_ActiveDate, self.pushButton_GCa)
+        QgsWcsClient2.setTabOrder(self.pushButton_GCa, self.btnClose_GCa)
+        QgsWcsClient2.setTabOrder(self.btnClose_GCa, self.treeWidget_GCa)
+        QgsWcsClient2.setTabOrder(self.treeWidget_GCa, self.dateEdit_GCaDocUpdate)
+        QgsWcsClient2.setTabOrder(self.dateEdit_GCaDocUpdate, self.treeWidget_DC)
+        QgsWcsClient2.setTabOrder(self.treeWidget_DC, self.pushButton_DC)
+        QgsWcsClient2.setTabOrder(self.pushButton_DC, self.btnClose_DC)
+        QgsWcsClient2.setTabOrder(self.btnClose_DC, self.pushButton_DCS)
+        QgsWcsClient2.setTabOrder(self.pushButton_DCS, self.treeWidget_DCS)
+        QgsWcsClient2.setTabOrder(self.treeWidget_DCS, self.btnClose_DCS)
+        QgsWcsClient2.setTabOrder(self.btnClose_DCS, self.lineEdit_DCSMaxLat)
+        QgsWcsClient2.setTabOrder(self.lineEdit_DCSMaxLat, self.lineEdit_DCSMinLon)
+        QgsWcsClient2.setTabOrder(self.lineEdit_DCSMinLon, self.lineEdit_DCSMaxLon)
+        QgsWcsClient2.setTabOrder(self.lineEdit_DCSMaxLon, self.lineEdit_DCSMinLat)
+        QgsWcsClient2.setTabOrder(self.lineEdit_DCSMinLat, self.dateTimeEdit_DCSBegin)
+        QgsWcsClient2.setTabOrder(self.dateTimeEdit_DCSBegin, self.dateTimeEdit_DCSEnd)
+        QgsWcsClient2.setTabOrder(self.dateTimeEdit_DCSEnd, self.checkBox_DCS_ActiveDate)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCS_ActiveDate, self.radioButton_ContOver)
+        QgsWcsClient2.setTabOrder(self.radioButton_ContOver, self.radioButton_ContCont)
+        QgsWcsClient2.setTabOrder(self.radioButton_ContCont, self.spinBox_DCSCount)
+        QgsWcsClient2.setTabOrder(self.spinBox_DCSCount, self.checkBox_DCS_ActiveCount)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCS_ActiveCount, self.checkBox_DCSAll)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSAll, self.checkBox_DCSDatSerSum)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSDatSerSum, self.checkBox_DCSCovSum)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSCovSum, self.checkBox_DCSIDonly)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSIDonly, self.pushButton_GCov)
+        QgsWcsClient2.setTabOrder(self.pushButton_GCov, self.btnClose_GCov)
+        QgsWcsClient2.setTabOrder(self.btnClose_GCov, self.treeWidget_GCov)
+        QgsWcsClient2.setTabOrder(self.treeWidget_GCov, self.lineEdit_GCovMaxLat)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovMaxLat, self.lineEdit_GCovMinLon)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovMinLon, self.lineEdit_GCovMaxLon)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovMaxLon, self.lineEdit_GCovMinLat)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovMinLat, self.lineEdit_GCovBands)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovBands, self.comboBox_GCOvOutFormat)
+        QgsWcsClient2.setTabOrder(self.comboBox_GCOvOutFormat, self.comboBox_GCovInterpol)
+        QgsWcsClient2.setTabOrder(self.comboBox_GCovInterpol, self.comboBox_GCovOutCRS)
+        QgsWcsClient2.setTabOrder(self.comboBox_GCovOutCRS, self.lineEdit_GCovXAxisLabel)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovXAxisLabel, self.radioButton_GCovXRes)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovXRes, self.radioButton_GCovXSize)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovXSize, self.lineEdit_GCovXSize)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovXSize, self.lineEdit_GCovYAxisLabel)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovYAxisLabel, self.radioButton_GCovYSize)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovYSize, self.radioButton_GCovYRes)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovYRes, self.lineEdit_GCovYSize)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovYSize, self.radioButton_GCov_OutSizeOrig)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCov_OutSizeOrig, self.radioButton_GCovSubOrig)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovSubOrig, self.radioButton_GCovSubCRS)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovSubCRS, self.radioButton_GCovSubPixel)
+        QgsWcsClient2.setTabOrder(self.radioButton_GCovSubPixel, self.lineEdit_GCovSubEPSG)
+        QgsWcsClient2.setTabOrder(self.lineEdit_GCovSubEPSG, self.btnClose_Help)
+        QgsWcsClient2.setTabOrder(self.btnClose_Help, self.btnClose_About)
 
     def retranslateUi(self, QgsWcsClient2):
         QgsWcsClient2.setWindowTitle(_translate("QgsWcsClient2", "QgsWcsClient2", None))
@@ -890,6 +924,7 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_GCa.headerItem().setText(0, _translate("QgsWcsClient2", "CoverageID/DataSetSeriesID", None))
         self.treeWidget_GCa.headerItem().setText(1, _translate("QgsWcsClient2", "BeginTime", None))
         self.treeWidget_GCa.headerItem().setText(2, _translate("QgsWcsClient2", "EndTime", None))
+        self.treeWidget_GCa.headerItem().setText(3, _translate("QgsWcsClient2", "[C]overage/[S]eries", None))
         self.dateEdit_GCaDocUpdate.setSpecialValueText(_translate("QgsWcsClient2", "1900-01-01", None))
         self.dateEdit_GCaDocUpdate.setDisplayFormat(_translate("QgsWcsClient2", "yyyy-MM-dd", None))
         self.label_3.setText(_translate("QgsWcsClient2", "Results of GetCapabilities Request  &  Selection for further usage:", None))

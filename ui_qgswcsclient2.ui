@@ -483,7 +483,7 @@ only update when newer then:</string>
       <bool>true</bool>
      </property>
      <property name="columnCount">
-      <number>3</number>
+      <number>4</number>
      </property>
      <attribute name="headerDefaultSectionSize">
       <number>200</number>
@@ -504,6 +504,11 @@ only update when newer then:</string>
      <column>
       <property name="text">
        <string>EndTime</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>[C]overage/[S]eries</string>
       </property>
      </column>
     </widget>
@@ -1043,7 +1048,7 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>7</hour>
+        <hour>4</hour>
         <minute>0</minute>
         <second>0</second>
         <year>2013</year>
@@ -1060,7 +1065,7 @@ Longitude</string>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>7</hour>
+        <hour>4</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1752</year>
@@ -1070,7 +1075,7 @@ Longitude</string>
       </property>
       <property name="minimumTime">
        <time>
-        <hour>7</hour>
+        <hour>4</hour>
         <minute>0</minute>
         <second>0</second>
        </time>
@@ -1096,7 +1101,7 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>6</hour>
+        <hour>3</hour>
         <minute>59</minute>
         <second>59</second>
         <year>2014</year>
@@ -1113,14 +1118,14 @@ Longitude</string>
       </property>
       <property name="time">
        <time>
-        <hour>6</hour>
+        <hour>3</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>7</hour>
+        <hour>4</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1752</year>
@@ -1130,7 +1135,7 @@ Longitude</string>
       </property>
       <property name="maximumTime">
        <time>
-        <hour>6</hour>
+        <hour>3</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
@@ -2143,6 +2148,79 @@ Longitude</string>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tabWidget_EOWcsClient2</tabstop>
+  <tabstop>btnNew_Serv</tabstop>
+  <tabstop>btnEdit_Serv</tabstop>
+  <tabstop>btnConnectServer_Serv</tabstop>
+  <tabstop>cmbConnections_Serv</tabstop>
+  <tabstop>btnDelete_Serv</tabstop>
+  <tabstop>textBrowser_Serv</tabstop>
+  <tabstop>btnClose_Serv</tabstop>
+  <tabstop>toolButton_Serv_OutputLoc</tabstop>
+  <tabstop>lineEdit_Serv_OutputLoc</tabstop>
+  <tabstop>checkBox_GCaDaSerSum</tabstop>
+  <tabstop>checkBox_GCaCovSum</tabstop>
+  <tabstop>checkBox_GCaServProv</tabstop>
+  <tabstop>checkBox_GCaAll</tabstop>
+  <tabstop>checkBox_GCaServId</tabstop>
+  <tabstop>checkBox_GCaLang</tabstop>
+  <tabstop>checkBox_GCaCont</tabstop>
+  <tabstop>checkBox_GCaOpMeta</tabstop>
+  <tabstop>checkBox_GCaServMeta</tabstop>
+  <tabstop>checkBox_GCa_ActiveDate</tabstop>
+  <tabstop>pushButton_GCa</tabstop>
+  <tabstop>btnClose_GCa</tabstop>
+  <tabstop>treeWidget_GCa</tabstop>
+  <tabstop>dateEdit_GCaDocUpdate</tabstop>
+  <tabstop>treeWidget_DC</tabstop>
+  <tabstop>pushButton_DC</tabstop>
+  <tabstop>btnClose_DC</tabstop>
+  <tabstop>pushButton_DCS</tabstop>
+  <tabstop>treeWidget_DCS</tabstop>
+  <tabstop>btnClose_DCS</tabstop>
+  <tabstop>lineEdit_DCSMaxLat</tabstop>
+  <tabstop>lineEdit_DCSMinLon</tabstop>
+  <tabstop>lineEdit_DCSMaxLon</tabstop>
+  <tabstop>lineEdit_DCSMinLat</tabstop>
+  <tabstop>dateTimeEdit_DCSBegin</tabstop>
+  <tabstop>dateTimeEdit_DCSEnd</tabstop>
+  <tabstop>checkBox_DCS_ActiveDate</tabstop>
+  <tabstop>radioButton_ContOver</tabstop>
+  <tabstop>radioButton_ContCont</tabstop>
+  <tabstop>spinBox_DCSCount</tabstop>
+  <tabstop>checkBox_DCS_ActiveCount</tabstop>
+  <tabstop>checkBox_DCSAll</tabstop>
+  <tabstop>checkBox_DCSDatSerSum</tabstop>
+  <tabstop>checkBox_DCSCovSum</tabstop>
+  <tabstop>checkBox_DCSIDonly</tabstop>
+  <tabstop>pushButton_GCov</tabstop>
+  <tabstop>btnClose_GCov</tabstop>
+  <tabstop>treeWidget_GCov</tabstop>
+  <tabstop>lineEdit_GCovMaxLat</tabstop>
+  <tabstop>lineEdit_GCovMinLon</tabstop>
+  <tabstop>lineEdit_GCovMaxLon</tabstop>
+  <tabstop>lineEdit_GCovMinLat</tabstop>
+  <tabstop>lineEdit_GCovBands</tabstop>
+  <tabstop>comboBox_GCOvOutFormat</tabstop>
+  <tabstop>comboBox_GCovInterpol</tabstop>
+  <tabstop>comboBox_GCovOutCRS</tabstop>
+  <tabstop>lineEdit_GCovXAxisLabel</tabstop>
+  <tabstop>radioButton_GCovXRes</tabstop>
+  <tabstop>radioButton_GCovXSize</tabstop>
+  <tabstop>lineEdit_GCovXSize</tabstop>
+  <tabstop>lineEdit_GCovYAxisLabel</tabstop>
+  <tabstop>radioButton_GCovYSize</tabstop>
+  <tabstop>radioButton_GCovYRes</tabstop>
+  <tabstop>lineEdit_GCovYSize</tabstop>
+  <tabstop>radioButton_GCov_OutSizeOrig</tabstop>
+  <tabstop>radioButton_GCovSubOrig</tabstop>
+  <tabstop>radioButton_GCovSubCRS</tabstop>
+  <tabstop>radioButton_GCovSubPixel</tabstop>
+  <tabstop>lineEdit_GCovSubEPSG</tabstop>
+  <tabstop>btnClose_Help</tabstop>
+  <tabstop>btnClose_About</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

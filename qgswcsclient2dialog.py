@@ -41,21 +41,26 @@
 
 
 
+import os, sys, pickle
 from xml.dom import minidom
 from lxml import etree
-import os, sys, pickle
+from glob import glob
 
-from PyQt4.QtCore import *
+from qgis.core import *
+from qgis.gui import *
+
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import QProgressDialog, QDialog, QMessageBox, QFileDialog
+from PyQt4.QtCore import *
+from PyQt4.QtGui import QProgressDialog, QDialog, QMessageBox, QFileDialog, QApplication, QCursor
 from PyQt4.QtNetwork import QNetworkRequest, QNetworkAccessManager
 from PyQt4 import QtXml
 
 from ui_qgswcsclient2 import Ui_QgsWcsClient2
 from qgsnewhttpconnectionbasedialog import qgsnewhttpconnectionbase
 from display_txtdialog import display_txt
-from EOxWCSClient.wcs_client  import wcsClient
 from  downloader import download_url 
+from EOxWCSClient.wcs_client  import wcsClient
+
 
 
 #global setttings and saved server list
@@ -82,6 +87,12 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
+def mouse_busy(function):
+    def new_function(self):
+        QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
+        function(self)
+        QApplication.restoreOverrideCursor()
+    return new_function
 
 class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     
@@ -150,6 +161,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
  
 #---------------
         # check if the url exist and if we get a respond to a simple OWS request
+    @mouse_busy
     def connectServer(self):
         global config
         global serv
@@ -237,6 +249,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.progress_dialog.close()
         
         self.textBrowser_Serv.setText(msg)
+
+        QApplication.restoreOverrideCursor()
         
 #---------------
         # parse the response issued during "Server Connect" and set some parameters
@@ -324,6 +338,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 #---------------
        # write the sever names/urls to a file
+    @mouse_busy
     def write_srv_list(self):
         plugin_dir = os.path.dirname(os.path.realpath(__file__))
         outsrvlst = os.path.join(plugin_dir,'config_srvlist.pkl')
@@ -332,6 +347,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         fo.close()
 
 #---------------
+        # get the path where the downloaded datasets shall be stored
+    @mouse_busy
     def get_outputLoc(self):
         global req_outputLoc
         start_dir = os.getenv("HOME")
@@ -346,6 +363,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 ## ====== Beginning GetCapabilities section ======
         # read-out params from the GetCapabilities Tab, execute the request and show results
+    @mouse_busy
     def exeGetCapabilities(self):
         global cov_ids
         global dss_ids
@@ -400,15 +418,17 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         
         if len(dss_ids) > 0:
             for a,b,c in zip(dss_ids, dss_begin, dss_end):
-                inlist =(a,b,c)
+                inlist =(a,b,c,"S")
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
         
         if len(cov_ids) > 0:
             for elem in cov_ids:
-                inlist = (elem, "","")
+                inlist = (elem, "","","C")
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
 
         self.treeWidget_GCa.resizeColumnToContents(0)
+
+        QApplication.restoreOverrideCursor()
 
 #---------------
         # GetCapabilities button
@@ -463,6 +483,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 ## ====== Beginning DescribeCoverage section ======
         # read-out the DescribeCoverage Tab, execute a DescribeCoverage request and display response
         # in a general purpose window
+    @mouse_busy
     def exeDescribeCoverage(self):
         global selected_covid
         selected_serv, selected_url = self.get_serv_url()
@@ -480,7 +501,9 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         myDisplay_txt =  display_txt(self)
         myDisplay_txt.textBrowser_Disp.setText(DC_result)
         myDisplay_txt.show()
-       
+
+        QApplication.restoreOverrideCursor()
+      
 #---------------
         # the DescribeCoverage Button
     def on_DC_clicked(self):
@@ -496,6 +519,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 ## ====== Beginning DescribeEOCoverageSet section ======
         # read-out the DescribeEOCoverageSet Tab, execute a DescribeEOCoverageSet request and display response
         # in the GetCoverage Tab (for further selection and execution)
+    @mouse_busy
     def exeDescribeEOCoverageSet(self):
         global selected_eoid
         global offered_crs
@@ -599,6 +623,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         self.treeWidget_DCS.resizeColumnToContents(0)
 
+        QApplication.restoreOverrideCursor()
+
 #---------------
         # activate the 2 Date-Subsetting selection fields
     def enableDCS_ActiveDate(self):
@@ -635,6 +661,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 ## ====== Beginning GetCoverage section ======
         # read-out the GetCoverage Tab and execute the GetCoverage request
+    @mouse_busy
     def exeGetCoverage(self):
         global selected_gcovid
         global req_outputLoc
@@ -737,6 +764,12 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         
 
 ## TODO -- Register the downloaded datsets with QGis MapCanvas -> load and show
+            self.add_to_map(req_params)
+
+        QApplication.restoreOverrideCursor()
+
+
+
 
 #---------------
         # GetCoverage Button
@@ -825,3 +858,22 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.radioButton_GCovYRes.setChecked(False)
 
 ## ====== End of GetCoverage section ======
+## ====== Add data to Map Canvas ======
+        # read the the downloaded datasets, register them and show them in the QGis MapCanvas
+    def add_to_map(self, req_params):
+
+        self.canvas = self.iface.mapCanvas()
+
+        coverageID = req_params['output']+os.sep+req_params['coverageID']+'*'
+        disp_coverage = glob(coverageID)
+        covInfo = QFileInfo(disp_coverage[-1])
+        cov_baseName = covInfo.baseName()
+        cov_layer = QgsRasterLayer(disp_coverage[-1], cov_baseName.encode())
+
+        if not cov_layer.isValid():
+            print "Layer failed to load!"
+
+        QgsMapLayerRegistry.instance().addMapLayer(cov_layer)
+
+
+## ====== End of Add data to Map Canvas ======
