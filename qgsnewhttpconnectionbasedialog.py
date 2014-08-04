@@ -44,6 +44,7 @@ from PyQt4 import QtCore, QtGui
 from ui_qgswcsclient2 import Ui_QgsWcsClient2
 from qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
 
+
 #global setttings and saved server list
 global config
 import config
@@ -71,9 +72,9 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         srv_url = self.txt_NewSrvUrl.text()
         
             # verify that URL starts with http://
-        while not srv_url.startswith("http://"):
-            info = "Sorry, but the 'Server URL' has to start with http://.\n"
-            self.warning_msg(info)
+        if not srv_url.startswith("http://"):
+            msg = "Sorry, you need to supply a 'Server URL' starting with http://\n"
+            self.warning_msg(msg)
             srv_name = self.txt_NewSrvName.text()
 
         
@@ -83,8 +84,8 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
                 while idx is not None:
                     self.txt_NewSrvName.setText(srv_name+'_1')
                     self.txt_NewSrvUrl.setText(srv_url)
-                    info = "Sorry, but the 'Server Name' has to be unique.\n      A   '_1'   has been added to the name."
-                    self.warning_msg(info)
+                    msg = "Sorry, but the 'Server Name' has to be unique.\n      A   '_1'   has been added to the name."
+                    self.warning_msg(msg)
                     srv_name = self.txt_NewSrvName.text()
                     idx = zip(*config.srv_list['servers'])[0].index(srv_name)
                     
@@ -98,11 +99,16 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
             except ValueError:
                 idx = self.idx_sel
                 srvlst.pop(idx)
-                srvlst.insert(idx,[srv_name,srv_url])
+                srvlst.insert(idx,[srv_name, srv_url])
 
         config.srv_list = {'servers': srvlst }
-        self.parent.write_srv_list()
-        self.parent.updateServerListing()
+        if (len(srv_name) > 0 and len(srv_url) > 10):
+            self.parent.write_srv_list()
+            self.parent.updateServerListing()
+        else:
+            msg = "Sorry, the provided 'Server Name' "+str(srv_name)+" or the provided 'Server URL '"+srv_url+" is not valid"
+            self.warning_msg(msg)
+            
         self.close()
 
 
@@ -113,3 +119,4 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         msgBox.exec_()
 
 
+        

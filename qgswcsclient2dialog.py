@@ -58,7 +58,7 @@ from PyQt4 import QtXml
 from ui_qgswcsclient2 import Ui_QgsWcsClient2
 from qgsnewhttpconnectionbasedialog import qgsnewhttpconnectionbase
 from display_txtdialog import display_txt
-from  downloader import download_url 
+from downloader import download_url 
 from EOxWCSClient.wcs_client  import wcsClient
 
 
@@ -87,12 +87,26 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 
+#---------------
 def mouse_busy(function):
     def new_function(self):
         QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
         function(self)
         QApplication.restoreOverrideCursor()
     return new_function
+
+#---------------
+
+    # provide a pop-up warning message
+def warning_msg(msg):
+    msgBox = QtGui.QMessageBox()
+    msgBox.setText(msg)
+    msgBox.addButton(QtGui.QPushButton('OK'), QtGui.QMessageBox.YesRole)
+    msgBox.exec_()
+        
+#---------------
+
+
 
 class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     
@@ -134,20 +148,18 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 ## ====== Beginning Server Tab-section ======
 
-#---------------
-        # popup a message in window
-    def message(self):
-        input = self.textEdit.toPlainText()
 
 #---------------
         # add a new server to the list
     def newServer(self):
         global config
         print '444-btnNew: I am adding a New ServerName/URL'
+#  not sure what to do with those flags 
         flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint  
         dlgNew = qgsnewhttpconnectionbase(self, flags, toEdit=False, choice='')
         dlgNew.show()
-
+        self.btnConnectServer_Serv.setFocus(True)
+        
 ##TODO -- sort the srv_list
 
 #---------------
@@ -180,7 +192,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         if  srv_valid is True:
             msg = msg+"Server address is valid \n"
             msg = msg+"Now testing the connection and response.....\n "
-            msg = msg+"       this may take some time (depending on the server)\n"
+            msg = msg+"       this may take some time (depending on the server and the volume of its offering)\n"
             self.textBrowser_Serv.setText(msg)
         
         label_text = self.tr("Downloading....")
@@ -311,7 +323,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         dlgEdit.txt_NewSrvName.setText(select_serv[0])
         dlgEdit.txt_NewSrvUrl.setText(select_serv[1])
         dlgEdit.show()
-
+        self.btnConnectServer_Serv.setFocus(True)
+        
 #---------------
         # dele a server entry
     def deleteServer(self):
@@ -322,7 +335,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         
         self.write_srv_list()        
         self.updateServerListing()
-
+        self.btnConnectServer_Serv.setFocus(True)
+        
 #---------------
         # update the server-listing shown in the selectionBar
     def updateServerListing(self):
@@ -412,6 +426,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         req_params = self.clear_req_params(req_params)
         print 'GCa: ',req_params
 
+
         GCa_result = self.myWCS.GetCapabilities(req_params)
 
         cov_ids, dss_ids, dss_begin, dss_end = self.parse_GCa_xml(GCa_result) 
@@ -441,14 +456,18 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         self.treeWidget_DCS.clear()
         self.treeWidget_GCov.clear()
         
+
+        
         for elem in sel_GCa_items:
+          #     @@@                    covID          BeginTime       EndTime          [C]/[S]   
+            print 'Selected Item: ',elem.data(0,0), elem.data(1,0), elem.data(2,0), elem.data(3,0)
             if elem.data(0,0) in cov_ids:
                 item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0,0),))
                 item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),))
                 item2 = QtGui.QTreeWidgetItem(self.treeWidget_GCov, (elem.data(0,0),))
             elif elem.data(0,0) in dss_ids:
-                item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),))
-
+                item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),elem.data(1,0),elem.data(2,0)))
+ 
         self.treeWidget_DC.resizeColumnToContents(0)
         self.treeWidget_DCS.resizeColumnToContents(0)
         self.treeWidget_GCov.resizeColumnToContents(0)
@@ -487,11 +506,18 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     def exeDescribeCoverage(self):
         global selected_covid
         selected_serv, selected_url = self.get_serv_url()
-         
-        req_params = {'request': 'DescribeCoverage',
+        
+        try:
+            req_params = {'request': 'DescribeCoverage',
                 'server_url':  selected_url, 
                 'coverageID':  selected_covid }
-
+        except NameError:
+            msg = "Error,    You need to select a CoverageID first!\n   (see also GetCapabilities TAB)"
+            warning_msg(msg)
+            #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
+            return
+        
+        
         req_params = self.clear_req_params(req_params)
         print "DC: ", req_params
         
@@ -573,18 +599,25 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         else:
             req_toi = None
             
-        selected_eoid = ','.join(selected_eoid)
 
-        req_params = {'request': 'DescribeEOCoverageSet' ,
-            'server_url': selected_url ,
-            'eoID':  selected_eoid ,
-            'subset_lon': req_lon , 
-            'subset_lat': req_lat , 
-            'subset_time': req_toi , 
-            'containment' : req_contain ,
-            'count' : req_count , 
-            'section' : req_sections ,
-            'IDs_only': req_IDs_only }
+        try:
+            selected_eoid = ','.join(selected_eoid)
+            req_params = {'request': 'DescribeEOCoverageSet' ,
+                'server_url': selected_url ,
+                'eoID':  selected_eoid ,
+                'subset_lon': req_lon , 
+                'subset_lat': req_lat , 
+                'subset_time': req_toi , 
+                'containment' : req_contain ,
+                'count' : req_count , 
+                'section' : req_sections ,
+                'IDs_only': req_IDs_only }
+        except NameError:
+            msg = "Error,    You need to select an DatasetSeriesID (eoID) first!\n   (see also GetCapabilities TAB)"
+            warning_msg(msg)
+            #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
+            return
+
 
         req_params = self.clear_req_params(req_params)
         print "DCS: ",req_params
@@ -733,25 +766,37 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         if not "req_outputLoc" in globals(): 
             msg = "Error: For downloading coverages you need to supply a Local Storage Path --> see TAB Server / Storage"
             QMessageBox.critical(self, "Error",  msg, QMessageBox.Ok )
+                # put focus on Server/STorage Tab to allow provision of Output Location
+            self.tabWidget_EOWcsClient2.setCurrentIndex(0)
+            req_outputLoc = self.get_outputLoc()
+        elif len(req_outputLoc) == 0:
+            self.tabWidget_EOWcsClient2.setCurrentIndex(0)
             req_outputLoc = self.get_outputLoc()
         else:
             req_outputLoc = self.lineEdit_Serv_OutputLoc.text()
 
-        
-        for gcov_elem in selected_gcovid:
-      
-            req_params = {'request': 'GetCoverage',
-                'server_url': selected_url ,
-                'coverageID': gcov_elem ,
-                'format':  req_format , 
-                'subset_x': req_lat ,
-                'subset_y': req_lon ,
-                'rangesubset': req_rangesubset ,
-                'outputcrs': req_outputcrs ,
-                'interpolation': req_interpolation ,
-                'size_x': req_size_x ,
-                'size_y': req_size_y ,
-                'output': req_outputLoc}
+
+        try: 
+            for gcov_elem in selected_gcovid:
+                req_params = {'request': 'GetCoverage',
+                    'server_url': selected_url ,
+                    'coverageID': gcov_elem ,
+                    'format':  req_format , 
+                    'subset_x': req_lat ,
+                    'subset_y': req_lon ,
+                    'rangesubset': req_rangesubset ,
+                    'outputcrs': req_outputcrs ,
+                    'interpolation': req_interpolation ,
+                    'size_x': req_size_x ,
+                    'size_y': req_size_y ,
+                    'output': req_outputLoc}
+        except NameError:
+            msg = "Error,    You need to select one or more CoverageIDs first!\n "
+            warning_msg(msg)
+            #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
+            return
+
+
 
 ## TODO -- mediatype & mask --> not yet implemented
                # 'mask': '&mask=polygon,'+crs_url, 

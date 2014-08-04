@@ -3,7 +3,7 @@ S'servers'
 p1
 (lp2
 (lp3
-VDream-instance00
+VDREAM
 p4
 aVhttp://data.eox.at/instance00/ows?
 p5
@@ -13,7 +13,7 @@ p7
 aVhttp://neso.cryoland.enveo.at/cryoland/ows?
 p8
 aa(lp9
-VEarthserver
+VEarthServer
 p10
 aVhttp://earthserver.eox.at/rasdaman?
 p11
@@ -22,4 +22,9 @@ VEarthServer-Beta
 p13
 aVhttp://earthserver.eox.at/beta-rasdaman?
 p14
+aa(lp15
+Vtest-failure
+p16
+aVhttp://
+p17
 aas.

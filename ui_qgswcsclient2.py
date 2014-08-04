@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_qgswcsclient2.ui'
 #
-# Created: Fri Jul 18 17:02:26 2014
+# Created: Mon Aug  4 16:22:29 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_QgsWcsClient2(object):
     def setupUi(self, QgsWcsClient2):
         QgsWcsClient2.setObjectName(_fromUtf8("QgsWcsClient2"))
-        QgsWcsClient2.resize(799, 675)
+        QgsWcsClient2.resize(799, 676)
         self.tabWidget_EOWcsClient2 = QtGui.QTabWidget(QgsWcsClient2)
         self.tabWidget_EOWcsClient2.setEnabled(True)
         self.tabWidget_EOWcsClient2.setGeometry(QtCore.QRect(10, 0, 781, 661))
@@ -35,60 +35,64 @@ class Ui_QgsWcsClient2(object):
         self.tab_Serv = QtGui.QWidget()
         self.tab_Serv.setObjectName(_fromUtf8("tab_Serv"))
         self.GroupBox_9 = QtGui.QGroupBox(self.tab_Serv)
-        self.GroupBox_9.setGeometry(QtCore.QRect(7, 20, 762, 111))
+        self.GroupBox_9.setGeometry(QtCore.QRect(7, 13, 762, 121))
         self.GroupBox_9.setObjectName(_fromUtf8("GroupBox_9"))
         self._6 = QtGui.QGridLayout(self.GroupBox_9)
         self._6.setMargin(9)
         self._6.setSpacing(6)
         self._6.setObjectName(_fromUtf8("_6"))
-        self.btnNew_Serv = QtGui.QPushButton(self.GroupBox_9)
-        self.btnNew_Serv.setAutoDefault(False)
-        self.btnNew_Serv.setObjectName(_fromUtf8("btnNew_Serv"))
-        self._6.addWidget(self.btnNew_Serv, 1, 1, 1, 1)
-        self.btnEdit_Serv = QtGui.QPushButton(self.GroupBox_9)
-        self.btnEdit_Serv.setEnabled(False)
-        self.btnEdit_Serv.setAutoDefault(False)
-        self.btnEdit_Serv.setObjectName(_fromUtf8("btnEdit_Serv"))
-        self._6.addWidget(self.btnEdit_Serv, 1, 2, 1, 1)
-        self.btnConnectServer_Serv = QtGui.QPushButton(self.GroupBox_9)
-        self.btnConnectServer_Serv.setEnabled(True)
-        self.btnConnectServer_Serv.setObjectName(_fromUtf8("btnConnectServer_Serv"))
-        self._6.addWidget(self.btnConnectServer_Serv, 1, 0, 1, 1)
-        self.cmbConnections_Serv = QtGui.QComboBox(self.GroupBox_9)
-        self.cmbConnections_Serv.setObjectName(_fromUtf8("cmbConnections_Serv"))
-        self._6.addWidget(self.cmbConnections_Serv, 0, 0, 1, 5)
         self.btnDelete_Serv = QtGui.QPushButton(self.GroupBox_9)
         self.btnDelete_Serv.setEnabled(False)
         self.btnDelete_Serv.setAutoDefault(False)
         self.btnDelete_Serv.setObjectName(_fromUtf8("btnDelete_Serv"))
-        self._6.addWidget(self.btnDelete_Serv, 1, 3, 1, 1)
+        self._6.addWidget(self.btnDelete_Serv, 4, 3, 1, 1)
         spacerItem = QtGui.QSpacerItem(258, 27, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self._6.addItem(spacerItem, 1, 4, 1, 1)
+        self._6.addItem(spacerItem, 4, 4, 1, 1)
+        self.btnEdit_Serv = QtGui.QPushButton(self.GroupBox_9)
+        self.btnEdit_Serv.setEnabled(False)
+        self.btnEdit_Serv.setAutoDefault(False)
+        self.btnEdit_Serv.setObjectName(_fromUtf8("btnEdit_Serv"))
+        self._6.addWidget(self.btnEdit_Serv, 4, 2, 1, 1)
+        self.btnNew_Serv = QtGui.QPushButton(self.GroupBox_9)
+        self.btnNew_Serv.setAutoDefault(False)
+        self.btnNew_Serv.setObjectName(_fromUtf8("btnNew_Serv"))
+        self._6.addWidget(self.btnNew_Serv, 4, 1, 1, 1)
+        self.cmbConnections_Serv = QtGui.QComboBox(self.GroupBox_9)
+        self.cmbConnections_Serv.setObjectName(_fromUtf8("cmbConnections_Serv"))
+        self._6.addWidget(self.cmbConnections_Serv, 1, 0, 1, 5)
+        self.btnConnectServer_Serv = QtGui.QPushButton(self.GroupBox_9)
+        self.btnConnectServer_Serv.setEnabled(True)
+        self.btnConnectServer_Serv.setObjectName(_fromUtf8("btnConnectServer_Serv"))
+        self._6.addWidget(self.btnConnectServer_Serv, 4, 0, 1, 1)
+        self.label_6 = QtGui.QLabel(self.GroupBox_9)
+        self.label_6.setObjectName(_fromUtf8("label_6"))
+        self._6.addWidget(self.label_6, 0, 0, 1, 1)
         self.textBrowser_Serv = QtGui.QTextBrowser(self.tab_Serv)
-        self.textBrowser_Serv.setGeometry(QtCore.QRect(20, 153, 731, 321))
+        self.textBrowser_Serv.setGeometry(QtCore.QRect(20, 166, 731, 321))
         self.textBrowser_Serv.setObjectName(_fromUtf8("textBrowser_Serv"))
         self.btnClose_Serv = QtGui.QPushButton(self.tab_Serv)
-        self.btnClose_Serv.setGeometry(QtCore.QRect(650, 582, 98, 27))
+        self.btnClose_Serv.setGeometry(QtCore.QRect(650, 585, 98, 27))
         self.btnClose_Serv.setObjectName(_fromUtf8("btnClose_Serv"))
         self.label_2 = QtGui.QLabel(self.tab_Serv)
-        self.label_2.setGeometry(QtCore.QRect(24, 130, 321, 17))
+        self.label_2.setGeometry(QtCore.QRect(24, 143, 321, 17))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setItalic(True)
         font.setWeight(75)
         self.label_2.setFont(font)
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.groupBox = QtGui.QGroupBox(self.tab_Serv)
-        self.groupBox.setGeometry(QtCore.QRect(20, 501, 741, 81))
+        self.groupBox.setGeometry(QtCore.QRect(20, 511, 741, 81))
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
         self.groupBox.setFont(font)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.toolButton_Serv_OutputLoc = QtGui.QToolButton(self.groupBox)
-        self.toolButton_Serv_OutputLoc.setGeometry(QtCore.QRect(650, 30, 23, 25))
+        self.toolButton_Serv_OutputLoc.setGeometry(QtCore.QRect(650, 35, 23, 25))
         self.toolButton_Serv_OutputLoc.setObjectName(_fromUtf8("toolButton_Serv_OutputLoc"))
         self.lineEdit_Serv_OutputLoc = QtGui.QLineEdit(self.groupBox)
-        self.lineEdit_Serv_OutputLoc.setGeometry(QtCore.QRect(0, 30, 641, 27))
+        self.lineEdit_Serv_OutputLoc.setGeometry(QtCore.QRect(0, 35, 641, 27))
         self.lineEdit_Serv_OutputLoc.setObjectName(_fromUtf8("lineEdit_Serv_OutputLoc"))
         self.tabWidget_EOWcsClient2.addTab(self.tab_Serv, _fromUtf8(""))
         self.tab_GCa = QtGui.QWidget()
@@ -224,9 +228,10 @@ class Ui_QgsWcsClient2(object):
         self.dateEdit_GCaDocUpdate.setCalendarPopup(True)
         self.dateEdit_GCaDocUpdate.setObjectName(_fromUtf8("dateEdit_GCaDocUpdate"))
         self.label_3 = QtGui.QLabel(self.tab_GCa)
-        self.label_3.setGeometry(QtCore.QRect(10, 220, 491, 17))
+        self.label_3.setGeometry(QtCore.QRect(10, 215, 591, 17))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setItalic(True)
         font.setWeight(75)
         self.label_3.setFont(font)
         self.label_3.setObjectName(_fromUtf8("label_3"))
@@ -261,7 +266,12 @@ class Ui_QgsWcsClient2(object):
         self.btnClose_DC.setGeometry(QtCore.QRect(484, 575, 98, 27))
         self.btnClose_DC.setObjectName(_fromUtf8("btnClose_DC"))
         self.label_4 = QtGui.QLabel(self.tab_DC)
-        self.label_4.setGeometry(QtCore.QRect(10, 83, 411, 17))
+        self.label_4.setGeometry(QtCore.QRect(10, 83, 701, 17))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.tabWidget_EOWcsClient2.addTab(self.tab_DC, _fromUtf8(""))
         self.tab_DCS = QtGui.QWidget()
@@ -408,20 +418,20 @@ class Ui_QgsWcsClient2(object):
         self.dateTimeEdit_DCSBegin = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSBegin.setGeometry(QtCore.QRect(164, 32, 194, 27))
         self.dateTimeEdit_DCSBegin.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2013, 12, 31), QtCore.QTime(4, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2013, 12, 31), QtCore.QTime(1, 0, 0)))
         self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2013, 12, 31))
-        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(4, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(4, 0, 0))
+        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(1, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(1, 0, 0))
         self.dateTimeEdit_DCSBegin.setCalendarPopup(True)
         self.dateTimeEdit_DCSBegin.setTimeSpec(QtCore.Qt.UTC)
         self.dateTimeEdit_DCSBegin.setObjectName(_fromUtf8("dateTimeEdit_DCSBegin"))
         self.dateTimeEdit_DCSEnd = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSEnd.setGeometry(QtCore.QRect(164, 72, 194, 27))
-        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 2), QtCore.QTime(3, 59, 59)))
+        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 2), QtCore.QTime(0, 59, 59)))
         self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2014, 1, 2))
-        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(3, 59, 59))
-        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(4, 0, 0)))
-        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(3, 59, 59))
+        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(0, 59, 59))
+        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(1, 0, 0)))
+        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(0, 59, 59))
         self.dateTimeEdit_DCSEnd.setCurrentSection(QtGui.QDateTimeEdit.YearSection)
         self.dateTimeEdit_DCSEnd.setCalendarPopup(True)
         self.dateTimeEdit_DCSEnd.setTimeSpec(QtCore.Qt.UTC)
@@ -515,6 +525,7 @@ class Ui_QgsWcsClient2(object):
         self.label_5.setGeometry(QtCore.QRect(10, 77, 731, 17))
         font = QtGui.QFont()
         font.setBold(True)
+        font.setItalic(True)
         font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setObjectName(_fromUtf8("label_5"))
@@ -539,14 +550,19 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_GCov.setObjectName(_fromUtf8("treeWidget_GCov"))
         self.treeWidget_GCov.header().setDefaultSectionSize(200)
         self.label_GCovInfo1 = QtGui.QLabel(self.tab_GCov)
-        self.label_GCovInfo1.setGeometry(QtCore.QRect(17, 20, 281, 17))
+        self.label_GCovInfo1.setGeometry(QtCore.QRect(10, 20, 281, 17))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.label_GCovInfo1.setFont(font)
         self.label_GCovInfo1.setObjectName(_fromUtf8("label_GCovInfo1"))
         self.label_GCOvInfo2 = QtGui.QLabel(self.tab_GCov)
-        self.label_GCOvInfo2.setGeometry(QtCore.QRect(30, 46, 661, 16))
+        self.label_GCOvInfo2.setGeometry(QtCore.QRect(10, 46, 661, 16))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.label_GCOvInfo2.setFont(font)
         self.label_GCOvInfo2.setObjectName(_fromUtf8("label_GCOvInfo2"))
         self.groupBox_15 = QtGui.QGroupBox(self.tab_GCov)
         self.groupBox_15.setGeometry(QtCore.QRect(7, 260, 401, 361))
@@ -782,14 +798,20 @@ class Ui_QgsWcsClient2(object):
         self.tab_Help = QtGui.QWidget()
         self.tab_Help.setObjectName(_fromUtf8("tab_Help"))
         self.btnClose_Help = QtGui.QPushButton(self.tab_Help)
-        self.btnClose_Help.setGeometry(QtCore.QRect(650, 570, 98, 27))
+        self.btnClose_Help.setGeometry(QtCore.QRect(650, 582, 98, 27))
         self.btnClose_Help.setObjectName(_fromUtf8("btnClose_Help"))
+        self.textEdit = QtGui.QTextEdit(self.tab_Help)
+        self.textEdit.setGeometry(QtCore.QRect(10, 10, 751, 561))
+        self.textEdit.setObjectName(_fromUtf8("textEdit"))
         self.tabWidget_EOWcsClient2.addTab(self.tab_Help, _fromUtf8(""))
         self.tab_About = QtGui.QWidget()
         self.tab_About.setObjectName(_fromUtf8("tab_About"))
         self.btnClose_About = QtGui.QPushButton(self.tab_About)
         self.btnClose_About.setGeometry(QtCore.QRect(650, 570, 98, 27))
         self.btnClose_About.setObjectName(_fromUtf8("btnClose_About"))
+        self.textEdit_2 = QtGui.QTextEdit(self.tab_About)
+        self.textEdit_2.setGeometry(QtCore.QRect(20, 20, 731, 521))
+        self.textEdit_2.setObjectName(_fromUtf8("textEdit_2"))
         self.tabWidget_EOWcsClient2.addTab(self.tab_About, _fromUtf8(""))
 
         self.retranslateUi(QgsWcsClient2)
@@ -896,10 +918,11 @@ class Ui_QgsWcsClient2(object):
     def retranslateUi(self, QgsWcsClient2):
         QgsWcsClient2.setWindowTitle(_translate("QgsWcsClient2", "QgsWcsClient2", None))
         self.GroupBox_9.setTitle(_translate("QgsWcsClient2", "Server Connections:", None))
-        self.btnNew_Serv.setText(_translate("QgsWcsClient2", "&New", None))
-        self.btnEdit_Serv.setText(_translate("QgsWcsClient2", "&Edit", None))
-        self.btnConnectServer_Serv.setText(_translate("QgsWcsClient2", "&Connect to Server", None))
         self.btnDelete_Serv.setText(_translate("QgsWcsClient2", "&Delete", None))
+        self.btnEdit_Serv.setText(_translate("QgsWcsClient2", "&Edit", None))
+        self.btnNew_Serv.setText(_translate("QgsWcsClient2", "&New", None))
+        self.btnConnectServer_Serv.setText(_translate("QgsWcsClient2", "&Connect to Server", None))
+        self.label_6.setText(_translate("QgsWcsClient2", "Server", None))
         self.btnClose_Serv.setText(_translate("QgsWcsClient2", "Close", None))
         self.label_2.setText(_translate("QgsWcsClient2", "General Information  / Errors / etc.", None))
         self.groupBox.setTitle(_translate("QgsWcsClient2", "Local Storage Path  (only required for downloading with GetCoverage): ", None))
@@ -927,7 +950,7 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_GCa.headerItem().setText(3, _translate("QgsWcsClient2", "[C]overage/[S]eries", None))
         self.dateEdit_GCaDocUpdate.setSpecialValueText(_translate("QgsWcsClient2", "1900-01-01", None))
         self.dateEdit_GCaDocUpdate.setDisplayFormat(_translate("QgsWcsClient2", "yyyy-MM-dd", None))
-        self.label_3.setText(_translate("QgsWcsClient2", "Results of GetCapabilities Request  &  Selection for further usage:", None))
+        self.label_3.setText(_translate("QgsWcsClient2", "Results of GetCapabilities Request:    Select one or more items for further usage:", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_GCa), _translate("QgsWcsClient2", "GetCapabilities", None))
         self.treeWidget_DC.setSortingEnabled(True)
         self.treeWidget_DC.headerItem().setText(0, _translate("QgsWcsClient2", "CoverageIDs", None))
@@ -935,7 +958,7 @@ class Ui_QgsWcsClient2(object):
         self.label_DCInfo2.setText(_translate("QgsWcsClient2", "Select the CoverageID\'s of interest, then press the DescribeCoverage button.", None))
         self.pushButton_DC.setText(_translate("QgsWcsClient2", "DescribeCoverage", None))
         self.btnClose_DC.setText(_translate("QgsWcsClient2", "Close", None))
-        self.label_4.setText(_translate("QgsWcsClient2", "Selection for DescribeCoverage Requests:", None))
+        self.label_4.setText(_translate("QgsWcsClient2", "Selections from GetCapabilities Result:  Select one item to be used in a DescribeCoverage Requests:", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_DC), _translate("QgsWcsClient2", "DescribeCoverage", None))
         self.pushButton_DCS.setText(_translate("QgsWcsClient2", "DescribeEOCoverageSet", None))
         self.label_DCSInfo2.setText(_translate("QgsWcsClient2", "Select the ID of interest, choose optional AOI and TOI, then press the DescribeEOCoverageSet button.", None))
@@ -961,19 +984,19 @@ class Ui_QgsWcsClient2(object):
         self.radioButton_ContOver.setText(_translate("QgsWcsClient2", "overlaps", None))
         self.radioButton_ContCont.setText(_translate("QgsWcsClient2", "contains", None))
         self.groupBox_14.setTitle(_translate("QgsWcsClient2", "Hits Count: ", None))
-        self.GroupBox_10.setTitle(_translate("QgsWcsClient2", "Capabilities Document - Select Sections:", None))
+        self.GroupBox_10.setTitle(_translate("QgsWcsClient2", "EOCoverageSet Document - Select Sections:", None))
         self.checkBox_DCSAll.setText(_translate("QgsWcsClient2", "All", None))
         self.checkBox_DCSDatSerSum.setText(_translate("QgsWcsClient2", "DatasetSeriesSummary", None))
         self.checkBox_DCSCovSum.setText(_translate("QgsWcsClient2", "CoverageSummary", None))
-        self.checkBox_DCSIDonly.setText(_translate("QgsWcsClient2", "coverage IDs only", None))
-        self.label_5.setText(_translate("QgsWcsClient2", "Selection for DescribeEOCoverageSet Request  &  Selection of Resulting CoverageIDs for further usage:", None))
+        self.checkBox_DCSIDonly.setText(_translate("QgsWcsClient2", "Coverage IDs only", None))
+        self.label_5.setText(_translate("QgsWcsClient2", "Selections from GetCapabilities Result:   Select item(s) for further usage:", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_DCS), _translate("QgsWcsClient2", "DescribeEOCoverageSet", None))
         self.pushButton_GCov.setText(_translate("QgsWcsClient2", "GetCoverage", None))
         self.btnClose_GCov.setText(_translate("QgsWcsClient2", "Close", None))
         self.treeWidget_GCov.setSortingEnabled(True)
         self.treeWidget_GCov.headerItem().setText(0, _translate("QgsWcsClient2", "CoverageID", None))
         self.label_GCovInfo1.setText(_translate("QgsWcsClient2", "GetCoverage:   download a Coverage ", None))
-        self.label_GCOvInfo2.setText(_translate("QgsWcsClient2", "Select the ID\'s of interest, choose optional parameters and then press the GetCoverager button.", None))
+        self.label_GCOvInfo2.setText(_translate("QgsWcsClient2", "Select the ID\'s of interest (and choose optional parameters), then press the GetCoverage button", None))
         self.groupBox_15.setTitle(_translate("QgsWcsClient2", "Output Subset:", None))
         self.groupBox_16.setTitle(_translate("QgsWcsClient2", "    Coordinates:", None))
         self.label_GCovMinLat.setText(_translate("QgsWcsClient2", "Min. Latitude", None))
@@ -1002,14 +1025,150 @@ class Ui_QgsWcsClient2(object):
         self.label_GCovYAxisLabel.setText(_translate("QgsWcsClient2", "Y-Axis Label:", None))
         self.radioButton_GCovYRes.setText(_translate("QgsWcsClient2", "Y-Resolution", None))
         self.radioButton_GCov_OutSizeOrig.setText(_translate("QgsWcsClient2", "Original Outsize:", None))
-        self.groupBox_17.setTitle(_translate("QgsWcsClient2", "   Type of subsetting:", None))
+        self.groupBox_17.setTitle(_translate("QgsWcsClient2", "   Type of Subsetting:", None))
         self.radioButton_GCovSubOrig.setText(_translate("QgsWcsClient2", "Original", None))
         self.radioButton_GCovSubCRS.setText(_translate("QgsWcsClient2", "CRS", None))
         self.radioButton_GCovSubPixel.setText(_translate("QgsWcsClient2", "Pixel", None))
         self.label_GCovSubEPSG.setText(_translate("QgsWcsClient2", "EPSG No.:", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_GCov), _translate("QgsWcsClient2", "GetCoverage", None))
         self.btnClose_Help.setText(_translate("QgsWcsClient2", "Close", None))
+        self.textEdit.setHtml(_translate("QgsWcsClient2", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:xx-large; font-weight:600;\">QgsWcsClient2</span></p>\n"
+"<p style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">A OGC WCS 2.0/EO-WCS Client</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">Author:  Christian Schiller </span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">Copyright:  EOX IT Services GmbH, Vienna, Austria, 2014</span></p>\n"
+"<hr width=\"100%\"/>\n"
+"<p style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">Help - QgsWcsClient2: Instructions and Hints</span></p>\n"
+"<p style=\" margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:large; font-weight:600;\">Content:</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#Introduction\"><span style=\" text-decoration: underline; color:#0000ff;\">Introduction:</span></a>   What the QgsWcsClient2 plugin is about    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#Getting Started\"><span style=\" text-decoration: underline; color:#0000ff;\">Getting Started:</span></a>   Initiating the QgsWcsClient2 plugin    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#How To\"><span style=\" text-decoration: underline; color:#0000ff;\">How To:</span></a>   A detailed description of the available functionalities and settings    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#Hint\"><span style=\" text-decoration: underline; color:#0000ff;\">Hint - Erroneous behaviour</span></a>    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#Quick How To\"><span style=\" text-decoration: underline; color:#0000ff;\">Quick How To:</span></a>   A very short, stepwise description    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"#Other Stuff\"><span style=\" text-decoration: underline; color:#0000ff;\">Other Stuff</span></a></li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"Introduction\"></a><span style=\" font-size:large; font-weight:600;\">I</span><span style=\" font-size:large; font-weight:600;\">ntroduction:</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">This WCS 2.0/EO-WCS client is intended to be used to access/download single Coverages, StitchedMosaics and DatasetSeries (which are offered by OGC WCS 2.0/EO-WCS conformant servers) in a convenient way from within QGis (&gt;2.0). Downloaded datasets are stored locally and loaded directly into QGis for further usage.<br />This client provides the possibility to send OGC <span style=\" font-style:italic;\">GetCapabilities</span>, <span style=\" font-style:italic;\">DescribeCoverage</span>, <span style=\" font-style:italic;\">DescribeEOCoverageSet</span>, and <span style=\" font-style:italic;\">GetCoverage</span> requests to a selected WCS 2.0/EO-WCS server. The respective request results are received and either shown completely or the relevant information is extracted and provided in the GUI for further usage within the client.<br />The GUI provides tabs for each request, allowing to select optional parameters (e.g. sub-setting in space and/or time) to be sent with the request. However, not all servers may honor all optional parameters. So if you receive an error message or no answser at all try it with different optional settings. See also the \'How To\' section for further details and the \'Hint - Erroneous behaviour\' section.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"Getting Started\"></a><span style=\" font-size:large; font-weight:600;\">G</span><span style=\" font-size:large; font-weight:600;\">etting Started:</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The first thing which needs to be done is to define at least one server in the &quot;Server/Storage&quot; tab. Press the &quot;New&quot; button, and enter a (personal) &quot;Server Name&quot; and the WCS Access &quot;Server URL&quot;. Press &quot;OK&quot; when done. All server entries are stored in the QgsWcsClient2 plugin installation directory    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Make sure the provided WCS Access &quot;Server URL&quot; complies to OGC OWS (e.g. usually OGC-Service Access-URls end with a &quot;?&quot;)    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The supplied server information can be changed anytime utilizing the &quot;Edit&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Any server entry can be deleted utilizing the &quot;Delete&quot; button&quot;.     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the server information has been provided, select the desired &quot;Server&quot; entry from the list and press the &quot;Connect to Server&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You always need to be connected to a server before you can send requests!</li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"How To\"></a><span style=\" font-size:large; font-weight:600;\">H</span><span style=\" font-size:large; font-weight:600;\">ow To:</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">This section shortly describes a \'typical\' usage scenario, starting with a <span style=\" font-style:italic;\">GetCapabilities</span> request to the final download of Coverages utilizing a <span style=\" font-style:italic;\">GetCoverage</span> request.<br />It also explains the provided options available in the GUI.</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">Server/Storage tab</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The QgsWcsClient2 plugin always starts with the &quot;Server/Storage&quot; tab    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select the desired &quot;Server&quot; entry from the list and press the &quot;Connect to Server&quot; button. You always need to be connected to a server before you can send requests!    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the connection is established successfully, the line <span style=\" font-family:\'Courier New,courier\'; font-size:large;\">&quot;Response:  Server OK&quot;</span> is printed in the &quot;General Information / Errors / etc.&quot; field    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If you want to access/download a Coverage, you need to supply a &quot;Local Storage Path&quot;. Either type the path into the &quot;Local Storage Path&quot; field or use the &quot;...&quot; button for the path selection    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the server connection is established click on the &quot;GetCapabilities&quot; tab</li></ul>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">GetCapabilities tab</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The sectionparameters allow you to limit the amount and type of information retrieved from the WCS server. The following <span style=\" font-style:italic;\">GetCapabilities</span> section parameters are available:</li>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />        </p>\n"
+"<ul type=\"circle\" style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;\"><li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">All:   Requests full information (equals to no selections)            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DatasetSeriesSummary:   Summary about offered DatasetSeries            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">CoverageSummary:   Summary about offered Coverages            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ServiceIdentification:   Information about available Service Profiles            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ServiceProvider:   Information about the Service Provider            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">ServiceMetadata:   Information about offered File Formats, offered CRSs, etc.            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">OperationsMetadata:   Metadata about available Service Operations (e.g. enabled requests)            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Contents:   Overview of offered Content (i.e. list of CoverageIDs and basic DatasetSeries information)            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Languages:   Offered Languages (if available)        </li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />    </p>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You may select requesting only sections (subsets) of the full <span style=\" font-style:italic;\">GetCapabilities</span> document. The default settings used have been chosen for fast and efficient usage (some WCS servers may return huge results and therefore take quite some time to respond)     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If you use the same server frequently you are probably not interested in \'older\' information. If you want to limit the returned information to \'newer\' offers only activate the &quot;Document Update Sequence&quot; check-box and provide a \'Cutoff Date\', i.e. only newer information shall be provided    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the desired options are chosen press the &quot;GetCapabilities&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The returned results will be shown in the &quot;Results of GetCapabilities Request&quot; field. There you will see the the following columns: <br /> <br />         </li>\n"
+"<table border=\"3\" style=\" margin-top:0px; margin-bottom:0px; margin-left:480px; margin-right:0px;\" cellspacing=\"5\" cellpadding=\"5\">\n"
+"<tr>\n"
+"<td>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">CoverageID/DatasetSeriesID            </p></td>\n"
+"<td>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">BeginTime            </p></td>\n"
+"<td>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">EndTime            </p></td>\n"
+"<td>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">[C]overage/[S]eries            </p></td></tr></table>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  <br />    In the first column either a CoverageID or a DatasetSeriesID is provided. The type of ID can be seen in the last column ([C] indicates a Coverage, [S] indicates a DatasetSerie). The two time columns are assumed to be self-explanatory.    </p>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the <span style=\" font-style:italic;\">GetCapabilities</span> results are listed you have to choose at least one CoverageID or DatasetSeriesID. However, the selection of multiple IDs is possible. <br />    The selected items will automatically show up in the &quot;DescribeCoverage&quot; tab, in the &quot;DescribeEOCoverageSet&quot; tab, and in the &quot;GetCapabilities&quot; tab (if a Coverage has been selected) or in only the &quot;DescribeEOCoverageSet&quot; tab (if a DatasetSeries has been selected).     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Now continue, changing either to the &quot;DescribeCoverage&quot; tab or to the &quot;DescribeEOCoverageSet&quot; tab. If you have chosen only CoverageIDs you may also switch directly to the &quot;GetCapabilities&quot; tab</li></ul>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">DescribeCoverage tab</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If one or more CoverageIDs have been selected in the &quot;Results of GetCapabilities Request&quot; field they will be shown in the &quot;Selections from the GetCapabilities Results&quot; field. You need to select a single CoverageID to send a <span style=\" font-style:italic;\">DescribeCoverage</span> request to the server. The full results of this request will be shown in a separate window. No optional parameters are available for a <span style=\" font-style:italic;\">DescribeCoverage</span> request.     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The provided information, however, may later be useful e.g. for specification of the Area of Interest (AOI)</li></ul>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">DescribeEOCoverageSet tab</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If one or more CoverageIDs and/or DatasetSeriesIDs have been selected in the &quot;Results of GetCapabilities Request&quot; field they will be shown in the &quot;Selections from the GetCapabilities Results&quot; field.     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">For the <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> response document the following section restrictions are available:</li>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />        </p>\n"
+"<ul type=\"circle\" style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;\"><li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">All:   Requests full information (equals to no selections)            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DatasetSeriesSummary:   Summary about offered DatasetSeries            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Coverage Summary:   Summary about offered Coverages        </li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />    </p>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-style:italic;\">DescribeEoCoverageSet</span> request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 coordinates (i.e. long/lat in degrees)! To use an AOI just enter the desired coordinate values    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-style:italic;\">DescribeEoCoverageSet</span> request can also be limited to a user provided Time of Interest(TOI). The TOI has to be provided in ISO-Format. To activate the use of TOI click the respective check-box and choose the desired Date-Time values    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Containment:   This parameter allows to limit the hits according to:</li>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />        </p>\n"
+"<ul type=\"circle\" style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;\"><li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">overlaps:   Coverages may just touch AOI            </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">contains:   Coverages must be fully inside AOI        </li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />    </p>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Hits Count:   Limits the number of the returned results    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Coverage IDs only:   This setting (non-standard) is not part of the request. It represents a \'convenience\' function which extracts the received CoverageIDs to be immediately used in the <span style=\" font-style:italic;\">GetCoverage</span> request. Not checking this check-box will result in the <span style=\" font-style:italic;\">DescribeEoCoverageSet</span> result document to be displayed in a separate window. If it is checked the resulting CoverageIDs will be extracted and listed in the &quot;GetCoverage&quot; tab to which the GUI will automatically change    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You need to select one or more items befor sending a <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request</li></ul>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:medium; font-weight:600;\">GetCoverage tab</span></p>\n"
+"<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The CoverageIDs returned by the <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request or selected in the &quot;Results of GetCapabilities Request&quot; field  are shown in the &quot;GetCoverage: download a Coverage&quot; field    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select one or more CoverageIDs which you want to download and access in QGis    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The following optional parameters, to limit and configure the resulting downloaded Coverages, are provided:</li>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />    </p>\n"
+"<ul type=\"circle\" style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;\"><li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">AOI:   At the &quot;GetCoverage&quot; tab the AOI values will subset the delivered Coverages to the limits provided by the AOI. The coordinate values to be supplied depend on the setting provided in the &quot;Type of Subsetting&quot; section. See below.         </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Type of Subsetting:   These settings influence the coordinate values of the AOI. The default setting is &quot;Original&quot;, i.e. the coordinate values have to correspond to the CRS of the offered Coverages. The list of server supported CRSs (which is gathered during the &quot;Connect to Server&quot; initialisation process) is provided via the the &quot;Output CRS&quot; selection button. However, the &quot;Original&quot; CRS (which corresponds to the CRS of the offered Coverage) is only gathered during a <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request. Thereafter the &quot;Output CRS&quot; selection button will be set to show the &quot;Original CRS&quot; as an indication. I.e. if you don\'t issue a <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request you have to know by yourself (e.g. by other means) the CRS of the offered/selected Coverage (&quot;Original CRS&quot;).           If you like to provide the coordinates of the AOI in a different CRS you can select the &quot;CRS&quot; radio button and provide the desired EPSG-Code in the designated &quot;EPSG-No.&quot; field (e.g. this method can be used if you don\'t know the &quot;Original CRS&quot;).  If want to provide pixel coordinates you can select the &quot;Pixel&quot; radio button and provide the AOI in pixel coordinates        </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">List of Band Numbers:   Here you may provide a comma-separated list of the desired bands (and their order). The delivered Coverages will be subsetted to contain only the provided bands in the provided order        </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Interpolation:   The method of interpolation applied during subsetting and especially for resizing of the delivered Coverages        </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output Format:   You may choose one of the supported &quot;Output Formats&quot; (file formats) in which the Coverages shall be delivered. The listing of the server side supported &quot;Output Formats&quot; is gathered during the &quot;Connect to Server&quot; initialisation process        </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output CRS:   Independent of the original CRS, you may choose to reproject the delivered Coverages to another CRS offered by the WCS server. The list of offered CRS\'s is provided as a selection button. The listing of server side offered CRS\'s is gathered during the &quot;Connect to Server&quot; initialisation process        </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output Size:   This section allows you to resize/rescale the delivered Coverages, independently of the AOI. You may choose either to provide absolute sizes for the &quot;x-&quot; and the &quot;y-dimension&quot; (pixel/line numbers) of the resulting Coverage or you provide the desired resolution (dimension of a pixel according to &quot;Output CRS&quot;) for each of the axis. In either case you may need to run a <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request for the desired Coverages first, in order to gather the correct &quot;Axis-Labels&quot; (if you know them already you may skip this step and provide the &quot;Axis-Labels&quot; manually). To return to the original outsize select the respective &quot;Original Outsize&quot; radio button        </li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><br />    </p>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Once you have set all desired \'Output Parameters\', select the &quot;GetCoverage&quot; button to start the download     </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">This may take some time (according to the number of selected Coverages and their requested size). Please be patient    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The Coverages will be downloaded and stored in the provided location sequentially and will concurrently be shown in the QGis Layers list</li></ul>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"Hint\"></a><span style=\" font-size:medium; font-weight:600;\">H</span><span style=\" font-size:medium; font-weight:600;\">int - Erroneous behaviour</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">In case you encounter an error (except server errors) or other strange behaviour, please close the QgsWcsClient2 plugin, restart QGis, activate the \'Python Console\' from within QGis (Menu: Plugins -&gt; Python Console), reload the QgsWcsClient2 plugin and repeat your previous actions. You should then get some additional information about the requests sent and error encountered. Please include this output in an error report to us.</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"Quick How To\"></a><span style=\" font-size:medium; font-weight:600;\">Q</span><span style=\" font-size:medium; font-weight:600;\">uick How To:</span></p>\n"
+"<ol style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select a WCS server from the &quot;Server&quot; list and press the &quot;Connect to Server&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Provide a &quot;Local Storage Path&quot; where downloaded Coverages shall be stored    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Switch to the &quot;GetCapabiltites&quot; tab and press the &quot;GetCapabilties&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select one or more CoveragesIDs and/or DataSeriesIDs of interest    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Switch to the &quot;DescribeEOCoverageSet&quot; tab    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Provide an AOI and maybe a TOI to which the search for DatasetSeries shall be limited (don\'t turn off the &quot;Coverage IDs only&quot; check-box!)    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Select one or more CoveragesIDs and/or DataSeriesIDs of interest    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Press the &quot;DescribeEOCoverageSet&quot; button    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The returned results will be automatically shown in the &quot;GetCoverage&quot; tab    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Optionally:    Provide an AOI to which the Coverages shall be subsetted (pay attention to the &quot;Type of Subsetting&quot;; see the \'How To\' for details). Select the desired &quot;Output Format&quot; and the &quot;Output CRS&quot;. Provide a comma-separated list of &quot;Bands&quot; considering their order    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Press &quot;GetCoverage&quot; button to start the download    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The Coverages will be downloaded and stored in the provided location (&quot;Local Storage Path&quot;) sequentially and will concurrently be shown in the QGis Layers list    </li>\n"
+"<li style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">This may take some time (according to the number of selected Coverages and their requested size). Please be patient</li></ol>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"Other Stuff\"></a><span style=\" font-size:medium; font-weight:600;\">O</span><span style=\" font-size:medium; font-weight:600;\">ther Stuff:</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:small; font-weight:600;\">Help</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The information you are currently reading</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:4px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:small; font-weight:600;\">About</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">General Information about the Author/Company/Contact/Copyright/Acknowledgements/License</p></body></html>", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_Help), _translate("QgsWcsClient2", "Help", None))
         self.btnClose_About.setText(_translate("QgsWcsClient2", "Close", None))
+        self.textEdit_2.setHtml(_translate("QgsWcsClient2", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p style=\" margin-top:18px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:xx-large; font-weight:600;\">QgsWcsClient2</span></p>\n"
+"<p style=\" margin-top:16px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:x-large; font-weight:600;\">A OGC WCS 2.0/EO-WCS Client</span></p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Author:</span>  Christian Schiller</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Company</span>:  EOX IT Services GmbH, Vienna, Austria</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Contact</span>:  christian dot schiller at eox dot at</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Copyright:</span>  Copyright (c) 2014 EOX IT Services GmbH</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Acknowledgements:</span>  The development of this QgsWcsClient2 plugin (a OGC WCS 2.0/EO-WCS Client) was partially financed by ESA (European Space Agency) under the ESA-GSTP DREAM/Delta-Dream project (991/C03-YC).</p>\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">License:</span> <br />The MIT License (MIT)<br />Permission is hereby granted, free of charge, to any person obtaining a copy  of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  copies of the Software, and to permit persons to whom the Software is  furnished to do so, subject to the following conditions: <br />The above copyright notice and this permission notice shall be included in  all copies or substantial portions of the Software.<br />THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE. </p></body></html>", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_About), _translate("QgsWcsClient2", "About", None))
 
