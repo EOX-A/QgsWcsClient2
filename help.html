@@ -1,0 +1,186 @@
+<body style="font-family: arial, helvetica, sans-serif; ">
+
+<h1>QgsWcsClient2</h1>
+
+<h2>A OGC WCS 2.0/EO-WCS Client</h2>
+
+<h4>Author:  Christian Schiller</h4> 
+
+<h4>Copyright:  EOX IT Services GmbH, Vienna, Austria, 2014</h4>
+
+<hr align="center" width="100%">
+
+<h2>Help - QgsWcsClient2: Instructions and Hints</h2>
+
+
+<h3>Content:</h3>
+<ul style="line-height: 1.5;">
+	<li><a href="#Introduction">Introduction:</a> &nbsp;&nbsp;What the QgsWcsClient2 plugin is about</li>
+	<li><a href="#Getting Started">Getting Started:</a> &nbsp;&nbsp;Initiating the QgsWcsClient2 plugin</li>
+	<li><a href="#How To">How To:</a> &nbsp;&nbsp;A detailed description of the available functionalities and settings</li>
+	<li><a href="#Hint">Hint - Erroneous behaviour</a></li>
+	<li><a href="#Quick How To">Quick How To:</a> &nbsp;&nbsp;A very short, stepwise description</li>
+	<li><a href="#Other Stuff">Other Stuff</a></li>
+</ul>
+
+
+<h3><a name="Introduction">Introduction:</a></h3>
+
+<p style="line-height: 1.5;">This WCS 2.0/EO-WCS client is intended to be used to access/download single Coverages, StitchedMosaics and DatasetSeries (which are offered by OGC WCS 2.0/EO-WCS conformant servers) in a convenient way from within QGis (>2.0). Downloaded datasets are stored locally and loaded directly into QGis for further usage.<br>
+This client provides the possibility to send OGC <em>GetCapabilities</em>, <em>DescribeCoverage</em>, <em>DescribeEOCoverageSet</em>, and <em>GetCoverage</em> requests to a selected WCS 2.0/EO-WCS server. The respective request results are received and either shown completely or the relevant information is extracted and provided in the GUI for further usage within the client.<br>
+The GUI provides tabs for each request, allowing to select optional parameters (e.g. sub-setting in space and/or time) to be sent with the request. However, not all servers may honor all optional parameters. So if you receive an error message or no answser at all try it with different optional settings. See also the 'How To' section for further details and the 'Hint - Erroneous behaviour' section.</p>
+
+
+<h3><a name="Getting Started">Getting Started:</h3>
+
+<ul style="line-height: 1.5;">
+	<li>The first thing which needs to be done is to define at least one server in the "Server/Storage" tab. Press the "New" button, and enter a (personal) "Server Name" and the WCS Access "Server URL". Press "OK" when done. All server entries are stored in the QgsWcsClient2 plugin installation directory</li>
+	<li>Make sure the provided WCS Access "Server URL" complies to OGC OWS (e.g. usually OGC-Service Access-URls end with a "?")</li>
+	<li>The supplied server information can be changed anytime utilizing the "Edit" button</li>
+	<li>Any server entry can be deleted utilizing the "Delete" button". </li>
+	<li>When the server information has been provided, select the desired "Server" entry from the list and press the "Connect to Server" button</li>
+	<li>You always need to be connected to a server before you can send requests!</li>
+</ul>
+
+
+<h3><a name="How To">How To:</h3>
+
+<p style="line-height: 1.5;">This section shortly describes a 'typical' usage scenario, starting with a <em>GetCapabilities</em> request to the final download of Coverages utilizing a <em>GetCoverage</em> request.<br>
+It also explains the provided options available in the GUI.</p>
+
+<h4>Server/Storage tab</h4>
+
+<ul style="line-height: 1.5;">
+	<li>The QgsWcsClient2 plugin always starts with the "Server/Storage" tab</li>
+	<li>Select the desired "Server" entry from the list and press the "Connect to Server" button. You always need to be connected to a server before you can send requests!</li>
+	<li>When the connection is established successfully, the line <code><font size="+1">"Response:  Server OK"</code></font> is printed in the "General Information / Errors / etc." field</li>
+	<li>If you want to access/download a Coverage, you need to supply a "Local Storage Path". Either type the path into the "Local Storage Path" field or use the "..." button for the path selection</li>
+	<li>When the server connection is established click on the "GetCapabilities" tab</li>
+</ul>
+
+<h4>GetCapabilities tab</h4>
+
+<ul style="line-height: 1.5;">
+	<li>The sectionparameters allow you to limit the amount and type of information retrieved from the WCS server. The following <em>GetCapabilities</em> section parameters are available:</li><br>
+		<ul>
+			<li>All: &nbsp;&nbsp;Requests full information (equals to no selections)</li>
+			<li>DatasetSeriesSummary: &nbsp;&nbsp;Summary about offered DatasetSeries</li>
+			<li>CoverageSummary: &nbsp;&nbsp;Summary about offered Coverages</li>
+			<li>ServiceIdentification: &nbsp;&nbsp;Information about available Service Profiles</li>
+			<li>ServiceProvider: &nbsp;&nbsp;Information about the Service Provider</li>
+			<li>ServiceMetadata: &nbsp;&nbsp;Information about offered File Formats, offered CRSs, etc.</li>
+			<li>OperationsMetadata: &nbsp;&nbsp;Metadata about available Service Operations (e.g. enabled requests)</li>
+			<li>Contents: &nbsp;&nbsp;Overview of offered Content (i.e. list of CoverageIDs and basic DatasetSeries information)</li>
+			<li>Languages: &nbsp;&nbsp;Offered Languages (if available)</li>
+		</ul><br>
+	<li>You may select requesting only sections (subsets) of the full <em>GetCapabilities</em> document. The default settings used have been chosen for fast and efficient usage (some WCS servers may return huge results and therefore take quite some time to respond) </li>
+
+	<li>If you use the same server frequently you are probably not interested in 'older' information. If you want to limit the returned information to 'newer' offers only activate the "Document Update Sequence" check-box and provide a 'Cutoff Date', i.e. only newer information shall be provided</li>
+	<li>When the desired options are chosen press the "GetCapabilities" button</li>
+	<li>The returned results will be shown in the "Results of GetCapabilities Request" field. There you will see the the following columns: <br>&nbsp;<br> 
+	
+	<table border="3" frame="box" cellpadding="5" cellspacing="5">
+		<tr align="center" >
+			<td>CoverageID/DatasetSeriesID</td>
+			<td>BeginTime</td>
+			<td>EndTime</td>
+			<td>[C]overage/[S]eries</td>
+		</tr>
+	</table>
+  <br>
+	In the first column either a CoverageID or a DatasetSeriesID is provided. The type of ID can be seen in the last column ([C] indicates a Coverage, [S] indicates a DatasetSerie). The two time columns are assumed to be self-explanatory.</li>
+	<li>When the <em>GetCapabilities</em> results are listed you have to choose at least one CoverageID or DatasetSeriesID. However, the selection of multiple IDs is possible. <br>
+	The selected items will automatically show up in the "DescribeCoverage" tab, in the "DescribeEOCoverageSet" tab, and in the "GetCapabilities" tab (if a Coverage has been selected) or in only the "DescribeEOCoverageSet" tab (if a DatasetSeries has been selected). </li>
+	<li>Now continue, changing either to the "DescribeCoverage" tab or to the "DescribeEOCoverageSet" tab. If you have chosen only CoverageIDs you may also switch directly to the "GetCapabilities" tab</li>
+</ul>
+
+<h4>DescribeCoverage tab</h4>
+
+<ul style="line-height: 1.5;">
+	<li>If one or more CoverageIDs have been selected in the "Results of GetCapabilities Request" field they will be shown in the "Selections from the GetCapabilities Results" field. You need to select a single CoverageID to send a <em>DescribeCoverage</em> request to the server. The full results of this request will be shown in a separate window. No optional parameters are available for a <em>DescribeCoverage</em> request. </li>
+	<li>The provided information, however, may later be useful e.g. for specification of the Area of Interest (AOI)</li>
+</ul>
+
+<h4>DescribeEOCoverageSet tab</h4>
+
+<ul style="line-height: 1.5;">
+	<li>If one or more CoverageIDs and/or DatasetSeriesIDs have been selected in the "Results of GetCapabilities Request" field they will be shown in the "Selections from the GetCapabilities Results" field. </li>
+	<li>For the <em>DescribeEOCoverageSet</em> response document the following section restrictions are available:</li><br>
+		<ul>
+			<li>All: &nbsp;&nbsp;Requests full information (equals to no selections)</li>
+			<li>DatasetSeriesSummary: &nbsp;&nbsp;Summary about offered DatasetSeries</li>
+			<li>Coverage Summary: &nbsp;&nbsp;Summary about offered Coverages</li>
+		</ul><br>
+	<li>The <em>DescribeEoCoverageSet</em> request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 coordinates (i.e. long/lat in degrees)! To use an AOI just enter the desired coordinate values</li>
+	<li>The <em>DescribeEoCoverageSet</em> request can also be limited to a user provided Time of Interest(TOI). The TOI has to be provided in ISO-Format. To activate the use of TOI click the respective check-box and choose the desired Date-Time values</li>
+	<li>Containment: &nbsp;&nbsp;This parameter allows to limit the hits according to:</li><br>
+		<ul>
+			<li>overlaps: &nbsp;&nbsp;Coverages may just touch AOI</li>
+			<li>contains: &nbsp;&nbsp;Coverages must be fully inside AOI</li>
+		</ul><br>
+	<li>Hits Count: &nbsp;&nbsp;Limits the number of the returned results</li>
+	<li>Coverage IDs only: &nbsp;&nbsp;This setting (non-standard) is not part of the request. It represents a 'convenience' function which extracts the received CoverageIDs to be immediately used in the <em>GetCoverage</em> request. Not checking this check-box will result in the <em>DescribeEoCoverageSet</em> result document to be displayed in a separate window. If it is checked the resulting CoverageIDs will be extracted and listed in the "GetCoverage" tab to which the GUI will automatically change</li>
+	<li>You need to select one or more items befor sending a <em>DescribeEOCoverageSet</em> request</li>
+
+</ul>
+
+
+<h4>GetCoverage tab</h4>
+
+<ul style="line-height: 1.5;">
+	<li>The CoverageIDs returned by the <em>DescribeEOCoverageSet</em> request or selected in the "Results of GetCapabilities Request" field  are shown in the "GetCoverage: download a Coverage" field</li>
+	<li>Select one or more CoverageIDs which you want to download and access in QGis</li>
+	<li>The following optional parameters, to limit and configure the resulting downloaded Coverages, are provided:</li><br>
+	<ul>
+		<li>AOI: &nbsp;&nbsp;At the "GetCoverage" tab the AOI values will subset the delivered Coverages to the limits provided by the AOI. The coordinate values to be supplied depend on the setting provided in the "Type of Subsetting" section. See below. </li>
+		<li>Type of Subsetting: &nbsp;&nbsp;These settings influence the coordinate values of the AOI. The default setting is "Original", i.e. the coordinate values have to correspond to the CRS of the offered Coverages. The list of server supported CRSs (which is gathered during the "Connect to Server" initialisation process) is provided via the the "Output CRS" selection button. However, the "Original" CRS (which corresponds to the CRS of the offered Coverage) is only gathered during a <em>DescribeEOCoverageSet</em> request. Thereafter the "Output CRS" selection button will be set to show the "Original CRS" as an indication. I.e. if you don't issue a <em>DescribeEOCoverageSet</em> request you have to know by yourself (e.g. by other means) the CRS of the offered/selected Coverage ("Original CRS").  
+		 If you like to provide the coordinates of the AOI in a different CRS you can select the "CRS" radio button and provide the desired EPSG-Code in the designated "EPSG-No." field (e.g. this method can be used if you don't know the "Original CRS").  If want to provide pixel coordinates you can select the "Pixel" radio button and provide the AOI in pixel coordinates</li>
+		<li>List of Band Numbers: &nbsp;&nbsp;Here you may provide a comma-separated list of the desired bands (and their order). The delivered Coverages will be subsetted to contain only the provided bands in the provided order</li>
+		<li>Interpolation: &nbsp;&nbsp;The method of interpolation applied during subsetting and especially for resizing of the delivered Coverages</li>
+		<li>Output Format: &nbsp;&nbsp;You may choose one of the supported "Output Formats" (file formats) in which the Coverages shall be delivered. The listing of the server side supported "Output Formats" is gathered during the "Connect to Server" initialisation process</li>
+		<li>Output CRS: &nbsp;&nbsp;Independent of the original CRS, you may choose to reproject the delivered Coverages to another CRS offered by the WCS server. The list of offered CRS's is provided as a selection button. The listing of server side offered CRS's is gathered during the "Connect to Server" initialisation process</li>
+		<li>Output Size: &nbsp;&nbsp;This section allows you to resize/rescale the delivered Coverages, independently of the AOI. You may choose either to provide absolute sizes for the "x-" and the "y-dimension" (pixel/line numbers) of the resulting Coverage or you provide the desired resolution (dimension of a pixel according to "Output CRS") for each of the axis. In either case you may need to run a <em>DescribeEOCoverageSet</em> request for the desired Coverages first, in order to gather the correct "Axis-Labels" (if you know them already you may skip this step and provide the "Axis-Labels" manually)</em>. To return to the original outsize select the respective "Original Outsize" radio button</li>
+		</ul><br>
+	<li>Once you have set all desired 'Output Parameters', select the "GetCoverage" button to start the download</li> 
+	<li>This may take some time (according to the number of selected Coverages and their requested size). Please be patient</li>
+	<li>The Coverages will be downloaded and stored in the provided location sequentially and will concurrently be shown in the QGis Layers list</li>
+</ul>
+
+
+<h4><a name="Hint">Hint - Erroneous behaviour</h4>
+
+<p style="line-height: 1.5;">In case you encounter an error (except server errors) or other strange behaviour, please close the QgsWcsClient2 plugin, restart QGis, activate the 'Python Console' from within QGis (Menu: Plugins -> Python Console), reload the QgsWcsClient2 plugin and repeat your previous actions. You should then get some additional information about the requests sent and error encountered. Please include this output in an error report to us.</p>
+
+
+<h4><a name="Quick How To">Quick How To:</h4>
+
+<ol style="line-height: 1.5;">
+	<li>Select a WCS server from the "Server" list and press the "Connect to Server" button</li>
+	<li>Provide a "Local Storage Path" where downloaded Coverages shall be stored</li>
+	<li>Switch to the "GetCapabiltites" tab and press the "GetCapabilties" button</li>
+	<li>Select one or more CoveragesIDs and/or DataSeriesIDs of interest</li>
+	<li>Switch to the "DescribeEOCoverageSet" tab</li>
+	<li>Provide an AOI and maybe a TOI to which the search for DatasetSeries shall be limited (don't turn off the "Coverage IDs only" check-box!)</li>
+	<li>Select one or more CoveragesIDs and/or DataSeriesIDs of interest</li>
+	<li>Press the "DescribeEOCoverageSet" button</li>
+	<li>The returned results will be automatically shown in the "GetCoverage" tab</li>
+	<li>Optionally: &nbsp;&nbsp; Provide an AOI to which the Coverages shall be subsetted (pay attention to the "Type of Subsetting"; see the 'How To' for details). Select the desired "Output Format" and the "Output CRS". Provide a comma-separated list of "Bands" considering their order</li>
+	<li>Press "GetCoverage" button to start the download</li>
+	<li>The Coverages will be downloaded and stored in the provided location ("Local Storage Path") sequentially and will concurrently be shown in the QGis Layers list</li>
+	<li>This may take some time (according to the number of selected Coverages and their requested size). Please be patient</li>
+</ol>
+
+
+
+<h4><a name="Other Stuff">Other Stuff:</h4>
+
+<h5>Help</h5>
+
+<p style="line-height: 1.5;">The information you are currently reading</p>
+
+<h5>About</h5>
+
+<p style="line-height: 1.5;">General Information about the Author/Company/Contact/Acknowledgements/License/</p>
+
+</body>
+
