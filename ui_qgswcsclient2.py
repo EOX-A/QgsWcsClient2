@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_qgswcsclient2.ui'
 #
-# Created: Mon Aug  4 16:22:29 2014
+# Created: Wed Sep  3 11:39:30 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,7 +30,7 @@ class Ui_QgsWcsClient2(object):
         self.tabWidget_EOWcsClient2 = QtGui.QTabWidget(QgsWcsClient2)
         self.tabWidget_EOWcsClient2.setEnabled(True)
         self.tabWidget_EOWcsClient2.setGeometry(QtCore.QRect(10, 0, 781, 661))
-        self.tabWidget_EOWcsClient2.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.Belgium))
+        self.tabWidget_EOWcsClient2.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.Austria))
         self.tabWidget_EOWcsClient2.setObjectName(_fromUtf8("tabWidget_EOWcsClient2"))
         self.tab_Serv = QtGui.QWidget()
         self.tab_Serv.setObjectName(_fromUtf8("tab_Serv"))
@@ -115,7 +115,6 @@ class Ui_QgsWcsClient2(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.checkBox_GCaDaSerSum.sizePolicy().hasHeightForWidth())
         self.checkBox_GCaDaSerSum.setSizePolicy(sizePolicy)
-        self.checkBox_GCaDaSerSum.setChecked(True)
         self.checkBox_GCaDaSerSum.setObjectName(_fromUtf8("checkBox_GCaDaSerSum"))
         self.gridLayout_5.addWidget(self.checkBox_GCaDaSerSum, 1, 0, 1, 1)
         self.checkBox_GCaCovSum = QtGui.QCheckBox(self.gridLayoutWidget_3)
@@ -124,7 +123,6 @@ class Ui_QgsWcsClient2(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.checkBox_GCaCovSum.sizePolicy().hasHeightForWidth())
         self.checkBox_GCaCovSum.setSizePolicy(sizePolicy)
-        self.checkBox_GCaCovSum.setChecked(True)
         self.checkBox_GCaCovSum.setObjectName(_fromUtf8("checkBox_GCaCovSum"))
         self.gridLayout_5.addWidget(self.checkBox_GCaCovSum, 2, 0, 1, 1)
         self.checkBox_GCaServProv = QtGui.QCheckBox(self.gridLayoutWidget_3)
@@ -222,7 +220,7 @@ class Ui_QgsWcsClient2(object):
         self.dateEdit_GCaDocUpdate.setEnabled(False)
         self.dateEdit_GCaDocUpdate.setGeometry(QtCore.QRect(282, 168, 131, 27))
         self.dateEdit_GCaDocUpdate.setDate(QtCore.QDate(2014, 1, 1))
-        self.dateEdit_GCaDocUpdate.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1753, 9, 14), QtCore.QTime(0, 0, 0)))
+        self.dateEdit_GCaDocUpdate.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 1, 1), QtCore.QTime(0, 0, 0)))
         self.dateEdit_GCaDocUpdate.setMaximumTime(QtCore.QTime(23, 59, 59))
         self.dateEdit_GCaDocUpdate.setCurrentSection(QtGui.QDateTimeEdit.YearSection)
         self.dateEdit_GCaDocUpdate.setCalendarPopup(True)
@@ -417,21 +415,21 @@ class Ui_QgsWcsClient2(object):
         self.groupBox_12.setObjectName(_fromUtf8("groupBox_12"))
         self.dateTimeEdit_DCSBegin = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSBegin.setGeometry(QtCore.QRect(164, 32, 194, 27))
-        self.dateTimeEdit_DCSBegin.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2013, 12, 31), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2013, 12, 31))
-        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(1, 0, 0))
+        self.dateTimeEdit_DCSBegin.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedKingdom))
+        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2014, 1, 1))
+        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(0, 0, 0))
         self.dateTimeEdit_DCSBegin.setCalendarPopup(True)
         self.dateTimeEdit_DCSBegin.setTimeSpec(QtCore.Qt.UTC)
         self.dateTimeEdit_DCSBegin.setObjectName(_fromUtf8("dateTimeEdit_DCSBegin"))
         self.dateTimeEdit_DCSEnd = QtGui.QDateTimeEdit(self.groupBox_12)
         self.dateTimeEdit_DCSEnd.setGeometry(QtCore.QRect(164, 72, 194, 27))
-        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 2), QtCore.QTime(0, 59, 59)))
-        self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2014, 1, 2))
-        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(0, 59, 59))
-        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1752, 10, 12), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(0, 59, 59))
+        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2014, 1, 1), QtCore.QTime(23, 59, 59)))
+        self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2014, 1, 1))
+        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(23, 59, 59))
+        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(23, 59, 59))
         self.dateTimeEdit_DCSEnd.setCurrentSection(QtGui.QDateTimeEdit.YearSection)
         self.dateTimeEdit_DCSEnd.setCalendarPopup(True)
         self.dateTimeEdit_DCSEnd.setTimeSpec(QtCore.Qt.UTC)
@@ -948,7 +946,7 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_GCa.headerItem().setText(1, _translate("QgsWcsClient2", "BeginTime", None))
         self.treeWidget_GCa.headerItem().setText(2, _translate("QgsWcsClient2", "EndTime", None))
         self.treeWidget_GCa.headerItem().setText(3, _translate("QgsWcsClient2", "[C]overage/[S]eries", None))
-        self.dateEdit_GCaDocUpdate.setSpecialValueText(_translate("QgsWcsClient2", "1900-01-01", None))
+        self.dateEdit_GCaDocUpdate.setSpecialValueText(_translate("QgsWcsClient2", "1970-01-01", None))
         self.dateEdit_GCaDocUpdate.setDisplayFormat(_translate("QgsWcsClient2", "yyyy-MM-dd", None))
         self.label_3.setText(_translate("QgsWcsClient2", "Results of GetCapabilities Request:    Select one or more items for further usage:", None))
         self.tabWidget_EOWcsClient2.setTabText(self.tabWidget_EOWcsClient2.indexOf(self.tab_GCa), _translate("QgsWcsClient2", "GetCapabilities", None))
@@ -1084,7 +1082,7 @@ class Ui_QgsWcsClient2(object):
 "<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If you use the same server frequently you are probably not interested in \'older\' information. If you want to limit the returned information to \'newer\' offers only activate the &quot;Document Update Sequence&quot; check-box and provide a \'Cutoff Date\', i.e. only newer information shall be provided    </li>\n"
 "<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">When the desired options are chosen press the &quot;GetCapabilities&quot; button    </li>\n"
 "<li style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The returned results will be shown in the &quot;Results of GetCapabilities Request&quot; field. There you will see the the following columns: <br /> <br />         </li>\n"
-"<table border=\"3\" style=\" margin-top:0px; margin-bottom:0px; margin-left:480px; margin-right:0px;\" cellspacing=\"5\" cellpadding=\"5\">\n"
+"<table border=\"3\" style=\" margin-top:0px; margin-bottom:0px; margin-left:520px; margin-right:0px;\" cellspacing=\"5\" cellpadding=\"5\">\n"
 "<tr>\n"
 "<td>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">CoverageID/DatasetSeriesID            </p></td>\n"

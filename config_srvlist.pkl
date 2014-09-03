@@ -27,4 +27,19 @@ Vtest-failure
 p16
 aVhttp://
 p17
+aa(lp18
+VDLR-/geotest.eoc.dlr.de/eoc/atmosphere/wcs
+p19
+aVhttp://geotest.eoc.dlr.de/eoc/atmosphere/wcs?
+p20
+aa(lp21
+VDLR-/geoservice.dlr.de/eoc/atmosphere/wcs?
+p22
+aVhttp://geoservice.dlr.de/eoc/atmosphere/wcs?
+p23
+aa(lp24
+VDLR-EOC imagery
+p25
+aVhttp://geoservice.dlr.de/eoc/imagery/wcs?
+p26
 aas.

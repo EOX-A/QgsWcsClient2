@@ -42,7 +42,7 @@
 
 
 import os, sys, pickle
-from xml.dom import minidom
+#from xml.dom import minidom
 from lxml import etree
 from glob import glob
 
@@ -67,8 +67,8 @@ from EOxWCSClient.wcs_client  import wcsClient
 global config
 import config
 
-global namespaces
-namespaces={"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0" }
+global namespacemap
+namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"  }
  
 
 
@@ -179,10 +179,10 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global serv
 
         selected_serv, selected_url = self.get_serv_url()
-        print '555-btnTest: I choose: ', selected_serv,   "URL:", selected_url
+        print '555-btnTest: You choose: ', selected_serv,   "URL:", selected_url
         
         url_base = selected_url
-            # &sections=ServiceMetadata  -- makes if faster, but some Servers don't accept it
+            # &sections=ServiceMetadata  -- makes if faster, but some Servers don't provide/accept it
         url_ext1 = "service=WCS&request=GetCapabilities" #&sections=ServiceMetadata"
         myUrl = url_base + url_ext1
         msg = "Your choice:    "+selected_serv.encode()+"\n"
@@ -267,37 +267,29 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         # parse the response issued during "Server Connect" and set some parameters
     def parse_first_xml(self, in_xml):
-        join_xml = ''.join(e.encode() for e in in_xml)
+        #join_xml = ''.join(e.encode() for e in in_xml)
+        join_xml = ''.join(in_xml)
 
-        _xml_ID_tag = ["wcs:formatSupported", "crs:crsSupported"]
-        _result_tag = ["outformat", "outcrs"]
+#        _xml_ID_tag = ["wcs:formatSupported", "crs:crsSupported"]
+#        _result_tag = ["outformat", "outcrs"]
 
 ## TODO - maybe change to use etree/xpath
-#        oformats = tree.xpath("wcs:ServiceMetadata/wcs:formatSupported/text()", namespaces=namespaces)
-#        ocrs = tree.xpath("wcs:ServiceMetadata/wcs:Extension/crs:crsSupported/text()", namespaces=namespaces)
-#        support_outcrs=[]
-#        for eleme in ocrs:
-#            support_outcrs.append(os.path.basename(elem))
-#
+#        tree.etree.parse(join_xml)
+        tree1 = etree.fromstring(join_xml)
+        outformat = tree1.xpath("wcs:ServiceMetadata/wcs:formatSupported/text()", namespaces=namespacemap)
+        outcrs = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/crs:crsSupported/text()", namespaces=namespacemap)
+        interpol = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/int:interpolationSupported/text()", namespaces=namespacemap)
+        oformat_num = len(outformat)
+        ocrs_num = len(outcrs)
+        interpol_num = len(interpol)
+        support_outcrs = []
+        support_interpol = []
 
-#---------------
-        def extractTags(join_xml, tag):
-            xmldoc = minidom.parseString(join_xml)
-            tagid_node = xmldoc.getElementsByTagName(tag)
-            n_elem = tagid_node.length
-            tag_ids = []
-
-                # store the found items
-            for n  in range(0, n_elem):
-                tag_ids.append(tagid_node[n].childNodes.item(0).data)
-
-            return tag_ids, n_elem
-
-        outformat, oformat_num = extractTags(join_xml, _xml_ID_tag[0])
-        outcrs, ocrs_num = extractTags(join_xml, _xml_ID_tag[1])
-        support_outcrs=[]
         for elem in outcrs:
             support_outcrs.append(os.path.basename(elem))
+
+        for elem in interpol:
+            support_interpol.append(os.path.basename(elem))
 
         for elem in range (0, oformat_num):
             self.comboBox_GCOvOutFormat.addItem(_fromUtf8(""))
@@ -307,11 +299,17 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.comboBox_GCovOutCRS.addItem(_fromUtf8(""))
             self.comboBox_GCovOutCRS.setItemText(elem, _translate("QgsWcsClient2", support_outcrs[elem], None))
 
+        for elem in range (0, interpol_num):
+            self.comboBox_GCovInterpol.addItem(_fromUtf8(""))
+            self.comboBox_GCovInterpol.setItemText(elem, _translate("QgsWcsClient2", support_interpol[elem], None))
+        
+        
+
 #---------------
         # modify a server entry
     def editServer(self):
         global config
-        print "444-btnEdit:  here we are editing... "
+        #print "444-btnEdit:  here we are editing... "
         flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint
 
         idx = self.cmbConnections_Serv.currentIndex()
@@ -329,7 +327,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         # dele a server entry
     def deleteServer(self):
         global config
-        print "444-btnDelete:  here we are deleting...."
+        #print "444-btnDelete:  here we are deleting...."
         idx = self.cmbConnections_Serv.currentIndex()
         config.srv_list['servers'].pop(idx)
         
@@ -463,7 +461,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             print 'Selected Item: ',elem.data(0,0), elem.data(1,0), elem.data(2,0), elem.data(3,0)
             if elem.data(0,0) in cov_ids:
                 item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0,0),))
-                item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),))
+                #item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),))
                 item2 = QtGui.QTreeWidgetItem(self.treeWidget_GCov, (elem.data(0,0),))
             elif elem.data(0,0) in dss_ids:
                 item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),elem.data(1,0),elem.data(2,0)))
@@ -485,14 +483,15 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         # parse GetCapabilities XML-response 
     def parse_GCa_xml(self, GCa_result): 
-        print "I'm in "+sys._getframe().f_code.co_name
+        #print "I'm in "+sys._getframe().f_code.co_name
+        join_xml = ''.join(GCa_result)
+#        tree = etree.parse(GCa_result)
+        tree = etree.fromstring(join_xml)
+        coverage_ids = tree.xpath("wcs:Contents/wcs:CoverageSummary/wcs:CoverageId/text()", namespaces=namespacemap)
+        datasetseries_ids = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/wcseo:DatasetSeriesId/text()",                                    namespaces=namespacemap)
+        datasetseries_timeBegin = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:beginPosition/text()", namespaces=namespacemap)
 
-        tree = etree.fromstring(GCa_result)
-        coverage_ids = tree.xpath("wcs:Contents/wcs:CoverageSummary/wcs:CoverageId/text()", namespaces=namespaces)
-        datasetseries_ids = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/wcseo:DatasetSeriesId/text()",                                    namespaces=namespaces)
-        datasetseries_timeBegin =  tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:beginPosition/text()", namespaces=namespaces)
-
-        datasetseries_timeEnd = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:endPosition/text()", namespaces=namespaces)
+        datasetseries_timeEnd = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:endPosition/text()", namespaces=namespacemap)
 
         return coverage_ids, datasetseries_ids, datasetseries_timeBegin, datasetseries_timeEnd
 
@@ -505,6 +504,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     @mouse_busy
     def exeDescribeCoverage(self):
         global selected_covid
+        global offered_crs
         selected_serv, selected_url = self.get_serv_url()
         
         try:
@@ -523,6 +523,29 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         
         DC_result = self.myWCS.DescribeCoverage(req_params)
 
+            # also read out the gml:Envelope axisLabels - use only first returned entry
+        join_xml = ''.join(DC_result)
+        tree = etree.fromstring(join_xml)
+        #axis_labels = tree.xpath("wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels", namespaces=namespacemap)
+        axis_labels = tree.xpath("wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=namespacemap)
+        axis_labels = axis_labels[0].encode().split(" ")
+        print axis_labels
+        #offered_crs = tree.xpath("wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName", namespaces=namespacemap)
+        offered_crs = tree.xpath("wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName", namespaces=namespacemap)
+        offered_crs = os.path.basename(offered_crs[0])
+        print offered_crs
+        if len(axis_labels) == 0:
+            axis_labels = ["",""]
+        if len(offered_crs) == 0:
+            offered_crs = '4326'
+
+            # now set the parameters in the GetCoverage Tab
+        self.lineEdit_GCovXAxisLabel.setText(axis_labels[0])
+        self.lineEdit_GCovYAxisLabel.setText(axis_labels[1])
+        combo_idx = self.comboBox_GCovOutCRS.findText(offered_crs)
+        self.comboBox_GCovOutCRS.setCurrentIndex(combo_idx)
+        
+
             # open a new window to display the returned DescribeCoverage-Response XMl 
         myDisplay_txt =  display_txt(self)
         myDisplay_txt.textBrowser_Disp.setText(DC_result)
@@ -537,6 +560,12 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         sel_DC_items = self.treeWidget_DC.selectedItems()
         selected_covid = sel_DC_items[0].data(0,0).encode()
 #        return 
+
+#---------------
+        # parse DescribeCoverage XML-response 
+    def parse_DC_xml(self, DC_result): 
+        #print "I'm in "+sys._getframe().f_code.co_name
+        join_xml = ''.join(DC_result)
 
 
 
@@ -790,6 +819,15 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                     'size_x': req_size_x ,
                     'size_y': req_size_y ,
                     'output': req_outputLoc}
+ 
+                # print 'GCov: ',req_params
+                req_params = self.clear_req_params(req_params)
+                # print 'GCov: ',req_params
+                GCov_result = self.myWCS.GetCoverage(req_params)
+                print "GCov_result: ", GCov_result
+
+                self.add_to_map(req_params) 
+                
         except NameError:
             msg = "Error,    You need to select one or more CoverageIDs first!\n "
             warning_msg(msg)
@@ -799,17 +837,17 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 
 ## TODO -- mediatype & mask --> not yet implemented
-               # 'mask': '&mask=polygon,'+crs_url, 
-               # 'mediatype': '&mediatype=',  # multipart/mixed' (default = parameter not provided)
+                    # 'mask': '&mask=polygon,'+crs_url, 
+                    # 'mediatype': '&mediatype=',  # multipart/mixed' (default = parameter not provided)
 
-            req_params = self.clear_req_params(req_params)
-            print 'GCov: ',req_params
+                #req_params = self.clear_req_params(req_params)
+                #print 'GCov: ',req_params
 
-            GCov_result = self.myWCS.GetCoverage(req_params)
+                #GCov_result = self.myWCS.GetCoverage(req_params)
         
 
 ## TODO -- Register the downloaded datsets with QGis MapCanvas -> load and show
-            self.add_to_map(req_params)
+#            self.add_to_map(req_params)
 
         QApplication.restoreOverrideCursor()
 
@@ -826,6 +864,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             selected_gcovid.append(elem.data(0,0).encode())
             print "SELECTED: ", selected_gcovid   #sel_DC_items[0].data(0,0)
             item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0,0).encode(),))
+            #item = QtGui.QTreeWidgetItem(self.treeWidget_GCov, (elem.data(0,0).encode(),))
 #        return 
 
  

@@ -74,7 +74,8 @@ import sys
 import os
 import time, datetime
 import urllib2, socket
-from xml.dom import minidom
+#from xml.dom import minidom
+from lxml import etree
 
 global __version__
 __version__ = '0.1'
@@ -86,6 +87,10 @@ dsep = os.sep
     # sets the url where epsg CRSs are defined/referenced
 global crs_url
 crs_url = 'http://www.opengis.net/def/crs/EPSG/0/'
+
+global namespacemap
+namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"  }
+
 
     # sets a storage location in case the user doesn't provide one (to be on the save side)
 global temp_storage
@@ -154,9 +159,9 @@ class wcsClient(object):
     _timeout = 180
     socket.setdefaulttimeout(_timeout)
 
-        # XML search tags for the request responses
-    _xml_ID_tag = ['wcseo:DatasetSeriesId', 'wcs:CoverageId']
-   # _xml_date_tag = ['gml:beginPosition',  'gml:endPosition']
+# @@       # XML search tags for the request responses
+#    _xml_ID_tag = ['wcseo:DatasetSeriesId', 'wcs:CoverageId']
+#   # _xml_date_tag = ['gml:beginPosition',  'gml:endPosition']
 
 
     def __init__(self):
@@ -569,42 +574,33 @@ class wcsClient(object):
     #/************************************************************************/
     #/*                             parse_xml()                              */
     #/************************************************************************/
-    def _parse_xml(self, in_xml, tag):
+    def _parse_xml(self, in_xml):
         """
             Function to parse the request results of a DescribeEOCoverageSet
             and extract all available CoveragesIDs.
             This function is used when the the  IDs_only  parameter is supplied.
             Return:  List of available coverageIDs
         """
-      #  print "I'm in "+sys._getframe().f_code.co_name
+        join_xml = ''.join(in_xml)
+        tree = etree.fromstring(join_xml)
+        tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()", namespaces=namespacemap)
+        print tag_ids
 
-            # parse the xml - received as answer to the request
-        xmldoc = minidom.parseString(in_xml)
-            # find all the tags (CoverageIds or DatasetSeriesIds)
-        tagid_node = xmldoc.getElementsByTagName(tag)
-            # number of found tags
-        n_elem = tagid_node.length
-        tag_ids = []
-            # store the found items
-        for n  in range(0, n_elem):
-            tag_ids.append(tagid_node[n].childNodes.item(0).data)
-        
-            # also read out (only once) the gml:Envelope axisLabels 
-        axis_tag = "gml:Envelope"
-        axis_node =  xmldoc.getElementsByTagName(axis_tag)
-        if axis_node.length > 0:
-            axis_labels = axis_node[0].getAttribute("axisLabels")
-            axis_labels = axis_labels.encode().split(" ")
-            offered_crs = axis_node[0].getAttribute("srsName")
-            offered_crs = os.path.basename(offered_crs)
-        else:
+## TODO - map each axis and crs to the respective coverage, abd show them accordingly to the selection
+
+            # also read out the gml:Envelope axisLabels and srsName - use only first returned entry
+        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels", namespaces=namespacemap)
+        axis_labels = axis_labels[0].encode().split(" ")
+        print axis_labels
+        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName", namespaces=namespacemap)
+        offered_crs = os.path.basename(offered_crs[0])
+        print offered_crs
+        if len(axis_labels) == 0:
             axis_labels = ["",""]
+        if len(offered_crs) == 0:
             offered_crs = '4326'
-        #print "11x",type(axis_labels), axis_labels
-       
-            # return the found items
-        return tag_ids, axis_labels, offered_crs
 
+        return tag_ids, axis_labels[0:2], offered_crs
 
 
     #/************************************************************************/
@@ -629,7 +625,8 @@ class wcsClient(object):
 
                 # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
-                cids, axis_labels, offered_crs = self._parse_xml(result_xml, self._xml_ID_tag[1])
+#@@                cids, axis_labels, offered_crs = self._parse_xml(result_xml, self._xml_ID_tag[1])
+                cids, axis_labels, offered_crs = self._parse_xml(result_xml)
                 request_handle.close()
                 return cids, axis_labels, offered_crs
             else:

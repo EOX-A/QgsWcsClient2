@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="locale">
-    <locale language="English" country="Belgium"/>
+    <locale language="English" country="Austria"/>
    </property>
    <property name="currentIndex">
     <number>0</number>
@@ -260,9 +260,6 @@
          <property name="text">
           <string>DatasetSeriesSummary</string>
          </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
         </widget>
        </item>
        <item row="2" column="0">
@@ -275,9 +272,6 @@
          </property>
          <property name="text">
           <string>CoverageSummary</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -533,7 +527,7 @@ only update when newer then:</string>
       </rect>
      </property>
      <property name="specialValueText">
-      <string>1900-01-01</string>
+      <string>1970-01-01</string>
      </property>
      <property name="date">
       <date>
@@ -547,9 +541,9 @@ only update when newer then:</string>
        <hour>0</hour>
        <minute>0</minute>
        <second>0</second>
-       <year>1753</year>
-       <month>9</month>
-       <day>14</day>
+       <year>1900</year>
+       <month>1</month>
+       <day>1</day>
       </datetime>
      </property>
      <property name="maximumTime">
@@ -1060,38 +1054,38 @@ Longitude</string>
        </rect>
       </property>
       <property name="locale">
-       <locale language="English" country="UnitedStates"/>
+          <locale language="English" country="UnitedKingdom"/>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>1</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
-        <year>2013</year>
-        <month>12</month>
-        <day>31</day>
+        <year>2014</year>
+        <month>1</month>
+        <day>1</day>
        </datetime>
       </property>
       <property name="date">
        <date>
-        <year>2013</year>
-        <month>12</month>
-        <day>31</day>
+        <year>2014</year>
+        <month>1</month>
+        <day>1</day>
        </date>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>1</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
-        <year>1752</year>
-        <month>10</month>
-        <day>12</day>
+        <year>1900</year>
+        <month>1</month>
+        <day>1</day>
        </datetime>
       </property>
       <property name="minimumTime">
        <time>
-        <hour>1</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
        </time>
@@ -1117,41 +1111,41 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>0</hour>
+        <hour>23</hour>
         <minute>59</minute>
         <second>59</second>
         <year>2014</year>
         <month>1</month>
-        <day>2</day>
+        <day>1</day>
        </datetime>
       </property>
       <property name="date">
        <date>
         <year>2014</year>
         <month>1</month>
-        <day>2</day>
+        <day>1</day>
        </date>
       </property>
       <property name="time">
        <time>
-        <hour>0</hour>
+        <hour>23</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>1</hour>
+        <hour>0</hour>
         <minute>0</minute>
         <second>0</second>
-        <year>1752</year>
-        <month>10</month>
-        <day>12</day>
+        <year>1900</year>
+        <month>1</month>
+        <day>1</day>
        </datetime>
       </property>
       <property name="maximumTime">
        <time>
-        <hour>0</hour>
+        <hour>23</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
@@ -2213,7 +2207,7 @@ p, li { white-space: pre-wrap; }
 &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If you use the same server frequently you are probably not interested in 'older' information. If you want to limit the returned information to 'newer' offers only activate the &amp;quot;Document Update Sequence&amp;quot; check-box and provide a 'Cutoff Date', i.e. only newer information shall be provided	&lt;/li&gt;
 &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;When the desired options are chosen press the &amp;quot;GetCapabilities&amp;quot; button	&lt;/li&gt;
 &lt;li style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The returned results will be shown in the &amp;quot;Results of GetCapabilities Request&amp;quot; field. There you will see the the following columns: &lt;br /&gt; &lt;br /&gt; 		&lt;/li&gt;
-&lt;table border=&quot;3&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:480px; margin-right:0px;&quot; cellspacing=&quot;5&quot; cellpadding=&quot;5&quot;&gt;
+&lt;table border=&quot;3&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:520px; margin-right:0px;&quot; cellspacing=&quot;5&quot; cellpadding=&quot;5&quot;&gt;
 &lt;tr&gt;
 &lt;td&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;CoverageID/DatasetSeriesID			&lt;/p&gt;&lt;/td&gt;
