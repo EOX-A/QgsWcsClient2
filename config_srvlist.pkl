@@ -42,4 +42,14 @@ VDLR-EOC imagery
 p25
 aVhttp://geoservice.dlr.de/eoc/imagery/wcs?
 p26
+aa(lp27
+VOGC: WCS 2.0/EO-WCS - Reference Implemetation (EoxServer)
+p28
+aVhttp://ows.eox.at/cite/ows?
+p29
+aa(lp30
+VOGC: WCS 2.0 - Reference Implementation (MapServer)
+p31
+aVhttp://ows.eox.at/cite-wcs?
+p32
 aas.

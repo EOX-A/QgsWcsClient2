@@ -112,6 +112,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     
     def __init__(self, iface):
         global config
+
         QtGui.QDialog.__init__(self)
         self.setupUi(self)
         self.iface=iface
@@ -153,8 +154,9 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         # add a new server to the list
     def newServer(self):
         global config
-        print '444-btnNew: I am adding a New ServerName/URL'
-#  not sure what to do with those flags 
+
+        print 'btnNew: I am adding a New ServerName/URL'
+            #  not sure what to do with those flags 
         flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint  
         dlgNew = qgsnewhttpconnectionbase(self, flags, toEdit=False, choice='')
         dlgNew.show()
@@ -166,6 +168,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         # read the selected server/url params
     def get_serv_url(self):
         global serv
+
         sel_serv = self.cmbConnections_Serv.currentText()
         idx = serv.index(sel_serv)
         sel_url = config.srv_list['servers'][idx][1]
@@ -177,14 +180,19 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     def connectServer(self):
         global config
         global serv
-
+        
+        FGCa_sect = False
         selected_serv, selected_url = self.get_serv_url()
-        print '555-btnTest: You choose: ', selected_serv,   "URL:", selected_url
+        print 'btnTest: You choose: ', selected_serv,   "URL:", selected_url
         
         url_base = selected_url
-            # &sections=ServiceMetadata  -- makes if faster, but some Servers don't provide/accept it
-        url_ext1 = "service=WCS&request=GetCapabilities" #&sections=ServiceMetadata"
+            # request only  &sections=ServiceMetadata -- this makes if faster (especially on large sites),
+            # but some Servers don't provide/accept it
+        url_ext1 = "service=WCS&request=GetCapabilities&sections=ServiceMetadata"
+        url_ext2 = "service=WCS&request=GetCapabilities"
         myUrl = url_base + url_ext1
+        myUrl2 = url_base + url_ext2
+        
         msg = "Your choice:    "+selected_serv.encode()+"\n"
         msg = msg+"URL:                   "+selected_url.encode()+"\n"
 
@@ -203,67 +211,92 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         req_qgsmng = QNetworkAccessManager(self)
 
         response = download_url(req_qgsmng, myUrl, None, self.progress_dialog)
+        print 'myUrl: ', response[0:1]
 
-        if response[0] is True and ((response[2] is not None or len(response[2]) == 0)) :
-            msg = msg+"Response:    Server OK\n"
-            self.parse_first_xml(response[2])
-            self.treeWidget_GCa.clear()
-            self.treeWidget_DC.clear()
-            self.treeWidget_DCS.clear()
-            self.treeWidget_GCov.clear()
-
-            self.progress_dialog.close()
-
-                # all tabs (except Server/Help/About) are disable until server connection is OK
-                # once server connection is verifyed, activate all other tabs
-            if not self.tab_GCa.isEnabled():
-                self.tab_GCa.setEnabled(True)
-            if not self.tab_DC.isEnabled():
-                self.tab_DC.setEnabled(True)
-            if not self.tab_DCS.isEnabled():
-                self.tab_DCS.setEnabled(True)
-            if not self.tab_GCov.isEnabled():
-                self.tab_GCov.setEnabled(True)
-
-            if not self.checkBox_GCa_ActiveDate.isEnabled():
-                self.checkBox_GCa_ActiveDate.setEnabled(True)
-
-            if not self.checkBox_DCS_ActiveDate.isEnabled():
-                 self.checkBox_DCS_ActiveDate.setEnabled(True)
-            if not self.checkBox_DCS_ActiveCount.isEnabled():
-                self.checkBox_DCS_ActiveCount.setEnabled(True)
-            if self.dateTimeEdit_DCSBegin.isEnabled():
-                self.dateTimeEdit_DCSBegin.setEnabled(False)
-            if self.dateTimeEdit_DCSEnd.isEnabled():
-                self.dateTimeEdit_DCSEnd.setEnabled(False)
-            if not self.spinBox_DCSCount.isEnabled():
-                self.spinBox_DCSCount.setEnabled(True)
-
-
-            if self.radioButton_GCovSubCRS.isChecked():
-                self.radioButton_GCovSubCRS.setChecked(False)
-            if self.radioButton_GCovSubPixel.isChecked():
-                self.radioButton_GCovSubPixel.setChecked(False)
-            if not self.radioButton_GCovSubOrig.isChecked():
-                self.radioButton_GCovSubOrig.setChecked(True)
-
-            if self.radioButton_GCovXSize.isChecked():
-                self.radioButton_GCovXSize.setChecked(False)
-            if self.radioButton_GCovXRes.isChecked():
-                self.radioButton_GCovXRes.setChecked(False)
-            if self.radioButton_GCovYSize.isChecked():
-                self.radioButton_GCovYSize.setChecked(False)
-            if self.radioButton_GCovYRes.isChecked():
-                self.radioButton_GCovYRes.setChecked(False)
-
+        if response[0] is not True:
+            response = download_url(req_qgsmng, myUrl2, None, self.progress_dialog)
+            print 'myUrl2',response[0:1]
+            if response[0] is not True:
+                msg = msg+"Response:    An Error occurred: --> "+str(response[1])+"\n HTTP-Code received: "+str(response[0])+"\n"
+                self.progress_dialog.close()
+            else:
+                msg = self.eval_response(response, msg)
+        elif response[0] is True and ((response[2] is not None or len(response[2]) == 0)) :
+            FGCa_sect = True
+            msg = self.eval_response(response,msg)
         else:
-            msg = msg+"Response:    An Error occurred: --> "+response[1]+"\n"
+            msg = msg+"Response:    An Error occurred: --> "+str(response[1])+"\n HTTP-Code received: "+str(response[0])+"\n"
             self.progress_dialog.close()
+
         
         self.textBrowser_Serv.setText(msg)
+        
+        if FGCa_sect is True:
+            self.checkBox_GCaDaSerSum.setChecked(True)
+            self.checkBox_GCaCovSum.setChecked(True)
+        else:
+            self.checkBox_GCaDaSerSum.setChecked(False)
+            self.checkBox_GCaCovSum.setChecked(False)
 
         QApplication.restoreOverrideCursor()
-        
+
+#---------------
+        #   evaluate a valid response and anable settings in the tabs
+    def eval_response(self, response, msg):
+
+        msg = msg+"Response:    Server OK\n"
+        self.parse_first_xml(response[2])
+        self.treeWidget_GCa.clear()
+        self.treeWidget_DC.clear()
+        self.treeWidget_DCS.clear()
+        self.treeWidget_GCov.clear()
+
+        self.progress_dialog.close()
+
+            # all tabs (except Server/Help/About) are disable until server connection is OK
+            # once server connection is verifyed, activate all other tabs
+        if not self.tab_GCa.isEnabled():
+            self.tab_GCa.setEnabled(True)
+        if not self.tab_DC.isEnabled():
+            self.tab_DC.setEnabled(True)
+        if not self.tab_DCS.isEnabled():
+            self.tab_DCS.setEnabled(True)
+        if not self.tab_GCov.isEnabled():
+            self.tab_GCov.setEnabled(True)
+
+        if not self.checkBox_GCa_ActiveDate.isEnabled():
+            self.checkBox_GCa_ActiveDate.setEnabled(True)
+
+        if not self.checkBox_DCS_ActiveDate.isEnabled():
+                self.checkBox_DCS_ActiveDate.setEnabled(True)
+        if not self.checkBox_DCS_ActiveCount.isEnabled():
+            self.checkBox_DCS_ActiveCount.setEnabled(True)
+        if self.dateTimeEdit_DCSBegin.isEnabled():
+            self.dateTimeEdit_DCSBegin.setEnabled(False)
+        if self.dateTimeEdit_DCSEnd.isEnabled():
+            self.dateTimeEdit_DCSEnd.setEnabled(False)
+        if not self.spinBox_DCSCount.isEnabled():
+            self.spinBox_DCSCount.setEnabled(True)
+
+
+        if self.radioButton_GCovSubCRS.isChecked():
+            self.radioButton_GCovSubCRS.setChecked(False)
+        if self.radioButton_GCovSubPixel.isChecked():
+            self.radioButton_GCovSubPixel.setChecked(False)
+        if not self.radioButton_GCovSubOrig.isChecked():
+            self.radioButton_GCovSubOrig.setChecked(True)
+
+        if self.radioButton_GCovXSize.isChecked():
+            self.radioButton_GCovXSize.setChecked(False)
+        if self.radioButton_GCovXRes.isChecked():
+            self.radioButton_GCovXRes.setChecked(False)
+        if self.radioButton_GCovYSize.isChecked():
+            self.radioButton_GCovYSize.setChecked(False)
+        if self.radioButton_GCovYRes.isChecked():
+            self.radioButton_GCovYRes.setChecked(False)
+
+        return msg
+
 #---------------
         # parse the response issued during "Server Connect" and set some parameters
     def parse_first_xml(self, in_xml):
@@ -369,7 +402,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             if not req_outputLoc.endswith(os.sep):
                 req_outputLoc = req_outputLoc+os.sep
             self.lineEdit_Serv_OutputLoc.setText(str(req_outputLoc))
-        return req_outputLoc
+        #return req_outputLoc
 
 ## ====== End of Server section ======
 
@@ -380,12 +413,12 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global cov_ids
         global dss_ids
         global req_outputLoc
-        
+
         self.treeWidget_GCa.clear()
         req_sections=[]
         req_updateDate=''
         selected_serv, selected_url = self.get_serv_url()
-        
+                
         if self.checkBox_GCaAll.isChecked():
             req_sections.append("All")
         if self.checkBox_GCaDaSerSum.isChecked():
@@ -429,14 +462,14 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         cov_ids, dss_ids, dss_begin, dss_end = self.parse_GCa_xml(GCa_result) 
         
-        if len(dss_ids) > 0:
-            for a,b,c in zip(dss_ids, dss_begin, dss_end):
-                inlist =(a,b,c,"S")
-                item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
-        
         if len(cov_ids) > 0:
             for elem in cov_ids:
                 inlist = (elem, "","","C")
+                item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
+
+        if len(dss_ids) > 0:
+            for a,b,c in zip(dss_ids, dss_begin, dss_end):
+                inlist =(a,b,c,"S")
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
 
         self.treeWidget_GCa.resizeColumnToContents(0)
@@ -540,8 +573,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             offered_crs = '4326'
 
             # now set the parameters in the GetCoverage Tab
-        self.lineEdit_GCovXAxisLabel.setText(axis_labels[0])
         self.lineEdit_GCovYAxisLabel.setText(axis_labels[1])
+        self.lineEdit_GCovXAxisLabel.setText(axis_labels[0])
         combo_idx = self.comboBox_GCovOutCRS.findText(offered_crs)
         self.comboBox_GCovOutCRS.setCurrentIndex(combo_idx)
         
@@ -797,13 +830,12 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             QMessageBox.critical(self, "Error",  msg, QMessageBox.Ok )
                 # put focus on Server/STorage Tab to allow provision of Output Location
             self.tabWidget_EOWcsClient2.setCurrentIndex(0)
-            req_outputLoc = self.get_outputLoc()
+            self.get_outputLoc()
         elif len(req_outputLoc) == 0:
             self.tabWidget_EOWcsClient2.setCurrentIndex(0)
-            req_outputLoc = self.get_outputLoc()
+            self.get_outputLoc()
         else:
             req_outputLoc = self.lineEdit_Serv_OutputLoc.text()
-
 
         try: 
             for gcov_elem in selected_gcovid:
@@ -945,7 +977,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 ## ====== Add data to Map Canvas ======
         # read the the downloaded datasets, register them and show them in the QGis MapCanvas
     def add_to_map(self, req_params):
-
+        
         self.canvas = self.iface.mapCanvas()
 
         coverageID = req_params['output']+os.sep+req_params['coverageID']+'*'

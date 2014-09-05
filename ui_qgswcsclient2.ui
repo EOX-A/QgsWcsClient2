@@ -1058,7 +1058,7 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>19</hour>
+        <hour>18</hour>
         <minute>0</minute>
         <second>0</second>
         <year>2013</year>
@@ -1075,7 +1075,7 @@ Longitude</string>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>19</hour>
+        <hour>18</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1899</year>
@@ -1085,7 +1085,7 @@ Longitude</string>
       </property>
       <property name="minimumTime">
        <time>
-        <hour>19</hour>
+        <hour>18</hour>
         <minute>0</minute>
         <second>0</second>
        </time>
@@ -1111,7 +1111,7 @@ Longitude</string>
       </property>
       <property name="dateTime">
        <datetime>
-        <hour>18</hour>
+        <hour>17</hour>
         <minute>59</minute>
         <second>59</second>
         <year>2014</year>
@@ -1128,14 +1128,14 @@ Longitude</string>
       </property>
       <property name="time">
        <time>
-        <hour>18</hour>
+        <hour>17</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
       </property>
       <property name="minimumDateTime">
        <datetime>
-        <hour>19</hour>
+        <hour>18</hour>
         <minute>0</minute>
         <second>0</second>
         <year>1899</year>
@@ -1145,7 +1145,7 @@ Longitude</string>
       </property>
       <property name="maximumTime">
        <time>
-        <hour>18</hour>
+        <hour>17</hour>
         <minute>59</minute>
         <second>59</second>
        </time>
@@ -2240,7 +2240,7 @@ p, li { white-space: pre-wrap; }
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The following optional parameters, to limit and configure the resulting downloaded Coverages, are provided:&lt;/li&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,helvetica,sans-serif';&quot;&gt;&lt;br /&gt;	&lt;/span&gt;&lt;/p&gt;
 &lt;ul type=&quot;circle&quot; style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;AOI:   At the &amp;quot;GetCoverage&amp;quot; tab the AOI values will subset the delivered Coverages to the limits provided by the AOI. The coordinate values to be supplied depend on the setting provided in the &amp;quot;Type of Subsetting&amp;quot; section. See below.		&lt;/li&gt;
-&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Type of Subsetting:   These settings influence the coordinate values of the AOI. The default setting is &amp;quot;Original&amp;quot;, i.e. the coordinate values have to correspond to the CRS of the offered Coverages. The list of server supported CRSs (which is gathered during the &amp;quot;Connect to Server&amp;quot; initialisation process) is provided via the the &amp;quot;Output CRS&amp;quot; selection button. However, the &amp;quot;Original&amp;quot; CRS (which corresponds to the CRS of the offered Coverage) is only gathered during a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeCoverage&lt;/span&gt; or a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; request. Thereafter the &amp;quot;Output CRS&amp;quot; selection button will be set to show the &amp;quot;Original CRS&amp;quot; as an indication. I.e. if you don't issue a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; request you have to know by yourself (e.g. by other means) the CRS of the offered/selected Coverage (&amp;quot;Original CRS&amp;quot;).  		 If you like to provide the coordinates of the AOI in a different CRS you can select the &amp;quot;CRS&amp;quot; radio button and provide the desired EPSG-Code in the designated &amp;quot;EPSG-No.&amp;quot; field (e.g. this method can be used if you don't know the &amp;quot;Original CRS&amp;quot;).  If want to provide pixel coordinates you can select the &amp;quot;Pixel&amp;quot; radio button and provide the AOI in pixel coordinates.&lt;br /&gt; (Note: Not all servers will respect the later two options, so you might get a server error here. See also the Hint - Erroneous behaviour section of this manual for additional information).		&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Type of Subsetting:   These settings influence the coordinate values of the AOI. The default setting is &amp;quot;Original&amp;quot;, i.e. the coordinate values have to correspond to the CRS of the offered Coverages. The list of server supported CRSs (which is gathered during the &amp;quot;Connect to Server&amp;quot; initialisation process) is provided via the the &amp;quot;Output CRS&amp;quot; selection button. However, the &amp;quot;Original&amp;quot; CRS (which corresponds to the CRS of the offered Coverage) is only gathered during a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeCoverage&lt;/span&gt; or a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; request (together with the axisLabels). Thereafter the &amp;quot;Output CRS&amp;quot; selection button will be set to show the &amp;quot;Original CRS&amp;quot; as an indication. I.e. if you don't issue a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeCoverage&lt;/span&gt; or a &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; request you have to know by yourself (e.g. by other means) the CRS of the offered/selected Coverage (&amp;quot;Original CRS&amp;quot;).  		If you like to provide the coordinates of the AOI in a different CRS you can select the &amp;quot;CRS&amp;quot; radio button and provide the desired EPSG-Code in the designated &amp;quot;EPSG-No.&amp;quot; field (e.g. this method can be used if you don't know the &amp;quot;Original CRS&amp;quot;). Attention: when you use this option you might also need to change the &amp;quot;X-Axis &amp;amp; Y-Axis Label&amp;quot; i.e. if you use e.g. EPSG:4326 for the CRS of the &amp;quot;Type of Subsetting&amp;quot; you need to change the labels to 'long' and 'lat', respectively. 		If want to provide pixel coordinates you can select the &amp;quot;Pixel&amp;quot; radio button and provide the AOI in pixel coordinates.&lt;br /&gt; (Note: Not all servers will respect the later two options, so you might get a server error here. See also the Hint - Erroneous behaviour section of this manual for additional information).		&lt;/li&gt;
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;List of Band Numbers:   Here you may provide a comma-separated list of the desired bands (and their order). The delivered Coverages will be subsetted to contain only the provided bands in the provided order.		&lt;/li&gt;
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Interpolation:   The method of interpolation applied during subsetting and especially for resizing of the delivered Coverages. Here either the values provided in the Caopabilities document are set or some default values are provided (nearest, bilinear, average). (Note: Not all possibilities might be supported by all WCS servers. The defaults have been chosen on the MapServer's capabilities).		&lt;/li&gt;
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Output Format:   You may choose one of the supported &amp;quot;Output Formats&amp;quot; (file formats) in which the Coverages shall be delivered. The listing of the server side supported &amp;quot;Output Formats&amp;quot; is gathered during the &amp;quot;Connect to Server&amp;quot; initialisation process.		&lt;/li&gt;
