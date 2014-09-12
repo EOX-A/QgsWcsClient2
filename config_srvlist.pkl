@@ -52,4 +52,9 @@ VOGC: WCS 2.0 - Reference Implementation (MapServer)
 p31
 aVhttp://ows.eox.at/cite-wcs?
 p32
+aa(lp33
+VAlaska Snow metric (MODIS)
+p34
+aVhttp://snow.proto.gina.alaska.edu/metrics?
+p35
 aas.

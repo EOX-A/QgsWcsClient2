@@ -92,7 +92,7 @@ global namespacemap
 namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"  }
 
 
-    # sets a storage location in case the user doesn't provide one (to be on the save side)
+    # sets a storage location in case the user doesn't provide one (to be on the save side) - eg. for error msgs.
 global temp_storage
 temp_storage = None
 try_dir = ['TMP', 'TEMP', 'HOME', 'USER']
@@ -159,9 +159,6 @@ class wcsClient(object):
     _timeout = 180
     socket.setdefaulttimeout(_timeout)
 
-# @@       # XML search tags for the request responses
-#    _xml_ID_tag = ['wcseo:DatasetSeriesId', 'wcs:CoverageId']
-#   # _xml_date_tag = ['gml:beginPosition',  'gml:endPosition']
 
 
     def __init__(self):
@@ -246,9 +243,7 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        base_request = {'service': 'service=WCS',
-                'version': '&version=2.0.1'}
-
+        base_request = {'service': 'service=WCS'}
 
         return base_request
 
@@ -266,7 +261,6 @@ class wcsClient(object):
             'updateSequence': '&updateSequence=',
             'sections' :'&sections='}
 
-
         return base_cap
 
 
@@ -279,7 +273,8 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        base_desccov = {'request': '&request=',
+        base_desccov = {'version': '&version=', 
+            'request': '&request=',
             'server_url': '',
             'coverageID': '&coverageID='}
 
@@ -295,7 +290,8 @@ class wcsClient(object):
         """
        # print "I'm in "+sys._getframe().f_code.co_name
 
-        base_desceocoverageset = {'request': '&request=',
+        base_desceocoverageset = {'version': '&version=', 
+            'request': '&request=',
             'server_url': '',
             'eoID': '&eoID=',
             'subset_lon': '&subset=Long,'+crs_url+'4326(',
@@ -305,7 +301,6 @@ class wcsClient(object):
             'section': '&section=',
             'count': '&count=',
             'IDs_only': False}
-
 
         return base_desceocoverageset
 
@@ -319,7 +314,8 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        getcov_dict = {'request': '&request=',
+        getcov_dict = {'version': '&version=', 
+            'request': '&request=',
             'server_url': '',
             'coverageID': '&coverageid=',
             'format': '&format=',
@@ -584,17 +580,18 @@ class wcsClient(object):
         join_xml = ''.join(in_xml)
         tree = etree.fromstring(join_xml)
         tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()", namespaces=namespacemap)
-        print tag_ids
+        #print tag_ids
 
 ## TODO - map each axis and crs to the respective coverage, abd show them accordingly to the selection
 
             # also read out the gml:Envelope axisLabels and srsName - use only first returned entry
-        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels", namespaces=namespacemap)
+        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=namespacemap)
+        #print 'AxisLabels: ', type(axis_labels),len(axis_labels), axis_labels
         axis_labels = axis_labels[0].encode().split(" ")
-        print axis_labels
-        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName", namespaces=namespacemap)
+        #print axis_labels
+        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName", namespaces=namespacemap)
         offered_crs = os.path.basename(offered_crs[0])
-        print offered_crs
+        #print offered_crs
         if len(axis_labels) == 0:
             axis_labels = ["",""]
         if len(offered_crs) == 0:
@@ -619,13 +616,11 @@ class wcsClient(object):
         try:
                 # access the url
             request_handle = urllib2.urlopen(http_request)
-#            status = request_handle.code
                 # read the content of the url
             result_xml = request_handle.read()
 
                 # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
-#@@                cids, axis_labels, offered_crs = self._parse_xml(result_xml, self._xml_ID_tag[1])
                 cids, axis_labels, offered_crs = self._parse_xml(result_xml)
                 request_handle.close()
                 return cids, axis_labels, offered_crs
@@ -636,19 +631,6 @@ class wcsClient(object):
         except urllib2.URLError, url_ERROR:
             if hasattr(url_ERROR, 'reason'):
                 print '\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -", url_ERROR.reason
-    # don't know to which location to write the data, so I just print it
-#                    # write out the servers return msg
-#                now = time.strftime('_%Y%m%dT%H%M%S')
-#                if input_params.has_key('output') and input_params['output'] is not None:
-#                    errfile = input_params['output']+dsep+'access_error'+now+'.xml'
-#                else:
-#                    outfile = temp_storage+dsep+'access_error'+now+'.xml'
-#
-#                access_err = open(errfile, 'w+b')
-#                access_err.write(url_ERROR.read())
-#                access_err.flush()
-#                access_err.close()
-                
                 
                 try:
                     print url_ERROR.read(), '\n'
@@ -685,7 +667,8 @@ class wcsClient(object):
         print http_request
 
         now = time.strftime('_%Y%m%dT%H%M%S')
-        
+
+            # set some common extension to a more 'useful' type
         if input_params['format'].find('/') != -1:
             out_format_ext = os.path.basename(input_params['format'])
             if out_format_ext == "tiff":
@@ -757,12 +740,15 @@ class wcsClient(object):
             Merge and harmonize the input_params-dict with the required request-dict
             e.g. the base_getcov-dict
         """
-      #  print "I'm in "+sys._getframe().f_code.co_name
+        #print "I'm in "+sys._getframe().f_code.co_name
 
         request_dict = {}
         for k, v in input_params.iteritems():
-           # print k,' -- ',v
-                # skip all keay with None or True values
+            #print k,' -- ',v
+                # make sure there is always a version set
+            if k == 'version' and ( v == '' or v == None): 
+                v = '2.0.0'
+                # skip all keys with None or True values
             if v == None or v == True:
                 continue
 
@@ -774,7 +760,7 @@ class wcsClient(object):
             # get the basic request settings
         base_request = self._set_base_request()
         request_dict.update(base_request)
-
+        #print 'request_dict ',request_dict
         return request_dict
 
 
@@ -790,7 +776,7 @@ class wcsClient(object):
 
         request_dict = self._merge_dicts(input_params, procedure_dict)
 
-            # this doesn't look nice, but this way I can control the order within the generated request
+            # this doesn't look so nice, but this way I can control the order within the generated request
         http_request = ''
         if request_dict.has_key('server_url'):
             http_request = http_request+request_dict.get('server_url')
