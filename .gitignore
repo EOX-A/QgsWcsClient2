@@ -56,3 +56,4 @@ docs/_build/
 *.bak
 *.bak*
 *.orig
+*.pkl
