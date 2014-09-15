@@ -8,19 +8,19 @@ import getpass
 from optparse import OptionParser
 
 # Configuration
-PROTOCOL='http'
-SERVER='plugins.qgis.org'
-PORT='80'
-ENDPOINT='/plugins/RPC2/'
-VERBOSE=False
+PROTOCOL = 'http'
+SERVER = 'plugins.qgis.org'
+PORT = '80'
+ENDPOINT = '/plugins/RPC2/'
+VERBOSE = False
 
 def main(options, args):
     address = "%s://%s:%s@%s:%s%s" % (PROTOCOL, options.username, options.password,
             options.server, options.port, ENDPOINT)
     print "Connecting to: %s" % hidepassword(address)
-    
+
     server = xmlrpclib.ServerProxy(address, verbose=VERBOSE)
-    
+
     try:
         plugin_id, version_id = server.plugin.upload(xmlrpclib.Binary(open(args[0]).read()))
         print "Plugin ID: %s" % plugin_id
@@ -36,7 +36,7 @@ def main(options, args):
         print "Fault code: %d" % err.faultCode
         print "Fault string: %s" % err.faultString
 
-def hidepassword(url, start = 6):
+def hidepassword(url, start=6):
     """Returns the http url with password part replaced with '*'."""
     passdeb = url.find(':', start) + 1
     passend = url.find('@')

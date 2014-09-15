@@ -3,7 +3,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -34,7 +34,7 @@
  *  SOFTWARE.                                                                     *
  *                                                                                *
  *********************************************************************************/
- initialisation, etc.  of the QgsWcsClient2 plugin 
+ initialisation, etc.  of the QgsWcsClient2 plugin
 """
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *

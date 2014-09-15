@@ -3,58 +3,13 @@ S'servers'
 p1
 (lp2
 (lp3
-VDREAM
+VOGC: WCS 2.0/EO-WCS 1.0 - Reference Implemetation (EOxServer)
 p4
-aVhttp://data.eox.at/instance00/ows?
+aVhttp://ows.eox.at/cite/ows?
 p5
 aa(lp6
-VCryoLand
-p7
-aVhttp://neso.cryoland.enveo.at/cryoland/ows?
-p8
-aa(lp9
-VEarthServer
-p10
-aVhttp://earthserver.eox.at/rasdaman?
-p11
-aa(lp12
-VEarthServer-Beta
-p13
-aVhttp://earthserver.eox.at/beta-rasdaman?
-p14
-aa(lp15
-Vtest-failure
-p16
-aVhttp://
-p17
-aa(lp18
-VDLR-/geotest.eoc.dlr.de/eoc/atmosphere/wcs
-p19
-aVhttp://geotest.eoc.dlr.de/eoc/atmosphere/wcs?
-p20
-aa(lp21
-VDLR-/geoservice.dlr.de/eoc/atmosphere/wcs?
-p22
-aVhttp://geoservice.dlr.de/eoc/atmosphere/wcs?
-p23
-aa(lp24
-VDLR-EOC imagery
-p25
-aVhttp://geoservice.dlr.de/eoc/imagery/wcs?
-p26
-aa(lp27
-VOGC: WCS 2.0/EO-WCS - Reference Implemetation (EoxServer)
-p28
-aVhttp://ows.eox.at/cite/ows?
-p29
-aa(lp30
 VOGC: WCS 2.0 - Reference Implementation (MapServer)
-p31
+p7
 aVhttp://ows.eox.at/cite-wcs?
-p32
-aa(lp33
-VAlaska Snow metric (MODIS)
-p34
-aVhttp://snow.proto.gina.alaska.edu/metrics?
-p35
+p8
 aas.

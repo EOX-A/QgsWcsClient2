@@ -3,7 +3,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -55,7 +55,7 @@ from PyQt4 import QtXml
 from ui_qgswcsclient2 import Ui_QgsWcsClient2
 from qgsnewhttpconnectionbasedialog import qgsnewhttpconnectionbase
 from display_txtdialog import display_txt
-from downloader import download_url 
+from downloader import download_url
 from EOxWCSClient.wcs_client  import wcsClient
 
 
@@ -65,8 +65,8 @@ global config
 import config
 
 global namespacemap
-namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"  }
- 
+namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"}
+
 
 
 try:
@@ -87,9 +87,13 @@ except AttributeError:
 #---------------
     # running clock icon
 def mouse_busy(function):
-    
+    """
+        set the mouse icon to show clock
+    """
     def new_function(self):
-        
+        """
+            set the mouse icon to show clock
+        """
         QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
         function(self)
         QApplication.restoreOverrideCursor()
@@ -100,44 +104,48 @@ def mouse_busy(function):
 #---------------
     # provide a pop-up warning message
 def warning_msg(msg):
-    
+    """
+        present a message in a popup dialog-box
+    """
     msgBox = QtGui.QMessageBox()
     msgBox.setText(msg)
     msgBox.addButton(QtGui.QPushButton('OK'), QtGui.QMessageBox.YesRole)
     msgBox.exec_()
 
-        
+
 #---------------
 
 
 ## ====== Main Class ======
 
 class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
-    
+    """
+        main QGis-WCS plugin dialog
+    """
     def __init__(self, iface):
         global config
 
         #print "I'm in "+sys._getframe().f_code.co_name
         QtGui.QDialog.__init__(self)
         self.setupUi(self)
-        self.iface=iface
+        self.iface = iface
 
-            # if server information is already available, activate the Edit-Button, and the update the 
+            # if server information is already available, activate the Edit-Button, and the update the
             # selectionBar
         if len(config.srv_list['servers']) > 0:
             self.btnEdit_Serv.setEnabled(True)
             self.btnDelete_Serv.setEnabled(True)
-            self.updateServerListing()  
-            
+            self.updateServerListing()
+
                 # creating progress dialog for download
         self.progress_dialog = QProgressDialog(self)
         self.progress_dialog.setAutoClose(True)  # False # was set originally
         title = self.tr("WSC-2.0/EO-WCS Downloader")
         self.progress_dialog.setWindowTitle(title)
 
-            # instantiate the wcsClient 
+            # instantiate the wcsClient
         self.myWCS = wcsClient()
-        
+
         self.treeWidget_GCa.itemClicked.connect(self.on_GCa_clicked)
         self.treeWidget_DC.itemClicked.connect(self.on_DC_clicked)
         self.treeWidget_DCS.itemClicked.connect(self.on_DCS_clicked)
@@ -145,10 +153,10 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 #---------------
         # remove all 'keys' which are set to 'None' from the request-parameter dictionary
-    def clear_req_params(self,req_params):
+    def clear_req_params(self, req_params):
         #print "I'm in "+sys._getframe().f_code.co_name
-        
-        for k,v in req_params.items():
+
+        for k, v in req_params.items():
             if v is None:
                 req_params.pop(k)
         return req_params
@@ -162,11 +170,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global config
 
         #print 'btnNew: I am adding a New ServerName/URL'
-        flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint  
+        flags = Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint
         dlgNew = qgsnewhttpconnectionbase(self, flags, toEdit=False, choice='')
         dlgNew.show()
         self.btnConnectServer_Serv.setFocus(True)
-        
+
 ##TODO -- sort the srv_list
 
 #---------------
@@ -178,26 +186,26 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         idx = serv.index(sel_serv)
         sel_url = config.srv_list['servers'][idx][1]
         return sel_serv, sel_url
- 
+
 #---------------
         # check if the url exist and if we get a respond to a simple OWS request
     @mouse_busy
     def connectServer(self):
         global config
         global serv
-        
+
         FGCa_sect = False
         selected_serv, selected_url = self.get_serv_url()
-        print 'You choose: ', selected_serv,   "URL:", selected_url
-        
+        print 'You choose: ', selected_serv, "URL:", selected_url
+
         url_base = selected_url
             # request only  &sections=ServiceMetadata -- this makes if faster (especially on large sites),
             # but some Servers don't provide/accept it, so there is a fallback implemented
-        url_ext1 = "service=WCS&request=GetCapabilities&sections=ServiceMetadata"
+        url_ext1 = "service=WCS&request=GetCapabilities" #&sections=ServiceMetadata"
         url_ext2 = "service=WCS&request=GetCapabilities"
         myUrl = url_base + url_ext1
         myUrl2 = url_base + url_ext2
-        
+
         msg = "Your choice:    "+selected_serv.encode()+"\n"
         msg = msg+"URL:                   "+selected_url.encode()+"\n"
 
@@ -207,15 +215,14 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             msg = msg+"Now testing the connection and response.....\n "
             msg = msg+"       this may take some time (depending on the server and the volume of its offering)\n"
             self.textBrowser_Serv.setText(msg)
-        
-        label_text = self.tr("Downloading....")
+
         self.progress_dialog.done(QDialog.Accepted)
         self.progress_dialog.cancel()
-        self.progress_dialog.show()        
+        self.progress_dialog.show()
 
-# TODO -- after changing a server connection --> reset all fields (at least the combo-boxes)
+            #after changing a server connection --> reset all fields (at least the combo-boxes)
         self.reset_comboboxes()
-        
+
         req_qgsmng = QNetworkAccessManager(self)
 
             # start the download
@@ -231,16 +238,16 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 self.progress_dialog.close()
             else:
                 msg = self.eval_response(response, msg)
-        elif response[0] is True and ((response[2] is not None or len(response[2]) == 0)) :
+        elif response[0] is True and ((response[2] is not None or len(response[2]) == 0)):
             FGCa_sect = True
-            msg = self.eval_response(response,msg)
+            msg = self.eval_response(response, msg)
         else:
             msg = msg+"Response:    An Error occurred: --> "+str(response[1])+"\n HTTP-Code received: "+str(response[0])+"\n"
             self.progress_dialog.close()
 
         self.textBrowser_Serv.setText(msg)
 
-        
+
         if FGCa_sect is True:
             self.checkBox_GCaDaSerSum.setChecked(True)
             self.checkBox_GCaCovSum.setChecked(True)
@@ -263,14 +270,14 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         self.comboBox_GCOvOutFormat.clear()
         self.comboBox_GCovOutCRS.clear()
         self.comboBox_GCovInterpol.clear()
-        default_interpol=['nearest (default)', 'bilinear', 'average (slow)']
-        for elem in range (0, 3):
+        default_interpol = ['nearest (default)', 'bilinear', 'average (slow)']
+        for elem in range(0, 3):
             self.comboBox_GCovInterpol.addItem(_fromUtf8(""))
             self.comboBox_GCovInterpol.setItemText(elem, _translate("QgsWcsClient2", default_interpol[elem], None))
 
-        
-        
-        
+
+
+
 #---------------
         #   evaluate a valid response and anable settings in the tabs
     def eval_response(self, response, msg):
@@ -299,7 +306,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.checkBox_GCa_ActiveDate.setEnabled(True)
 
         if not self.checkBox_DCS_ActiveDate.isEnabled():
-                self.checkBox_DCS_ActiveDate.setEnabled(True)
+            self.checkBox_DCS_ActiveDate.setEnabled(True)
         if not self.checkBox_DCS_ActiveCount.isEnabled():
             self.checkBox_DCS_ActiveCount.setEnabled(True)
         if self.dateTimeEdit_DCSBegin.isEnabled():
@@ -335,8 +342,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         join_xml = ''.join(in_xml)
         tree1 = etree.fromstring(join_xml)
-        
-            # get the required information from the GetCapabilitiy response 
+
+            # get the required information from the GetCapabilitiy response
         outformat = tree1.xpath("wcs:ServiceMetadata/wcs:formatSupported/text()", namespaces=namespacemap)
         outcrs = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/crs:crsSupported/text()", namespaces=namespacemap)
         interpol = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/int:interpolationSupported/text()", namespaces=namespacemap)
@@ -344,7 +351,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         oformat_num = len(outformat)
         ocrs_num = len(outcrs)
-        interpol_num = len(interpol)        
+        interpol_num = len(interpol)
         support_outcrs = []
         support_interpol = []
         #print 'support_outcrs: ',ocrs_num, type(outcrs), outcrs
@@ -357,8 +364,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             msg = "WARNING: \nThe chosen WCS Server doesn't support WCS 2.0  or above \n"
             msg = msg+"The server responded with supported version:  "+offered_version
             warning_msg(msg)
-        
-            # set the output-crs, output-format, and interpolation possibilities 
+
+            # set the output-crs, output-format, and interpolation possibilities
             # in the corresponding combo-boxes
         for elem in outcrs:
             support_outcrs.append(os.path.basename(elem))
@@ -366,19 +373,19 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         for elem in interpol:
             support_interpol.append(os.path.basename(elem))
 
-        for elem in range (0, oformat_num):
+        for elem in range(0, oformat_num):
             self.comboBox_GCOvOutFormat.addItem(_fromUtf8(""))
             self.comboBox_GCOvOutFormat.setItemText(elem, _translate("QgsWcsClient2", outformat[elem], None))
-                                                             
-        for elem in range (0, ocrs_num):
+
+        for elem in range(0, ocrs_num):
             self.comboBox_GCovOutCRS.addItem(_fromUtf8(""))
             self.comboBox_GCovOutCRS.setItemText(elem, _translate("QgsWcsClient2", support_outcrs[elem], None))
 
-        for elem in range (0, interpol_num):
+        for elem in range(0, interpol_num):
             self.comboBox_GCovInterpol.addItem(_fromUtf8(""))
             self.comboBox_GCovInterpol.setItemText(elem, _translate("QgsWcsClient2", support_interpol[elem], None))
-        
-        
+
+
 
 #---------------
         # modify a server entry
@@ -393,25 +400,25 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         print "Selection: ", idx, " -- ", select_serv, " -- Check: ", serv[idx]
 
-        dlgEdit = qgsnewhttpconnectionbase(self, flags, toEdit=True, choice=idx )  
+        dlgEdit = qgsnewhttpconnectionbase(self, flags, toEdit=True, choice=idx)
         dlgEdit.txt_NewSrvName.setText(select_serv[0])
         dlgEdit.txt_NewSrvUrl.setText(select_serv[1])
         dlgEdit.show()
         self.btnConnectServer_Serv.setFocus(True)
-        
+
 #---------------
         # dele a server entry
     def deleteServer(self):
         global config
-        
+
         #print "btnDelete:  here we are deleting...."
         idx = self.cmbConnections_Serv.currentIndex()
         config.srv_list['servers'].pop(idx)
-        
-        self.write_srv_list()        
+
+        self.write_srv_list()
         self.updateServerListing()
         self.btnConnectServer_Serv.setFocus(True)
-        
+
 #---------------
         # update the server-listing shown in the selectionBar
     def updateServerListing(self):
@@ -423,7 +430,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         config.srv_list = config.read_srv_list()
         for ii in range(len(config.srv_list['servers'])):
             serv.append(config.srv_list['servers'][ii][0][:])
-            
+
         self.cmbConnections_Serv.clear()
         self.cmbConnections_Serv.addItems(serv)
 
@@ -434,9 +441,9 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         #print "btnwriteServerListing:  here we are writing the ServerList...."
         plugin_dir = os.path.dirname(os.path.realpath(__file__))
-        outsrvlst = os.path.join(plugin_dir,'config_srvlist.pkl')
+        outsrvlst = os.path.join(plugin_dir, 'config_srvlist.pkl')
         fo = open(outsrvlst, 'wb')
-        p = pickle.dump(config.srv_list, fo, 0)
+        pickle.dump(config.srv_list, fo, 0)
         fo.close()
 
 #---------------
@@ -444,7 +451,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     @mouse_busy
     def get_outputLoc(self):
         global req_outputLoc
-        
+
         start_dir = os.getenv("HOME")
         req_outputLoc = QFileDialog.getExistingDirectory(self, "Select Output Path", start_dir)
         if len(req_outputLoc) > 0:
@@ -466,10 +473,10 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global req_outputLoc
 
         self.treeWidget_GCa.clear()
-        req_sections=[]
-        req_updateDate=''
+        req_sections = []
+        req_updateDate = ''
         selected_serv, selected_url = self.get_serv_url()
-                
+
         if self.checkBox_GCaAll.isChecked():
             req_sections.append("All")
         if self.checkBox_GCaDaSerSum.isChecked():
@@ -488,7 +495,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             req_sections.append("Content")
         if self.checkBox_GCaLang.isChecked():
             req_sections.append("Languages")
-            
+
         req_outputLoc = self.lineEdit_Serv_OutputLoc.text()
 
         if self.dateEdit_GCaDocUpdate.isEnabled():
@@ -496,15 +503,15 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         else:
             req_updateDate = None
 
-        req_sections =','.join(req_sections)
-        if len(req_sections) == 0:  
+        req_sections = ','.join(req_sections)
+        if len(req_sections) == 0:
             req_sections = None
 
             # basic request setting
         req_params = {'request': 'GetCapabilities',
-            'server_url': selected_url ,
+            'server_url': selected_url,
             'updateSequence': req_updateDate,
-            'sections' : req_sections }
+            'sections' : req_sections}
 
         req_params = self.clear_req_params(req_params)
         #print 'GCa: ',req_params
@@ -513,16 +520,18 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         GCa_result = self.myWCS.GetCapabilities(req_params)
 
             # parse the results and place them in the crespective widgets
-        cov_ids, dss_ids, dss_begin, dss_end = self.parse_GCa_xml(GCa_result) 
-        
+        cov_ids, dss_ids, dss_begin, dss_end = self.parse_GCa_xml(GCa_result)
+
+# TODO -- add the coverage extension (BoundingBox) information to the respective Tabs
+
         if len(cov_ids) > 0:
             for elem in cov_ids:
-                inlist = (elem, "","","C")
+                inlist = (elem, "", "", "C")
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
 
         if len(dss_ids) > 0:
-            for a,b,c in zip(dss_ids, dss_begin, dss_end):
-                inlist =(a,b,c,"S")
+            for a, b, c in zip(dss_ids, dss_begin, dss_end):
+                inlist = (a, b, c, "S")
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCa, inlist)
 
         self.treeWidget_GCa.resizeColumnToContents(0)
@@ -540,17 +549,17 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         self.treeWidget_DC.clear()
         self.treeWidget_DCS.clear()
         self.treeWidget_GCov.clear()
-        
+
             #  place selected items also in the DescribeCoverage, DescribeEOCoverageSet, GetCoverage Tab widgets
         for elem in sel_GCa_items:
-          #                           covID          BeginTime       EndTime          [C]/[S]   
-            print 'Selected Item: ',elem.data(0,0), elem.data(1,0), elem.data(2,0), elem.data(3,0)
-            if elem.data(0,0) in cov_ids:
-                item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0,0),))
-                item2 = QtGui.QTreeWidgetItem(self.treeWidget_GCov, (elem.data(0,0),))
-            elif elem.data(0,0) in dss_ids:
-                item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0,0),elem.data(1,0),elem.data(2,0)))
- 
+          #                           covID          BeginTime       EndTime          [C]/[S]
+            print 'Selected Item: ', elem.data(0, 0), elem.data(1, 0), elem.data(2, 0), elem.data(3, 0)
+            if elem.data(0, 0) in cov_ids:
+                item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0, 0), ))
+                item2 = QtGui.QTreeWidgetItem(self.treeWidget_GCov, (elem.data(0, 0), ))
+            elif elem.data(0, 0) in dss_ids:
+                item1 = QtGui.QTreeWidgetItem(self.treeWidget_DCS, (elem.data(0, 0), elem.data(1, 0), elem.data(2, 0)))
+
         self.treeWidget_DC.resizeColumnToContents(0)
         self.treeWidget_DCS.resizeColumnToContents(0)
         self.treeWidget_GCov.resizeColumnToContents(0)
@@ -559,7 +568,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         # updateDate field
     def updateDateChanged(self):
-        
+
         if self.dateEdit_GCaDocUpdate.isEnabled():
             self.dateEdit_GCaDocUpdate.setEnabled(False)
         else:
@@ -567,18 +576,18 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
 
 #---------------
-        # parse GetCapabilities XML-response 
-    def parse_GCa_xml(self, GCa_result): 
+        # parse GetCapabilities XML-response
+    def parse_GCa_xml(self, GCa_result):
 
 
         join_xml = ''.join(GCa_result)
         tree = etree.fromstring(join_xml)
         coverage_ids = tree.xpath("wcs:Contents/wcs:CoverageSummary/wcs:CoverageId/text()", namespaces=namespacemap)
-        datasetseries_ids = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/wcseo:DatasetSeriesId/text()",                                    namespaces=namespacemap)
+        datasetseries_ids = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/wcseo:DatasetSeriesId/text()", namespaces=namespacemap)
         datasetseries_timeBegin = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:beginPosition/text()", namespaces=namespacemap)
 
         datasetseries_timeEnd = tree.xpath("wcs:Contents/wcs:Extension/wcseo:DatasetSeriesSummary/gml:TimePeriod/gml:endPosition/text()", namespaces=namespacemap)
-        
+
         return coverage_ids, datasetseries_ids, datasetseries_timeBegin, datasetseries_timeEnd
 
 
@@ -595,23 +604,23 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global offered_version
 
         selected_serv, selected_url = self.get_serv_url()
-        
+
         try:
                 # a basic DescribeCoverage request
-            req_params = {'version': offered_version, 
+            req_params = {'version': offered_version,
                 'request': 'DescribeCoverage',
-                'server_url':  selected_url, 
-                'coverageID':  selected_covid }
+                'server_url':  selected_url,
+                'coverageID':  selected_covid}
         except NameError:
             msg = "Error,    You need to select a CoverageID first!\n   (see also GetCapabilities TAB)"
             warning_msg(msg)
             #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
             return
-        
-        
+
+
         req_params = self.clear_req_params(req_params)
         #print "DC: ", req_params
-        
+
         DC_result = self.myWCS.DescribeCoverage(req_params)
 
             # also read out the gml:Envelope axisLabels - use only first returned entry
@@ -626,7 +635,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         #print 'Offered CRS: ',offered_crs
             # set a default if AxisdLabels, offered_crs are not presented
         if len(axis_labels) == 0:
-            axis_labels = ["",""]
+            axis_labels = ["", ""]
         if len(offered_crs) == 0:
             offered_crs = '4326'
 
@@ -639,36 +648,36 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.lineEdit_GCovYAxisLabel.setText(axis_labels[1])
 
         combo_idx = self.comboBox_GCovOutCRS.findText(offered_crs)
-        if combo_idx == -1: 
+        if combo_idx == -1:
             self.comboBox_GCovOutCRS.addItem(_fromUtf8(""))
             self.comboBox_GCovOutCRS.setItemText(0, _translate("QgsWcsClient2", offered_crs, None))
         else:
             self.comboBox_GCovOutCRS.setCurrentIndex(combo_idx)
-        
 
-            # open a new window to display the returned DescribeCoverage-Response XMl 
-        myDisplay_txt =  display_txt(self)
+
+            # open a new window to display the returned DescribeCoverage-Response XMl
+        myDisplay_txt = display_txt(self)
         myDisplay_txt.textBrowser_Disp.setText(DC_result)
         myDisplay_txt.show()
 
         #QApplication.restoreOverrideCursor()
         QApplication.changeOverrideCursor(Qt.ArrowCursor)
-      
+
 #---------------
         # the DescribeCoverage Button
     def on_DC_clicked(self):
         global selected_covid
-        
+
         sel_DC_items = self.treeWidget_DC.selectedItems()
-        selected_covid = sel_DC_items[0].data(0,0).encode()
-#        return 
+        selected_covid = sel_DC_items[0].data(0, 0).encode()
+#        return
 
 #---------------
-        # parse DescribeCoverage XML-response 
-    def parse_DC_xml(self, DC_result): 
-        
-        #print "I'm in "+sys._getframe().f_code.co_name
-        join_xml = ''.join(DC_result)
+        # parse DescribeCoverage XML-response
+#    def parse_DC_xml(self, DC_result):
+#
+#        #print "I'm in "+sys._getframe().f_code.co_name
+#        join_xml = ''.join(DC_result)
 
 
 
@@ -683,10 +692,10 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global selected_eoid
         global offered_crs
         global offered_version
-        
+
         req_sections = []
         selected_serv, selected_url = self.get_serv_url()
-                
+
         if self.checkBox_DCSAll.isChecked():
             req_sections.append("All")
         if self.checkBox_DCSDatSerSum.isChecked():
@@ -695,11 +704,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             req_sections.append("CoverageSummary")
 
         req_sections = ','.join(req_sections)
-        if len(req_sections) == 0:  
+        if len(req_sections) == 0:
             req_sections = None
 
         if self.radioButton_ContCont.isChecked():
-            req_contain = "contains"        
+            req_contain = "contains"
         if self.radioButton_ContOver.isChecked():
             req_contain = "overlaps"
 
@@ -710,44 +719,44 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         if self.checkBox_DCSIDonly.isChecked():
             req_IDs_only = True
-        else: 
+        else:
             req_IDs_only = False
 
         min_x = self.lineEdit_DCSMinLon.text()
         max_x = self.lineEdit_DCSMaxLon.text()
         min_y = self.lineEdit_DCSMinLat.text()
-        max_y = self.lineEdit_DCSMaxLat.text()        
-        if ( len(min_x) == 0 or len(max_x) == 0 ): 
+        max_y = self.lineEdit_DCSMaxLat.text()
+        if len(min_x) == 0 or len(max_x) == 0:
             req_lon = None
         else:
             req_lon = str(min_x+","+max_x)
-        if ( len(min_y) == 0 or len(max_y) == 0 ): 
+        if len(min_y) == 0 or len(max_y) == 0:
             req_lat = None
         else:
             req_lat = str(min_y+","+max_y)
-        
+
         if self.checkBox_DCS_ActiveDate.isChecked():
-            beginTime= self.dateTimeEdit_DCSBegin.text()
-            endTime= self.dateTimeEdit_DCSEnd.text()
+            beginTime = self.dateTimeEdit_DCSBegin.text()
+            endTime = self.dateTimeEdit_DCSEnd.text()
             req_toi = str(beginTime.strip()+","+endTime.strip())
         else:
             req_toi = None
-            
+
 
         try:
                 # a basic DescribeEOCoverageSet request
             selected_eoid = ','.join(selected_eoid)
-            req_params = {'version': offered_version, 
-                'request': 'DescribeEOCoverageSet' ,
-                'server_url': selected_url ,
-                'eoID':  selected_eoid ,
-                'subset_lon': req_lon , 
-                'subset_lat': req_lat , 
-                'subset_time': req_toi , 
-                'containment' : req_contain ,
-                'count' : req_count , 
-                'section' : req_sections ,
-                'IDs_only': req_IDs_only }
+            req_params = {'version': offered_version,
+                'request': 'DescribeEOCoverageSet',
+                'server_url': selected_url,
+                'eoID':  selected_eoid,
+                'subset_lon': req_lon,
+                'subset_lat': req_lat,
+                'subset_time': req_toi,
+                'containment' : req_contain,
+                'count' : req_count,
+                'section' : req_sections,
+                'IDs_only': req_IDs_only}
         except NameError:
             msg = "Error,    You need to select an DatasetSeriesID (eoID) first!\n   (see also GetCapabilities TAB)"
             warning_msg(msg)
@@ -763,7 +772,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
                 # set a default if AxisdLabels, offered_crs are not presented
             if len(axis_labels) == 0:
-                axis_labels = ["",""]
+                axis_labels = ["", ""]
             if len(offered_crs) == 0:
                 offered_crs = '4326'
 
@@ -776,7 +785,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 self.lineEdit_GCovYAxisLabel.setText(axis_labels[1])
 
             combo_idx = self.comboBox_GCovOutCRS.findText(offered_crs)
-            if combo_idx == -1: 
+            if combo_idx == -1:
                 self.comboBox_GCovOutCRS.addItem(_fromUtf8(""))
                 self.comboBox_GCovOutCRS.setItemText(0, _translate("QgsWcsClient2", offered_crs, None))
             else:
@@ -793,13 +802,13 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.treeWidget_GCov.clear()
             for elem in DCS_result:
                 item = QtGui.QTreeWidgetItem(self.treeWidget_GCov, [elem])
-                
+
                 # once results are available - put 'Focus' on --> tab_GCov
             self.tabWidget_EOWcsClient2.setCurrentIndex(4)
-            self.treeWidget_GCov.resizeColumnToContents(0)    
+            self.treeWidget_GCov.resizeColumnToContents(0)
         else:
                 # just display full result with a text-viewer
-            myDisplay_txt =  display_txt(self)
+            myDisplay_txt = display_txt(self)
             myDisplay_txt.textBrowser_Disp.setText(DCS_result)
             myDisplay_txt.show()
 
@@ -834,7 +843,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         selected_eoid = []
         sel_DCS_items = self.treeWidget_DCS.selectedItems()
         for elem in sel_DCS_items:
-            selected_eoid.append(elem.data(0,0).encode())
+            selected_eoid.append(elem.data(0, 0).encode())
             print "Selected EO-Series: ", selected_eoid  #, type(selected_eoid)   #, sel_DC_items[0].data(0,0)
             item2 = QtGui.QTreeWidgetItem(self.treeWidget_GCov, elem)
 
@@ -850,7 +859,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global req_outputLoc
         global offered_crs
         global offered_version
-        
+
         selected_serv, selected_url = self.get_serv_url()
 
         req_format = self.comboBox_GCOvOutFormat.currentText()
@@ -866,11 +875,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         req_x_label = self.lineEdit_GCovXAxisLabel.text().strip()
         req_y_label = self.lineEdit_GCovYAxisLabel.text().strip()
- 
+
         if self.radioButton_GCovXSize.isChecked():
             req_xsize = self.lineEdit_GCovXSize.text()
             req_size_x = "size "+str(req_x_label)+" "+str(req_xsize)
-            
+
         if self.radioButton_GCovXRes.isChecked():
             req_xsize = self.lineEdit_GCovXSize.text()
             req_size_x = "resolution "+str(req_x_label)+" "+str(req_xsize)
@@ -878,7 +887,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         if self.radioButton_GCovYSize.isChecked():
             req_ysize = self.lineEdit_GCovYSize.text()
             req_size_y = "size "+str(req_y_label)+" "+str(req_ysize)
-            
+
         if self.radioButton_GCovYRes.isChecked():
             req_ysize = self.lineEdit_GCovYSize.text()
             req_size_y = "resolution "+str(req_y_label)+" "+str(req_ysize)
@@ -898,25 +907,25 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         min_x = self.lineEdit_GCovMinLon.text()
         max_x = self.lineEdit_GCovMaxLon.text()
         min_y = self.lineEdit_GCovMinLat.text()
-        max_y = self.lineEdit_GCovMaxLat.text()        
+        max_y = self.lineEdit_GCovMaxLat.text()
 
-        if ( len(min_x) == 0 or len(max_x) == 0 ): 
+        if len(min_x) == 0 or len(max_x) == 0:
             req_lon = None
         else:
             req_lon = req_subsetCRS+" "+req_x_label+" "+str(min_x+","+max_x)
 
-        if ( len(min_y) == 0 or len(max_y) == 0 ): 
+        if len(min_y) == 0 or len(max_y) == 0:
             req_lat = None
         else:
             req_lat = req_subsetCRS+" "+req_y_label+" "+str(min_y+","+max_y)
 
-#@@
+
         #if req_outputcrs == offered_crs:
             #req_outputcrs = None
 
-        if not "req_outputLoc" in globals(): 
+        if not "req_outputLoc" in globals():
             msg = "Error: For downloading coverages you need to supply a Local Storage Path --> see TAB Server / Storage"
-            QMessageBox.critical(self, "Error",  msg, QMessageBox.Ok )
+            QMessageBox.critical(self, "Error", msg, QMessageBox.Ok)
                 # put focus on Server/STorage Tab to allow provision of Output Location
             self.tabWidget_EOWcsClient2.setCurrentIndex(0)
             self.get_outputLoc()
@@ -926,46 +935,45 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         else:
             req_outputLoc = self.lineEdit_Serv_OutputLoc.text()
 
-        try: 
+        try:
                 # a basic GetCoverage request
             for gcov_elem in selected_gcovid:
-                req_params = {'version': offered_version, 
+                req_params = {'version': offered_version,
                     'request': 'GetCoverage',
-                    'server_url': selected_url ,
-                    'coverageID': gcov_elem ,
-                    'format':  req_format , 
-                    'subset_x': req_lat ,
-                    'subset_y': req_lon ,
-                    'rangesubset': req_rangesubset ,
-                    'outputcrs': req_outputcrs ,
-                    'interpolation': req_interpolation ,
-                    'size_x': req_size_x ,
-                    'size_y': req_size_y ,
+                    'server_url': selected_url,
+                    'coverageID': gcov_elem,
+                    'format':  req_format,
+                    'subset_x': req_lat,
+                    'subset_y': req_lon,
+                    'rangesubset': req_rangesubset,
+                    'outputcrs': req_outputcrs,
+                    'interpolation': req_interpolation,
+                    'size_x': req_size_x,
+                    'size_y': req_size_y,
                     'output': req_outputLoc}
- 
-                #if req_params['format'].startswith('application/gml'):
-                    #req_params['mediatype']='multpart/mixed'
+
+                if req_params['format'].startswith('application/gml'):
+                    req_params['mediatype'] = 'multipart/related'
 
                 #print req_params
                 req_params = self.clear_req_params(req_params)
                 #print req_params
                 GCov_result = self.myWCS.GetCoverage(req_params)
                 print "GCov_result / HTTP-Code: ", GCov_result
-               
+
         except NameError as EEE:
-            print 'NameError: ',EEE
+            print 'NameError: ', EEE
             msg = "Error,    You need to select one or more CoverageIDs first!\n "
             warning_msg(msg)
             #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
             return
 
 ## TODO -- mediatype & mask --> not yet implemented
-                    # 'mask': '&mask=polygon,'+crs_url, 
-                    # 'mediatype': '&mediatype=',  # multipart/mixed' (default = parameter not provided)
+                    # 'mask': '&mask=polygon,'+crs_url,
 
 
             #Register the downloaded datsets with QGis MapCanvas -> load and show
-        self.add_to_map(req_params) 
+        self.add_to_map(req_params)
             # reset the cursur
         #QApplication.restoreOverrideCursor()
         QApplication.changeOverrideCursor(Qt.ArrowCursor)
@@ -979,16 +987,16 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         selected_gcovid = []
         sel_GCov_items = self.treeWidget_GCov.selectedItems()
         for elem in sel_GCov_items:
-            selected_gcovid.append(elem.data(0,0).encode())
-            print "Selected CoverageID: ", selected_gcovid 
+            selected_gcovid.append(elem.data(0, 0).encode())
+            print "Selected CoverageID: ", selected_gcovid
                 # to allow a DescribeCoverage request for a Coverage comeing from a DescribeEOCoverageSet request
                 # we add the selected Coverage to the DescribeCoverage window
                 # to avoid duplicat entries we have to check if the entry already exists
-            DC_treeContent = self.treeWidget_DC.findItems(elem.data(0,0).encode(), Qt.MatchStartsWith, 0)
+            DC_treeContent = self.treeWidget_DC.findItems(elem.data(0, 0).encode(), Qt.MatchStartsWith, 0)
             if len(DC_treeContent) == 0:
-                item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0,0).encode(),))
-            
- 
+                item = QtGui.QTreeWidgetItem(self.treeWidget_DC, (elem.data(0, 0).encode(),))
+
+
 #---------------
         # activate the SubsetCRS setting and field
     def enableGCov_SubCRS(self):
@@ -1000,21 +1008,21 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         # activate the SubsetPixel setting
     def enableGCov_SubPixel(self):
-       if self.radioButton_GCovSubPixel.isChecked():
+        if self.radioButton_GCovSubPixel.isChecked():
             self.radioButton_GCovSubCRS.setChecked(False)
             self.radioButton_GCovSubOrig.setChecked(False)
             self.lineEdit_GCovSubEPSG.setEnabled(False)
 
-#---------------            
+#---------------
         # activate the OriginalCRS setting
     def enableGCov_SubOrig(self):
-       if self.radioButton_GCovSubOrig.isChecked():
+        if self.radioButton_GCovSubOrig.isChecked():
             self.radioButton_GCovSubCRS.setChecked(False)
             self.radioButton_GCovSubPixel.setChecked(False)
             self.lineEdit_GCovSubEPSG.setEnabled(False)
 
 #---------------
-        # enabele scaling X-Size 
+        # enabele scaling X-Size
     def enableGCov_XSize(self):
         if self.radioButton_GCovXSize.isChecked():
             self.radioButton_GCov_OutSizeOrig.setChecked(False)
@@ -1023,7 +1031,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.radioButton_GCovXRes.setChecked(False)
 
 #---------------
-        # enabele scaling X-Resolution 
+        # enabele scaling X-Resolution
     def enableGCov_XResolution(self):
         if self.radioButton_GCovXRes.isChecked():
             self.radioButton_GCov_OutSizeOrig.setChecked(False)
@@ -1032,7 +1040,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             self.lineEdit_GCovXSize.setEnabled(True)
 
 #---------------
-        # enabele scaling Y-Size             
+        # enabele scaling Y-Size
     def enableGCov_YSize(self):
         if self.radioButton_GCovYSize.isChecked():
             self.radioButton_GCov_OutSizeOrig.setChecked(False)
@@ -1068,13 +1076,13 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 ## ====== Add data to Map Canvas ======
         # read the the downloaded datasets, register them and show them in the QGis MapCanvas
     def add_to_map(self, req_params):
-        
+
         self.canvas = self.iface.mapCanvas()
 
         coverageID = req_params['output']+os.sep+req_params['coverageID']+'*'
         disp_coverage = glob(coverageID)
-        
-            # check if there is a loadable coverage availabel (and not eg. an multipart/mixed gml) or an error occurred
+
+            # check if there is a loadable coverage availabel (and not eg. an multipart/related gml) or an error occurred
         if len(disp_coverage) > 0:
             covInfo = QFileInfo(disp_coverage[-1])
             cov_baseName = covInfo.baseName()
@@ -1083,7 +1091,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 warning_msg("Layer failed to load!")
 
         else:
-            msg = "There is no loadable/viewable Coverage available ! \n Maybe it wasn't an image format you choose ?" 
+            msg = "There is no loadable/viewable Coverage available ! \n Maybe it wasn't an image format you choose ?"
             msg = "But maybe an error occurred. \n Please check you output-location for 'access_error_xxxx.xml' files"
             warning_msg(msg)
 

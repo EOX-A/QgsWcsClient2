@@ -6,7 +6,7 @@
 # Name:  wcs_client.py
 #
 #   General purpose WCS 2.0/EO-WCS Client:
-#       The routine is inteded to be imported as modules. 
+#       The routine is inteded to be imported as modules.
 #       If cmd-line usage is desired the cmdline_wcs_client.py will provide it.
 #       The documentation of the modules functionality is provided as doc-strings.
 #
@@ -89,7 +89,7 @@ global crs_url
 crs_url = 'http://www.opengis.net/def/crs/EPSG/0/'
 
 global namespacemap
-namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"  }
+namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"}
 
 
     # sets a storage location in case the user doesn't provide one (to be on the save side) - eg. for error msgs.
@@ -193,7 +193,7 @@ class wcsClient(object):
             fday = int(outdate[0][8:10])
             time_stamp = datetime.datetime(day=fday, month=fmonth, year=fyear)
             difference = time_stamp+datetime.timedelta(days=1)
-            to_date ='%.4d-%.2d-%.2d' %  (difference.year, difference.month, difference.day)
+            to_date = '%.4d-%.2d-%.2d' %  (difference.year, difference.month, difference.day)
             outdate.append(to_date)
 
         return outdate
@@ -273,7 +273,7 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        base_desccov = {'version': '&version=', 
+        base_desccov = {'version': '&version=',
             'request': '&request=',
             'server_url': '',
             'coverageID': '&coverageID='}
@@ -290,7 +290,7 @@ class wcsClient(object):
         """
        # print "I'm in "+sys._getframe().f_code.co_name
 
-        base_desceocoverageset = {'version': '&version=', 
+        base_desceocoverageset = {'version': '&version=',
             'request': '&request=',
             'server_url': '',
             'eoID': '&eoID=',
@@ -314,7 +314,7 @@ class wcsClient(object):
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
 
-        getcov_dict = {'version': '&version=', 
+        getcov_dict = {'version': '&version=',
             'request': '&request=',
             'server_url': '',
             'coverageID': '&coverageid=',
@@ -349,7 +349,7 @@ class wcsClient(object):
                     updateSequence:   Receive a new document only if it has changed since last
                         requested (expressed in ISO-8601 date format e.g. 2007-04-05)
                     sections:         Request one or more section(s) of a Capabilities Document
-                        possible sections: [ DatasetSeriesSummary, CoverageSummary, Content, ServiceMetadata, 
+                        possible sections: [ DatasetSeriesSummary, CoverageSummary, Content, ServiceMetadata,
                         ServiceIdentification, ServiceProvider, OperationsMetadata, Languages, All ]
             Example:
                 input_params= {'request': 'GetCapabilities',
@@ -359,7 +359,7 @@ class wcsClient(object):
             Returns:  XML GetCapabilities resonse
         """
        # print "I'm in "+sys._getframe().f_code.co_name
-       
+
         if input_params.has_key('updateSequence') and input_params['updateSequence'] is not None:
             res_in = self._valid_time_wrapper(list(input_params.get('updateSequence').split(',')))
             input_params['updateSequence'] = ','.join(res_in)
@@ -500,7 +500,7 @@ class wcsClient(object):
                                  in Y-Dimension e.g.[size Y 320 | resolution Lat 55 ]
                     interpolation: Interpolation method to be used (default=nearest), ['nearest | bilinear | average]
                     mediatype:   Coverage delivered directly as an image file or enclosed inside a GML structure.
-                                 parameter either [ not present (=default) | multipart/mixed ]
+                                 parameter either [ not present (=default) | multipart/related ]
                 Non-standard Parameter implemented (optional):
                     mask:        Masking of coverage by polygon: define the polygon as a list of points
                                  (i.e. latitude and longitude values), e.g. lat1,lon1,lat2,lon2,...; make sure
@@ -542,15 +542,15 @@ class wcsClient(object):
             pass
 
 
-        if input_params.has_key('size_x'): 
+        if input_params.has_key('size_x'):
             if input_params['size_x'].startswith('siz'):
                 out = "size="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
             elif input_params['size_x'].startswith('res'):
                 out = "resolution="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
-         
-        if input_params.has_key('size_y'): 
+
+        if input_params.has_key('size_y'):
             if input_params['size_y'].startswith('siz'):
                 out = "size="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
                 input_params['size_y'] = out
@@ -593,7 +593,7 @@ class wcsClient(object):
         offered_crs = os.path.basename(offered_crs[0])
         #print offered_crs
         if len(axis_labels) == 0:
-            axis_labels = ["",""]
+            axis_labels = ["", ""]
         if len(offered_crs) == 0:
             offered_crs = '4326'
 
@@ -631,7 +631,7 @@ class wcsClient(object):
         except urllib2.URLError, url_ERROR:
             if hasattr(url_ERROR, 'reason'):
                 print '\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -", url_ERROR.reason
-                
+
                 try:
                     print url_ERROR.read(), '\n'
                 except:
@@ -657,11 +657,11 @@ class wcsClient(object):
             plus the the current date and time. This timestamp is added to avoid accidently overwriting of
             received coverages having the same coverageID but a differerent extend (AOI) (i.e.
             multiple subsets of the same coverage).
-            
+
             Output: prints out the submitted http_request
                     stores the received datasets
                     saves Error-XML (-> access_error_"TimeStamp".xml) at output location (in case of failure)
-            Returns:  HttpCode (if success)  
+            Returns:  HttpCode (if success)
         """
        # print "I'm in "+sys._getframe().f_code.co_name
         print http_request
@@ -681,7 +681,7 @@ class wcsClient(object):
                 out_format_ext = "hdf"
         else:
             out_format_ext = input_params['format']
-            
+
         if not (input_params['coverageID'].endswith('tif') or input_params['coverageID'].endswith('tiff') or \
                 input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
                 input_params['coverageID'].endswith('gif')):
@@ -746,7 +746,7 @@ class wcsClient(object):
         for k, v in input_params.iteritems():
             #print k,' -- ',v
                 # make sure there is always a version set
-            if k == 'version' and ( v == '' or v == None): 
+            if k == 'version' and (v == '' or v == None):
                 v = '2.0.0'
                 # skip all keys with None or True values
             if v == None or v == True:

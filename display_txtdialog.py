@@ -4,7 +4,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -35,7 +35,7 @@
  *  SOFTWARE.                                                                     *
  *                                                                                *
  *********************************************************************************/
- a popoup window to display the full-version of XML-Response messages and Error 
+ a popoup window to display the full-version of XML-Response messages and Error
  as well as Error or other messages
 """
 
@@ -54,9 +54,10 @@ import config
 
 
 
-class display_txt(QDialog,  QObject, Ui_Dialog_Disp):
-   
+class display_txt(QDialog, QObject, Ui_Dialog_Disp):
+
     def __init__(self, parent):
-        QDialog.__init__(self, parent) 
+        QDialog.__init__(self, parent)
         self.setupUi(self)
         self.setWindowTitle('DescribeCoverage Response')
+

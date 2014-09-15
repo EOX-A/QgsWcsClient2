@@ -3,7 +3,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -43,10 +43,10 @@ from PyQt4.QtNetwork import QNetworkRequest, QNetworkReply
 
 def download_url(manager, url, output_path, progress_dialog=None):
     global xml_result
-    xml_result=[]
-    
+    xml_result = []
+
         # set up the  output path
-    if output_path is not None:   
+    if output_path is not None:
         out_file = QFile(output_path)
         if not out_file.open(QFile.WriteOnly):
             raise IOError(out_file.errorString())
@@ -70,11 +70,11 @@ def download_url(manager, url, output_path, progress_dialog=None):
 
     if output_path is None:
         reply.readyRead.connect(read_data)
-    else: 
+    else:
         reply.readyRead.connect(write_data)
 
 
-        
+
     if progress_dialog:
         def progress_event(received, total):
             QCoreApplication.processEvents()

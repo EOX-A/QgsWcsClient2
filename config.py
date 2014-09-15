@@ -3,7 +3,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -37,7 +37,7 @@
 configuration for the QgsWcsClient2 plugin
 """
 
-# some global setttings 
+# some global setttings
 settings = {}
 
 #configured server listing (srv_list)
@@ -49,7 +49,7 @@ plugin_dir = os.path.dirname(os.path.realpath(__file__))
 
     # read the sever names/urls from a file
 def read_srv_list():
-    insrvlst = os.path.join(plugin_dir,'config_srvlist.pkl')
+    insrvlst = os.path.join(plugin_dir, 'config_srvlist.pkl')
     fo = open(insrvlst, 'rb')
     sl = pickle.load(fo)
     fo.close()
