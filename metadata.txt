@@ -13,9 +13,9 @@ qgisMinimumVersion = 2.0
 description = A OGC WCS 2.0/EO-WCS Client; a tool to download (and subset in space and time) a series of raster data
 version = version 0.1
 
-category = Raster
+# category = Raster
 author = Christian Schiller / EOX IT Services GmbH, Vienna, Austria
-email = christian dot schiller at eox dot at
+email = christian.schiller@eox.at
 
 # end of mandatory metadata
 
