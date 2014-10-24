@@ -10,5 +10,5 @@ Unlike WMS, WCS enables the access to the original data (and not just to portray
 The tool also handles the EO-WCS Application profile which allows to access/download a full time-series of coverages with just a few clicks. For multi-band EO-imagery the bands of interest can also be selected/sub-setted and their order in the output can be chosen.
 The downloaded coverages are directly loaded as layers into QGIS
 
-This tool requires the python lxml-module to be installed. 
+Requirements: This tool requires the python lxml-module to be pre-installed. 
 
