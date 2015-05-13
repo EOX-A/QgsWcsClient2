@@ -64,15 +64,62 @@ def download_url(manager, url, output_path, progress_dialog=None):
         global xml_result
         xml_result.append(reply.readAll().data())
 
+    def read_data1():
+        xml_result1 = []
+        global xml_result1
+        xml_result1.append(reply.readAll().data())
+        return xml_result1
+ 
+
         # request the content of the url
     request = QNetworkRequest(QUrl(url))
     reply = manager.get(request)
+   
+    #print "EEE: ", reply.error(), reply.errorString(), reply.size()
+    #print "AA1: ", reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+    #print "AA2: ", reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)
+    #print "AA3: ", reply.attribute(QNetworkRequest.RedirectionTargetAttribute)
+    #print "=================="
+    #print "1: AuthenticationRequiredError",reply.AuthenticationRequiredError
+    #print "2: ConnectionRefusedError",reply.ConnectionRefusedError
+    #print "3: ContentAccessDenied",reply.ContentAccessDenied
+    #print "4: ContentNotFoundError",reply.ContentNotFoundError
+    #print "5: ContentOperationNotPermittedError",reply.ContentOperationNotPermittedError
+    #print "6: ContentReSendError",reply.ContentReSendError
+    #print "7: HostNotFoundError",reply.HostNotFoundError
+    #print "8: NetworkError",reply.NetworkError
+    #print "9: NoError",reply.NoError
+    #print "10: NotOpen",reply.NotOpen
+    #print "12: OpenMode",reply.OpenMode
+    #print "13: OpenModeFlag",reply.OpenModeFlag
+    #print "14: OperationCanceledError",reply.OperationCanceledError
+    #print "15: ProtocolFailure",reply.ProtocolFailure
+    #print "16: ProtocolInvalidOperationError",reply.ProtocolInvalidOperationError
+    #print "17: ProtocolUnknownError",reply.ProtocolUnknownError
+    #print "18: ProxyAuthenticationRequiredError",reply.ProxyAuthenticationRequiredError
+    #print "19: ProxyConnectionClosedError",reply.ProxyConnectionClosedError
+    #print "20: ProxyConnectionRefusedError",reply.ProxyConnectionRefusedError
+    #print "21: ProxyNotFoundError",reply.ProxyNotFoundError
+    #print "22: ProxyTimeoutError",reply.ProxyTimeoutError
+    #print "23: ReadOnly",reply.ReadOnly
+    #print "24: ReadWrite",reply.ReadWrite
+    #print "25: RemoteHostClosedError",reply.RemoteHostClosedError
+    #print "26: SslHandshakeFailedError",reply.SslHandshakeFailedError
+    #print "27: TemporaryNetworkFailureError",reply.TemporaryNetworkFailureError
+    #print "28: Text",reply.Text
+    #print "29: TimeoutError",reply.TimeoutError
+    #print "30: Truncate",reply.Truncate
+    #print "31: Unbuffered",reply.Unbuffered
+    #print "32: UnknownContentError",reply.UnknownContentError
+    #print "33: UnknownNetworkError",reply.UnknownNetworkError
+    #print "34: UnknownProxyError",reply.UnknownProxyError
+    # to call the manager again seems to be needed, the reply seems to get overwritten or cleared by the above calls
+    #reply = manager.get(request)
 
     if output_path is None:
         reply.readyRead.connect(read_data)
     else:
         reply.readyRead.connect(write_data)
-
 
 
     if progress_dialog:

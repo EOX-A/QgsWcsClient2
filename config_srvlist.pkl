@@ -3,13 +3,78 @@ S'servers'
 p1
 (lp2
 (lp3
-VOGC: WCS 2.0/EO-WCS 1.0 - Reference Implemetation (EOxServer)
+VDREAM
 p4
-aVhttp://ows.eox.at/cite/ows?
+aVhttp://data.eox.at/instance00/ows?
 p5
 aa(lp6
-VOGC: WCS 2.0 - Reference Implementation (MapServer)
+VEC FP7-CryoLand - Copernicus Service Snow and Land Ice (>16.000 datasets, GetCapabilities is slow)
 p7
-aVhttp://ows.eox.at/cite-wcs?
+aVhttp://neso.cryoland.enveo.at/cryoland/ows?
 p8
+aa(lp9
+VEarthServer
+p10
+aVhttp://earthserver.eox.at/rasdaman?
+p11
+aa(lp12
+VEarthServer-Beta
+p13
+aVhttp://earthserver.eox.at/beta-rasdaman?
+p14
+aa(lp15
+Vtest-failure
+p16
+aVhttp://
+p17
+aa(lp18
+VDLR-/geotest.eoc.dlr.de/eoc/atmosphere/wcs
+p19
+aVhttp://geotest.eoc.dlr.de/eoc/atmosphere/wcs?
+p20
+aa(lp21
+VDLR-/geoservice.dlr.de/eoc/atmosphere/wcs?
+p22
+aVhttp://geoservice.dlr.de/eoc/atmosphere/wcs?
+p23
+aa(lp24
+VDLR-EOC imagery
+p25
+aVhttp://geoservice.dlr.de/eoc/imagery/wcs?
+p26
+aa(lp27
+VOGC: WCS 2.0/EO-WCS 1.0 - Reference Implemetation (EoxServer)
+p28
+aVhttp://ows.eox.at/cite/ows?
+p29
+aa(lp30
+VOGC: WCS 2.0 - Reference Implementation (MapServer)
+p31
+aVhttp://ows.eox.at/cite-wcs?
+p32
+aa(lp33
+VAlaska Snow metric (MODIS)
+p34
+aVhttp://snow.proto.gina.alaska.edu/metrics?
+p35
+aa(lp36
+VV-MANIP (ESA project - Visualizing and Manipulating multidimensional data directly through a web client)
+p37
+aVhttp://demo.v-manip.eox.at/browse/ows?
+p38
+aa(lp39
+VDREAM-2- WCS with new extensions
+p40
+aVhttp://dream.eox.at/eoxs2/ows?
+p41
+aa(lp42
+Vnew_CryoLand_TEST
+p43
+aVhttp://192.168.122.129/cryoland/ows?
+p44
+aa(lp45
+VCryoLand - NEW (neso1)
+p46
+aVhttp://neso1.cryoland.enveo.at/cryoland/ows?
+p47
 aas.

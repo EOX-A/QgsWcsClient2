@@ -201,7 +201,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         url_base = selected_url
             # request only  &sections=ServiceMetadata -- this makes if faster (especially on large sites),
             # but some Servers don't provide/accept it, so there is a fallback implemented
-        url_ext1 = "service=WCS&request=GetCapabilities" #&sections=ServiceMetadata"
+        url_ext1 = "service=WCS&request=GetCapabilities&sections=ServiceMetadata"
         url_ext2 = "service=WCS&request=GetCapabilities"
         myUrl = url_base + url_ext1
         myUrl2 = url_base + url_ext2
@@ -224,10 +224,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         self.reset_comboboxes()
 
         req_qgsmng = QNetworkAccessManager(self)
-
+        
             # start the download
         response = download_url(req_qgsmng, myUrl, None, self.progress_dialog)
         #print 'myUrl: ', response[0:1]
+        #print response[2]
 
             # check if response is valid and useful, else try the fallback or issue an error
         if response[0] is not True:
@@ -339,14 +340,20 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         # parse the response issued during "Server Connect" and set some parameters
     def parse_first_xml(self, in_xml):
         global offered_version
-
+        
         join_xml = ''.join(in_xml)
         tree1 = etree.fromstring(join_xml)
 
             # get the required information from the GetCapabilitiy response
         outformat = tree1.xpath("wcs:ServiceMetadata/wcs:formatSupported/text()", namespaces=namespacemap)
         outcrs = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/crs:crsSupported/text()", namespaces=namespacemap)
+        # new syntax ??? vereify
+        #outcrs = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/crs:CrsMetadata/crs:crsSupported/text()", namespaces=namespacemap)
+
         interpol = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/int:interpolationSupported/text()", namespaces=namespacemap)
+        # new syntax ??? verify
+        #interpol = tree1.xpath("wcs:ServiceMetadata/wcs:Extension/int:InterpolationMetadata/int:InterpolationSupported/text()", namespaces=namespacemap)
+        
         offered_version = tree1.attrib['version']
 
         oformat_num = len(outformat)
@@ -768,8 +775,13 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         #print "DCS: ",req_params
 
         if req_params.has_key('IDs_only') and req_params['IDs_only'] == True:
-            DCS_result, axis_labels, offered_crs = self.myWCS.DescribeEOCoverageSet(req_params)
-
+            try:
+                DCS_result, axis_labels, offered_crs = self.myWCS.DescribeEOCoverageSet(req_params)
+            except IndexError:
+                msg='Sorry, it seems that there are no datasets for the chosen parameters.'
+                warning_msg(msg)
+                return
+            
                 # set a default if AxisdLabels, offered_crs are not presented
             if len(axis_labels) == 0:
                 axis_labels = ["", ""]
@@ -953,13 +965,46 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                     'output': req_outputLoc}
 
                 if req_params['format'].startswith('application/gml'):
+                    if req_params['format'].count('+') != -1:
+                        req_params['format'] = req_params['format'].replace('+','%2B')
+
                     req_params['mediatype'] = 'multipart/related'
 
-                #print req_params
-                req_params = self.clear_req_params(req_params)
-                #print req_params
-                GCov_result = self.myWCS.GetCoverage(req_params)
-                print "GCov_result / HTTP-Code: ", GCov_result
+                ##print req_params
+                #req_params = self.clear_req_params(req_params)
+                ##print req_params
+                #GCov_result = self.myWCS.GetCoverage(req_params)
+                #print "GCov_result / HTTP-Code: ", GCov_result
+
+                try:
+                        # send the request
+                    #print req_params
+                    req_params = self.clear_req_params(req_params)
+                    #print req_params
+                    GCov_result = self.myWCS.GetCoverage(req_params)
+                    print "GCov_result / HTTP-Code: ", GCov_result
+                except IOError, TypeError: 
+                    return
+
+
+
+        ## TODO -- mediatype & mask --> not yet implemented
+                            # 'mask': '&mask=polygon,'+crs_url,
+
+                if GCov_result == 200:
+                        #Register the downloaded datsets with QGis MapCanvas -> load and show
+                    self.add_to_map(req_params)
+                        # reset the cursur
+                    #QApplication.restoreOverrideCursor()
+                    QApplication.changeOverrideCursor(Qt.ArrowCursor)
+                else: 
+                    msg = "There is no loadable/viewable Coverage available ! \nMaybe it wasn't an image format you choose ? \n"
+                    msg = msg+"Please check you output-location. \n"
+                    msg = msg+"But maybe another error occurred. \nPlease check you output-location for 'access_error_xxxx.xml' files"
+                    warning_msg(msg)
+
+
+
 
         except NameError as EEE:
             print 'NameError: ', EEE
@@ -967,16 +1012,6 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             warning_msg(msg)
             #self.tabWidget_EOWcsClient2.setCurrentIndex(1)
             return
-
-## TODO -- mediatype & mask --> not yet implemented
-                    # 'mask': '&mask=polygon,'+crs_url,
-
-
-            #Register the downloaded datsets with QGis MapCanvas -> load and show
-        self.add_to_map(req_params)
-            # reset the cursur
-        #QApplication.restoreOverrideCursor()
-        QApplication.changeOverrideCursor(Qt.ArrowCursor)
 
 
 #---------------
@@ -1091,8 +1126,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 warning_msg("Layer failed to load!")
 
         else:
-            msg = "There is no loadable/viewable Coverage available ! \n Maybe it wasn't an image format you choose ?"
-            msg = "But maybe an error occurred. \n Please check you output-location for 'access_error_xxxx.xml' files"
+            msg = "There is no loadable/viewable Coverage available ! \nMaybe it wasn't an image format you choose ? \n"
+            msg = msg+"But maybe another error occurred. \nPlease check you output-location for 'access_error_xxxx.xml' files"
             warning_msg(msg)
 
 

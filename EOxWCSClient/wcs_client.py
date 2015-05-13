@@ -619,6 +619,11 @@ class wcsClient(object):
                 # read the content of the url
             result_xml = request_handle.read()
 
+                ## TODO ## to change the User-agent header --> change the above to the following
+                # create a request object, this construct doesn't need the close-statements (-> line 633 / 633) anymore
+            #request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.6,QgsWcsClient-plugin'})
+            #result_xml = urllib2.urlopen(request_handle).read()
+
                 # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
                 cids, axis_labels, offered_crs = self._parse_xml(result_xml)
@@ -679,13 +684,20 @@ class wcsClient(object):
                 out_format_ext = "jpg"
             elif out_format_ext == "x-hdf":
                 out_format_ext = "hdf"
+            elif out_format_ext.startswith("gml"):
+                out_format_ext = "gml"
         else:
             out_format_ext = input_params['format']
 
-        if not (input_params['coverageID'].endswith('tif') or input_params['coverageID'].endswith('tiff') or \
-                input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
-                input_params['coverageID'].endswith('gif')):
-            out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
+        #if not (input_params['coverageID'].endswith('tif') or input_params['coverageID'].endswith('tiff') or \
+                #input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
+                #input_params['coverageID'].endswith('gif')):
+            #out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
+
+        #else:
+            #out_coverageID = input_params['coverageID']
+#@@
+        out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
 
         if input_params.has_key('output') and input_params['output'] is not None:
             outfile = input_params['output']+dsep+out_coverageID

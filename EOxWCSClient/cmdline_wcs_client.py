@@ -342,7 +342,7 @@ def _get_cmdline():
     getcov_parser.add_argument('--interpolation', choices=['nearest', 'bilinear', 'average'],
                         help='Interpolation method to be used [default=nearest]')
 
-    getcov_parser.add_argument('--mediatype', choices=['multipart/mixed'], nargs='?',
+    getcov_parser.add_argument('--mediatype', choices=['multipart/related'], nargs='?',
                         help='Coverage delivered directly as image file or enclosed in GML structure \
                         [default=parameter is not provided]')
 
