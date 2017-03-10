@@ -342,7 +342,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         global offered_version
         
         join_xml = ''.join(in_xml)
-        tree1 = etree.fromstring(join_xml)
+        tree1 = etree.XML(join_xml)
 
             # get the required information from the GetCapabilitiy response
         outformat = tree1.xpath("wcs:ServiceMetadata/wcs:formatSupported/text()", namespaces=namespacemap)
