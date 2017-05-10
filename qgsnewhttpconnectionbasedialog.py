@@ -5,7 +5,7 @@
                                  A QGIS plugin
  A OGC WCS 2.0/EO-WCS Client 
                              -------------------
-        begin                : 2014-06-26
+        begin                : 2014-06-26; 2017-04-10
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
         email                : christian dot schiller at eox dot at
  ***************************************************************************/
@@ -72,8 +72,8 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         srv_url = self.txt_NewSrvUrl.text()
         
             # verify that URL starts with http://
-        if not srv_url.startswith("http://"):
-            msg = "Sorry, you need to supply a 'Server URL' starting with http://\n"
+        if not srv_url.startswith("http://") and not srv_url.startswith("https://"):
+            msg = "Sorry, you need to supply a 'Server URL' starting with http://  or https://\n"
             self.warning_msg(msg)
             srv_name = self.txt_NewSrvName.text()
 

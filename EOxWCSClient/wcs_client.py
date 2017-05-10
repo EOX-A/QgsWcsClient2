@@ -88,9 +88,6 @@ dsep = os.sep
 global crs_url
 crs_url = 'http://www.opengis.net/def/crs/EPSG/0/'
 
-global namespacemap
-namespacemap = {"wcs": "http://www.opengis.net/wcs/2.0", "wcseo": "http://www.opengis.net/wcseo/1.0", "crs":  "http://www.opengis.net/wcs/service-extension/crs/1.0", "gml" : "http://www.opengis.net/gml/3.2", "gmlcov" : "http://www.opengis.net/gmlcov/1.0", "ogc" : "http://www.opengis.net/ogc", "ows" : "http://www.opengis.net/ows/2.0", "swe" : "http://www.opengis.net/swe/2.0", "int" : "http://www.opengis.net/WCS_service-extension_interpolation/1.0", "eop" : "http://www.opengis.net/eop/2.0", "om" : "http://www.opengis.net/om/2.0"}
-
 
     # sets a storage location in case the user doesn't provide one (to be on the save side) - eg. for error msgs.
 global temp_storage
@@ -294,14 +291,17 @@ class wcsClient(object):
             'request': '&request=',
             'server_url': '',
             'eoID': '&eoID=',
-            'subset_lon': '&subset=Long,'+crs_url+'4326(',
-            'subset_lat': '&subset=Lat,'+crs_url+'4326(',
+#            'subset_lon': '&subset=Long,'+crs_url+'4326(', #@@
+#            'subset_lat': '&subset=Lat,'+crs_url+'4326(',  #@@
+            'subset_lon': '&subset=Long(',
+            'subset_lat': '&subset=Lat(',
             'subset_time': '&subset=phenomenonTime(%22',
             'containment': '&containment=',
             'section': '&section=',
             'count': '&count=',
             'IDs_only': False}
 
+        #print "base_desceocoverageset", base_desceocoverageset
         return base_desceocoverageset
 
 
@@ -323,7 +323,8 @@ class wcsClient(object):
             'subset_y': '&subset=',
             'rangesubset': '&rangesubset=',
             'outputcrs': '&outputcrs='+crs_url,
-            'interpolation': '&interpolation=',
+            'interpolation': '&interpolation=',     #@@
+#            'interpolation': '&interpolation=nearest-neighbour',  #@@
             'mediatype': '&mediatype=',
             'mask': '&mask=polygon,'+crs_url,
             'size_x': '&',
@@ -463,7 +464,7 @@ class wcsClient(object):
     #/*                              GetCoverage()                           */
     #/************************************************************************/
 
-    def GetCoverage(self, input_params):
+    def GetCoverage(self, input_params, use_wcs_GCo_call):
         """
             Creates a GetCoverage request url based on the input_parameters
             and executes the request.
@@ -513,13 +514,14 @@ class wcsClient(object):
 
             # provide the same functionality for input as for the cmd-line
             # (to get around the url-notation for input)
-        if input_params.has_key('subset_x') and input_params['subset_x'].startswith('epsg'):
+        if input_params.has_key('subset_x') and input_params['subset_x'] is not None and input_params['subset_x'].startswith('epsg') :
             crs = input_params['subset_x'].split(':')[1].split(' ')[0]
             label = input_params['subset_x'].split(':')[1].split(' ')[1]
             coord = input_params['subset_x'].split(':')[1].split(' ')[2]
-            out = label+','+crs_url+crs+'('+coord
+#            out = label+','+crs_url+crs+'('+coord   #@@
+            out = label+'('+coord
             input_params['subset_x'] = out
-        elif input_params.has_key('subset_x') and (input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori')):
+        elif input_params.has_key('subset_x') and input_params['subset_x'] is not None and (input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori')):
             label = input_params['subset_x'].split(' ')[1]
             coord = input_params['subset_x'].split(' ')[2]
             out = label+'('+coord
@@ -527,13 +529,14 @@ class wcsClient(object):
         else:
             pass
 
-        if input_params.has_key('subset_y') and input_params['subset_y'].startswith('epsg'):
+        if input_params.has_key('subset_y') and input_params['subset_y'] is not None and input_params['subset_y'].startswith('epsg'):
             crs = input_params['subset_y'].split(':')[1].split(' ')[0]
             label = input_params['subset_y'].split(':')[1].split(' ')[1]
             coord = input_params['subset_y'].split(':')[1].split(' ')[2]
-            out = label+','+crs_url+crs+'('+coord
+#            out = label+','+crs_url+crs+'('+coord  #@@
+            out = label+'('+coord
             input_params['subset_y'] = out
-        elif input_params.has_key('subset_y') and (input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori')):
+        elif input_params.has_key('subset_y') and input_params['subset_y'] is not None and (input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori')):
             label = input_params['subset_y'].split(' ')[1]
             coord = input_params['subset_y'].split(' ')[2]
             out = label+'('+coord
@@ -542,7 +545,7 @@ class wcsClient(object):
             pass
 
 
-        if input_params.has_key('size_x'):
+        if input_params.has_key('size_x') and input_params['size_x'] is not None:
             if input_params['size_x'].startswith('siz'):
                 out = "size="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
@@ -550,7 +553,7 @@ class wcsClient(object):
                 out = "resolution="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
 
-        if input_params.has_key('size_y'):
+        if input_params.has_key('size_y') and input_params['size_y'] is not None:
             if input_params['size_y'].startswith('siz'):
                 out = "size="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
                 input_params['size_y'] = out
@@ -579,17 +582,17 @@ class wcsClient(object):
         """
         join_xml = ''.join(in_xml)
         tree = etree.fromstring(join_xml)
-        tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()", namespaces=namespacemap)
-        #print tag_ids
-
-## TODO - map each axis and crs to the respective coverage, abd show them accordingly to the selection
-
-            # also read out the gml:Envelope axisLabels and srsName - use only first returned entry
-        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=namespacemap)
+        try:
+            tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()", namespaces=tree.nsmap)
+            #print tag_ids
+        except etree.XPathEvalError:
+            raise IndexError
+        
+        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=tree.nsmap)
         #print 'AxisLabels: ', type(axis_labels),len(axis_labels), axis_labels
         axis_labels = axis_labels[0].encode().split(" ")
         #print axis_labels
-        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName", namespaces=namespacemap)
+        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName", namespaces=tree.nsmap)
         offered_crs = os.path.basename(offered_crs[0])
         #print offered_crs
         if len(axis_labels) == 0:
@@ -611,34 +614,40 @@ class wcsClient(object):
             Output: prints out the submitted http_request  or Error_XML in case of failure
         """
       #  print "I'm in "+sys._getframe().f_code.co_name
-        print http_request
+        print 'REQUEST: ',http_request  #@@
 
         try:
-                # access the url
-            request_handle = urllib2.urlopen(http_request)
-                # read the content of the url
-            result_xml = request_handle.read()
+                # create a request object, 
+            request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
+            response = urllib2.urlopen(request_handle)
+            xml_result = response.read()
+            status = response.code 
+            #headers = response.headers.dict
+            #print 'HEADERS ', headers
+            #print 'XML-ResponseStatus: ', status
 
-                ## TODO ## to change the User-agent header --> change the above to the following
-                # create a request object, this construct doesn't need the close-statements (-> line 633 / 633) anymore
-            #request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.6,QgsWcsClient-plugin'})
-            #result_xml = urllib2.urlopen(request_handle).read()
+
 
                 # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
-                cids, axis_labels, offered_crs = self._parse_xml(result_xml)
-                request_handle.close()
-                return cids, axis_labels, offered_crs
+                try:
+                    cids, axis_labels, offered_crs = self._parse_xml(xml_result)
+    #                request_handle.close()
+                    return cids, axis_labels, offered_crs
+                except IndexError:
+                    raise IndexError
             else:
-                request_handle.close()
-                return result_xml
+                return xml_result
 
         except urllib2.URLError, url_ERROR:
             if hasattr(url_ERROR, 'reason'):
-                print '\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -", url_ERROR.reason
+                print '\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -" , url_ERROR.reason
+                err_msg=['ERROR', url_ERROR.read()]
+                return err_msg
 
                 try:
                     print url_ERROR.read(), '\n'
+                    
                 except:
                     pass
 
@@ -669,7 +678,7 @@ class wcsClient(object):
             Returns:  HttpCode (if success)
         """
        # print "I'm in "+sys._getframe().f_code.co_name
-        print http_request
+        print 'REQUEST:', http_request
 
         now = time.strftime('_%Y%m%dT%H%M%S')
 
@@ -689,14 +698,7 @@ class wcsClient(object):
         else:
             out_format_ext = input_params['format']
 
-        #if not (input_params['coverageID'].endswith('tif') or input_params['coverageID'].endswith('tiff') or \
-                #input_params['coverageID'].endswith('jpeg') or input_params['coverageID'].endswith('jpg') or \
-                #input_params['coverageID'].endswith('gif')):
-            #out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
 
-        #else:
-            #out_coverageID = input_params['coverageID']
-#@@
         out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
 
         if input_params.has_key('output') and input_params['output'] is not None:
@@ -704,19 +706,25 @@ class wcsClient(object):
         else:
             outfile = temp_storage+dsep+out_coverageID
 
+            print 'REQUEST-GetCov: ',http_request  #@@
 
         try:
-            request_handle = urllib2.urlopen(http_request)
-            status = request_handle.code
+            request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
+            response = urllib2.urlopen(request_handle)
+            result = response.read()
+            status = response.code 
+            #headers = response.headers.dict
+            #print 'HEADERS ', headers
+            #print 'GCov-Status: ', status
 
             try:
                 file_getcov = open(outfile, 'w+b')
-                file_getcov.write(request_handle.read())
+                file_getcov.write(result)
                 file_getcov.flush()
                 os.fsync(file_getcov.fileno())
                 file_getcov.close()
-                request_handle.close()
                 return status
+
 
             except IOError as (errno, strerror):
                 print "I/O error({0}): {1}".format(errno, strerror)
@@ -756,7 +764,7 @@ class wcsClient(object):
 
         request_dict = {}
         for k, v in input_params.iteritems():
-            #print k,' -- ',v
+            #print 'TTTT: ',  k,' -- ',v
                 # make sure there is always a version set
             if k == 'version' and (v == '' or v == None):
                 v = '2.0.0'
@@ -768,11 +776,10 @@ class wcsClient(object):
                 # (which got inserted for argparse() to handle negativ input values correctly)
             request_dict[k] = str(procedure_dict[k])+str(v).strip()
 
-
             # get the basic request settings
         base_request = self._set_base_request()
         request_dict.update(base_request)
-        #print 'request_dict ',request_dict
+
         return request_dict
 
 
@@ -787,6 +794,7 @@ class wcsClient(object):
       #  print "I'm in "+sys._getframe().f_code.co_name
 
         request_dict = self._merge_dicts(input_params, procedure_dict)
+        #print 'Request_Dict: ', request_dict  #@@
 
             # this doesn't look so nice, but this way I can control the order within the generated request
         http_request = ''

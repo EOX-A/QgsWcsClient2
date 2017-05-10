@@ -5,7 +5,7 @@
                                  A QGIS plugin
  A OGC WCS 2.0/EO-WCS Client
                              -------------------
-        begin                : 2014-06-26
+        begin                : 2014-06-26; 2017-04-10
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
         email                : christian dot schiller at eox dot at
  ***************************************************************************/
@@ -69,14 +69,14 @@ def download_url(manager, url, output_path, progress_dialog=None):
         global xml_result1
         xml_result1.append(reply.readAll().data())
         return xml_result1
- 
+
 
         # request the content of the url
     request = QNetworkRequest(QUrl(url))
     reply = manager.get(request)
-   
+
     #print "EEE: ", reply.error(), reply.errorString(), reply.size()
-    #print "AA1: ", reply.attribute(QNetworkRequest.HttpStatusCodeAttribute)
+    #print "AA1: ", reply.attribute(QNetworkRequest.HttpStatusCodeAttribute), type(reply.attribute(QNetworkRequest.HttpStatusCodeAttribute))
     #print "AA2: ", reply.attribute(QNetworkRequest.HttpReasonPhraseAttribute)
     #print "AA3: ", reply.attribute(QNetworkRequest.RedirectionTargetAttribute)
     #print "=================="
@@ -143,6 +143,12 @@ def download_url(manager, url, output_path, progress_dialog=None):
         QCoreApplication.processEvents()
 
     result = reply.error()
+
+    if reply.attribute(QNetworkRequest.RedirectionTargetAttribute):
+        redir_url = reply.attribute(QNetworkRequest.RedirectionTargetAttribute).toString().split('?')[0]+'?'
+        print 'Redirection-Url:',redir_url, type(redir_url)
+        return True, None, 'Redirection-URL:\t'+redir_url
+
     if result == QNetworkReply.NoError:
         if output_path is None:
             return True, None, xml_result

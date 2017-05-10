@@ -3,7 +3,7 @@
 #
 # A OGC WCS 2.0/EO-WCS Client 
 #                             -------------------
-#        begin                : 2014-06-26
+#        begin                : 2014-06-26; 2017-04-10
 #        copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
 #        email                : christian.schiller@eox.at
 # ***************************************************************************/

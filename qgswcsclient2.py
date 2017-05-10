@@ -5,7 +5,7 @@
                                  A QGIS plugin
  A OGC WCS 2.0/EO-WCS Client
                              -------------------
-        begin                : 2014-06-26
+        begin                : 2014-06-26; 2017-04-10
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
         email                : christian dot schiller at eox dot at
  ***************************************************************************/
@@ -36,19 +36,19 @@
  *********************************************************************************/
  initialisation, etc.  of the QgsWcsClient2 plugin
 """
-# Import the PyQt and QGIS libraries
+    # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
-# Initialize Qt resources from file resources.py
+    # Initialize Qt resources from file resources.py
 import resources_rc
-# Import the code for the dialog(s)
+    # Import the code for the dialog(s)
 from qgswcsclient2dialog import QgsWcsClient2Dialog
 from qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
 from EOxWCSClient.wcs_client  import wcsClient
 import os.path
 
-#global setttings and saved server list
+    # global setttings and saved server list
 global config
 import config
 
@@ -57,10 +57,10 @@ class QgsWcsClient2:
 
     def __init__(self, iface):
         global config
-        # Save reference to the QGIS interface
+            # Save reference to the QGIS interface
         self.iface = iface
 
-        # initialize locale
+            # initialize locale
         locale = QSettings().value("locale/userLocale")[0:2]
         localePath = os.path.join(config.plugin_dir, 'i18n', 'qgswcsclient2_{}.qm'.format(locale))
 
@@ -71,36 +71,37 @@ class QgsWcsClient2:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-        # Create the dialog (after translation) and keep reference
+            # Create the dialog (after translation) and keep reference
         self.dlg = QgsWcsClient2Dialog(iface)
 
+
     def initGui(self):
-        # Create action that will start plugin configuration
+            # Create action that will start plugin configuration
         self.action = QAction(
             QIcon(":/plugins/qgswcsclient2/icon.png"),
-            u"WCS 2.0/EO-WCS Clien", self.iface.mainWindow())
-        # connect the action to the run method
+            u"WCS 2.0/EO-WCS Client", self.iface.mainWindow())
+            # connect the action to the run method
         self.action.triggered.connect(self.run)
 
-        # Add toolbar button and menu item
+            # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(u"&WcsClient2", self.action)
 
     def unload(self):
-        # Remove the plugin menu item and icon
+            # Remove the plugin menu item and icon
         self.iface.removePluginMenu(u"&WcsClient2", self.action)
         self.iface.removeToolBarIcon(self.action)
 
-    # run method that performs all the real work
+        # run method that performs all the real work
     def run(self):
-        # show the dialog
+            # show the dialog
         self.dlg.show()
-        # Run the dialog event loop
+            # Run the dialog event loop
         result = self.dlg.exec_()
-        # See if OK was pressed
+            # See if OK was pressed
         if result == 1:
-            # do something useful (delete the line containing pass and
-            # substitute with your code)
+                # do something useful (delete the line containing pass and
+                # substitute with your code)
             pass
 
 
