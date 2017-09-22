@@ -44,4 +44,6 @@ Added Features & Fixed Bugs:
 - fixed issue with associateing the corresponding axisLabel / CRS etc. with each coverage (once DescribeCoverage is executed for a specific 
     Coverage)
 
+2017-090-22 - version 0.3.1:
+- fixed minor issue with Windows installation of 'config_srvlist.pkl' - due to differernt line endings in Linux/Windows
 

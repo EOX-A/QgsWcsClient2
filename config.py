@@ -67,7 +67,7 @@ def read_srv_list():
     # and an already existing 'config_srvlist.pkl' doesn't get overwritten during the installation
 def chk_srvlist(insrvlst):
     print 'Creating a default Server-list file'
-    f = open(insrvlst,'w')
+    f = open(insrvlst,'wb')
     print >> f, "(dp0"
     print >> f, "S'servers'"
     print >> f, "p1"
