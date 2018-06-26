@@ -297,7 +297,7 @@ class wcsClient(object):
             'subset_lat': '&subset=Lat(',
             'subset_time': '&subset=phenomenonTime(%22',
             'containment': '&containment=',
-            'section': '&section=',
+            'sections': '&sections=',
             'count': '&count=',
             'IDs_only': False}
 
@@ -427,8 +427,8 @@ class wcsClient(object):
                     containment:  Allows to limits the spatial search results. \
                                   [ overlaps (just touching)(=default) | contains (fully within) ]
                     count:        Limits the maximum number of DatasetDescriptions returned
-                    section:      Request one or more section(s) of a DescribeEOCoverageSet Document;
-                                  possible section: [ DatasetSeriesSummary, CoverageSummary, All ]
+                    sections:      Request one or more section(s) of a DescribeEOCoverageSet Document;
+                                  possible sections: [ DatasetSeriesDescription, CoverageDescription, All ]
                 Non-standard Parameters implemented:
                     IDs_only:     Will provide only a listing of the available CoverageIDs;
                                   intended to feed results directly to a GetCoverage request loop [ True | False ]
@@ -587,7 +587,7 @@ class wcsClient(object):
             #print tag_ids
         except etree.XPathEvalError:
             raise IndexError
-        
+
         axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=tree.nsmap)
         #print 'AxisLabels: ', type(axis_labels),len(axis_labels), axis_labels
         axis_labels = axis_labels[0].encode().split(" ")
@@ -617,11 +617,11 @@ class wcsClient(object):
         print 'REQUEST: ',http_request  #@@
 
         try:
-                # create a request object, 
+                # create a request object,
             request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
             response = urllib2.urlopen(request_handle)
             xml_result = response.read()
-            status = response.code 
+            status = response.code
             #headers = response.headers.dict
             #print 'HEADERS ', headers
             #print 'XML-ResponseStatus: ', status
@@ -647,7 +647,7 @@ class wcsClient(object):
 
                 try:
                     print url_ERROR.read(), '\n'
-                    
+
                 except:
                     pass
 
@@ -712,7 +712,7 @@ class wcsClient(object):
             request_handle = urllib2.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
             response = urllib2.urlopen(request_handle)
             result = response.read()
-            status = response.code 
+            status = response.code
             #headers = response.headers.dict
             #print 'HEADERS ', headers
             #print 'GCov-Status: ', status

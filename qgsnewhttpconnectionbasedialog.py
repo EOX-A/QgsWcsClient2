@@ -3,7 +3,7 @@
 /***************************************************************************
  QgsWcsClient2
                                  A QGIS plugin
- A OGC WCS 2.0/EO-WCS Client 
+ A OGC WCS 2.0/EO-WCS Client
                              -------------------
         begin                : 2014-06-26; 2017-04-10
         copyright            : (C) 2014 by Christian Schiller / EOX IT Services GmbH, Vienna, Austria
@@ -52,9 +52,9 @@ srvlst = []
 
 class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
     MSG_BOX_TITLE = "WCS2.0/EO-WCS Client"
-    
+
     def __init__(self, parent, fl, toEdit, choice):
-        QDialog.__init__(self, parent, fl) 
+        QDialog.__init__(self, parent, fl)
         self.toEdit = toEdit
         self.idx_sel = choice
         self.parent = parent
@@ -66,18 +66,21 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
 
     def accept(self):
         global config
-        print 'IDX: ',self.idx_sel
         srvlst = config.srv_list['servers']
         srv_name = self.txt_NewSrvName.text()
         srv_url = self.txt_NewSrvUrl.text()
-        
+
+            # fix to enable changing of url without changing servername
+        if str(self.idx_sel).isdigit():
+            if srv_name == srvlst[self.idx_sel][0] and srv_url != srvlst[self.idx_sel][1]:
+                srv_name +=' '
+
             # verify that URL starts with http://
         if not srv_url.startswith("http://") and not srv_url.startswith("https://"):
             msg = "Sorry, you need to supply a 'Server URL' starting with http://  or https://\n"
             self.warning_msg(msg)
             srv_name = self.txt_NewSrvName.text()
 
-        
         if self.toEdit is False:
             try:
                 idx = zip(*config.srv_list['servers'])[0].index(srv_name)
@@ -88,11 +91,11 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
                     self.warning_msg(msg)
                     srv_name = self.txt_NewSrvName.text()
                     idx = zip(*config.srv_list['servers'])[0].index(srv_name)
-                    
-                    
+
+
             except ValueError:
                 srvlst.append([srv_name, srv_url])
-                
+
         if self.toEdit is True:
             try:
                 idx = zip(*config.srv_list['servers'])[0].index(srv_name)
@@ -108,7 +111,7 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         else:
             msg = "Sorry, the provided 'Server Name' "+str(srv_name)+" or the provided 'Server URL '"+srv_url+" is not valid"
             self.warning_msg(msg)
-            
+
         self.close()
 
 
@@ -119,4 +122,3 @@ class qgsnewhttpconnectionbase(QDialog,  QObject, Ui_qgsnewhttpconnectionbase):
         msgBox.exec_()
 
 
-        

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>824</width>
+    <width>830</width>
     <height>748</height>
    </rect>
   </property>
@@ -878,7 +878,7 @@ only update when newer then:</string>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_20">
          <item>
-          <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,2,4" columnstretch="0,0">
+          <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,2,4,0" columnstretch="0,0">
            <property name="spacing">
             <number>6</number>
            </property>
@@ -936,7 +936,7 @@ only update when newer then:</string>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_DCSDatSerSum">
+                <widget class="QCheckBox" name="checkBox_DCSDatSerDesc">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -944,12 +944,12 @@ only update when newer then:</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>DatasetSeriesSummary</string>
+                  <string>DatasetSeriesDescriptions</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QCheckBox" name="checkBox_DCSCovSum">
+                <widget class="QCheckBox" name="checkBox_DCSCovDesc">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -957,15 +957,28 @@ only update when newer then:</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>CoverageSummary</string>
+                  <string>CoverageDescriptions</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </widget>
+             <widget class="QLabel" name="label_8">
+              <property name="geometry">
+               <rect>
+                <x>95</x>
+                <y>43</y>
+                <width>181</width>
+                <height>17</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>(use only for XML viewing)</string>
+              </property>
+             </widget>
             </widget>
            </item>
-           <item row="2" column="0" colspan="2">
+           <item row="3" column="0" colspan="2">
             <widget class="QGroupBox" name="groupBox_21">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1286,7 +1299,7 @@ Longitude</string>
              </widget>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
+           <item row="1" column="0">
             <widget class="QGroupBox" name="groupBox_12">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -1357,41 +1370,41 @@ Longitude</string>
                    </property>
                    <property name="dateTime">
                     <datetime>
-                     <hour>0</hour>
+                     <hour>22</hour>
                      <minute>59</minute>
                      <second>59</second>
-                     <year>2017</year>
-                     <month>1</month>
-                     <day>1</day>
+                     <year>2016</year>
+                     <month>12</month>
+                     <day>31</day>
                     </datetime>
                    </property>
                    <property name="date">
                     <date>
-                     <year>2017</year>
-                     <month>1</month>
-                     <day>1</day>
+                     <year>2016</year>
+                     <month>12</month>
+                     <day>31</day>
                     </date>
                    </property>
                    <property name="time">
                     <time>
-                     <hour>0</hour>
+                     <hour>22</hour>
                      <minute>59</minute>
                      <second>59</second>
                     </time>
                    </property>
                    <property name="minimumDateTime">
                     <datetime>
-                     <hour>1</hour>
+                     <hour>23</hour>
                      <minute>0</minute>
                      <second>0</second>
                      <year>1899</year>
                      <month>12</month>
-                     <day>31</day>
+                     <day>30</day>
                     </datetime>
                    </property>
                    <property name="maximumTime">
                     <time>
-                     <hour>0</hour>
+                     <hour>22</hour>
                      <minute>59</minute>
                      <second>59</second>
                     </time>
@@ -1423,34 +1436,34 @@ Longitude</string>
                    </property>
                    <property name="dateTime">
                     <datetime>
-                     <hour>1</hour>
+                     <hour>23</hour>
                      <minute>0</minute>
                      <second>0</second>
                      <year>2016</year>
                      <month>12</month>
-                     <day>31</day>
+                     <day>30</day>
                     </datetime>
                    </property>
                    <property name="date">
                     <date>
                      <year>2016</year>
                      <month>12</month>
-                     <day>31</day>
+                     <day>30</day>
                     </date>
                    </property>
                    <property name="minimumDateTime">
                     <datetime>
-                     <hour>1</hour>
+                     <hour>23</hour>
                      <minute>0</minute>
                      <second>0</second>
                      <year>1899</year>
                      <month>12</month>
-                     <day>31</day>
+                     <day>30</day>
                     </datetime>
                    </property>
                    <property name="minimumTime">
                     <time>
-                     <hour>1</hour>
+                     <hour>23</hour>
                      <minute>0</minute>
                      <second>0</second>
                     </time>
@@ -2731,13 +2744,13 @@ p, li { white-space: pre-wrap; }
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Furthermore, also some of the information required for subsetting (e.g. axis names, projection) is only availbale via a dedicated &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeCoverage&lt;/span&gt; request. It therefroe highly recommended to issue &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeCoverage&lt;/span&gt; before you continue to access a Coverage. &lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,helvetica,sans-serif'; font-size:medium; font-weight:600;&quot;&gt;DescribeEOCoverageSet tab&lt;/span&gt;&lt;/p&gt;
 &lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;If one or more DatasetSeriesIDs have been selected in the &amp;quot;Results of GetCapabilities Request&amp;quot; field they will be shown in the &amp;quot;Selections from the GetCapabilities Results&amp;quot; field.	&lt;/li&gt;
-&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;For the &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; response document the following section restrictions are available:&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;For the &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; response document the following sections restrictions are available:&lt;/li&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,helvetica,sans-serif';&quot;&gt;&lt;br /&gt;		&lt;/span&gt;&lt;/p&gt;
 &lt;ul type=&quot;circle&quot; style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;All:   Requests full information (equals to no selections)			&lt;/li&gt;
-&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;DatasetSeriesSummary:   Summary about offered DatasetSeries			&lt;/li&gt;
-&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Coverage Summary:   Summary about offered Coverages		&lt;/li&gt;&lt;/ul&gt;
+&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;DatasetSeriesDescriptions:   Descriptions of the offered DatasetSeries		&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;CoverageDescriptions:   Descriptions of the offered Coverages		&lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,helvetica,sans-serif';&quot;&gt;&lt;br /&gt;	&lt;/span&gt;&lt;/p&gt;
-&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEoCoverageSet&lt;/span&gt; request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 !! coordinates (i.e. long/lat in degrees). To use an AOI just enter the desired coordinate values.	&lt;/li&gt;
+&lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEOCoverageSet&lt;/span&gt; request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 !! coordinates (i.e. long/lat in degrees). To use an AOI just enter the desired coordinate values.	&lt;/li&gt;
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The &lt;span style=&quot; font-style:italic;&quot;&gt;DescribeEoCoverageSet&lt;/span&gt; request can also be limited to a user provided Time of Interest(TOI). The TOI has to be provided in ISO-Format. To activate the use of TOI click the respective check-box and choose the desired Date-Time values. You may modify the /DateTime values also manually. Providing a TOI will limit the returned results to the respective time period.	&lt;/li&gt;
 &lt;li style=&quot; font-family:'arial,helvetica,sans-serif';&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Containment:   This parameter allows to limit the hits according to:&lt;/li&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'arial,helvetica,sans-serif';&quot;&gt;&lt;br /&gt;		&lt;/span&gt;&lt;/p&gt;
@@ -2916,8 +2929,8 @@ p, li { white-space: pre-wrap; }
   <tabstop>spinBox_DCSCount</tabstop>
   <tabstop>checkBox_DCS_ActiveCount</tabstop>
   <tabstop>checkBox_DCSAll</tabstop>
-  <tabstop>checkBox_DCSDatSerSum</tabstop>
-  <tabstop>checkBox_DCSCovSum</tabstop>
+  <tabstop>checkBox_DCSDatSerDesc</tabstop>
+  <tabstop>checkBox_DCSCovDesc</tabstop>
   <tabstop>pushButton_GCov</tabstop>
   <tabstop>btnClose_GCov</tabstop>
   <tabstop>treeWidget_GCov</tabstop>

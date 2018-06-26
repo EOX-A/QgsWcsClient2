@@ -95,7 +95,7 @@ def mouse_busy(function):
         """
         QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
         QApplication.processEvents()
-        
+
         try:
             #function(self)
             return function(*args, **kwargs)
@@ -231,11 +231,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         #sort the server list alphabetically
     def sortServerListing(self):
-        
+
         #print "btnSort_Serv:  here we are sorting...."
         config.srv_list = config.read_srv_list()
         config.srv_list['servers'].sort()
-        
+
         self.write_srv_list()
         self.updateServerListing()
         self.btnConnectServer_Serv.setFocus(True)
@@ -249,6 +249,8 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
         #print "btnUpdateServerListing:  here we are updating the ServerList...."
         serv = []
         config.srv_list = config.read_srv_list()
+        idx = self.cmbConnections_Serv.currentIndex()
+
         for ii in range(len(config.srv_list['servers'])):
             serv.append(config.srv_list['servers'][ii][0][:])
 
@@ -273,13 +275,13 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
     def importQgis_ServList(self):
         global config
         from PyQt4.QtCore import QSettings
-        
+
         #print "btnImport_QgsWcsUrls:  here we are importing the Qgis-WCS ServerList...."
         qgs_settings = QSettings(QSettings.NativeFormat, QSettings.UserScope, 'QGIS', 'QGIS2')
-        
+
         qgis_wcs_urls = []
         for elem in qgs_settings.allKeys():
-            if elem.startswith('Qgis/connections-wcs') and elem.endswith('url'): 
+            if elem.startswith('Qgis/connections-wcs') and elem.endswith('url'):
                 print 'Importing WCS-Url: ', str.rsplit(str(elem),'/',2)[-2], qgs_settings.value(elem)
                 qgis_wcs_urls.append([str.rsplit(str(elem),'/',2)[-2], str(qgs_settings.value(elem))])
 
@@ -566,7 +568,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             # check which additional profiles are offered
             # especially for the "WCS_service-extension_crs/1.0/conf/crs" profile, since this one changes the request syntax
         target_profile = "WCS_service-extension_crs/1.0/conf/crs"
-        profiles = tree1.xpath("ows:ServiceIdentification/ows:Profile/text()", namespaces=tree1.nsmap) 
+        profiles = tree1.xpath("ows:ServiceIdentification/ows:Profile/text()", namespaces=tree1.nsmap)
         res_prof = [x for x in profiles if (target_profile in x)]
 
         if res_prof.__len__() > 0:
@@ -575,7 +577,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         my_nsp = self.get_namespace(tree1.getroottree())
         #print 'MY_NSP: ',my_nsp
-    
+
         interpol = self.getlist_interpol(tree1, my_nsp)
         outcrs = self.getlist_crs(tree1, my_nsp)
         outformat = self.getlist_formats(tree1, my_nsp)
@@ -678,11 +680,11 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
             # issue the WCS request
         GCa_result = self.myWCS.GetCapabilities(req_params)
         #print "GCa_result: ", type(GCa_result), GCa_result[0], GCa_result[1], GCa_result
-        if  type(GCa_result) is list and GCa_result[0] == 'ERROR': 
+        if  type(GCa_result) is list and GCa_result[0] == 'ERROR':
             self.textBrowser_Serv.setText(GCa_result[0]+'\n'+GCa_result[1]+'\n    HINT:  Select only the "All" setting or select none')
             warning_msg(GCa_result[0]+'\n'+GCa_result[1]+'\n    HINT:  Select only the All setting or select none')
             return
-        
+
 
         #print 'RESULT: ',GCa_result
         if req_full_GCa is False:
@@ -755,12 +757,12 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 #---------------
         # parse GetCapabilities XML-response
     def parse_GCa_xml(self, GCa_result):
-        
+
 
         join_xml = ''.join(GCa_result)
         tree = etree.fromstring(join_xml).getroottree()
         nsmap=tree.getroot().nsmap
-        
+
         if len(tree.xpath("wcs:Contents", namespaces=nsmap)) == 0:
             return
 
@@ -920,10 +922,10 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
 
         if self.checkBox_DCSAll.isChecked():
             req_sections.append("All")
-        if self.checkBox_DCSDatSerSum.isChecked():
-            req_sections.append("DatasetSeriesSummary")
-        if self.checkBox_DCSCovSum.isChecked():
-            req_sections.append("CoverageSummary")
+        if self.checkBox_DCSDatSerDesc.isChecked():
+            req_sections.append("DatasetSeriesDescriptions")
+        if self.checkBox_DCSCovDesc.isChecked():
+            req_sections.append("CoverageDescriptions")
 
         req_sections = ','.join(req_sections)
         if len(req_sections) == 0:
@@ -968,7 +970,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 msg="Dates entered: End-Time before Start-Time\nPlease correct the Dates"
                 warning_msg(msg)
                 return
-                
+
             req_toi = str(beginTime.strip()+","+endTime.strip())
         else:
             req_toi = None
@@ -978,7 +980,7 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 # a basic DescribeEOCoverageSet request
             if type(selected_eoid) is list:
                 selected_eoid = ','.join(selected_eoid)
-            
+
             req_params = {'version': offered_version,
                 'request': 'DescribeEOCoverageSet',
                 'server_url': selected_url,
@@ -988,8 +990,9 @@ class QgsWcsClient2Dialog(QtGui.QDialog, Ui_QgsWcsClient2):
                 'subset_time': req_toi,
                 'containment' : req_contain,
                 'count' : req_count,
-                'section' : req_sections,
+                'sections' : req_sections,
                 'IDs_only': req_IDs_only}
+            #print 'req_params: ', req_params
         except NameError:
             msg = "Error:    You need to select an DatasetSeriesID (eoID) first!\n   (see also GetCapabilities TAB)"
             warning_msg(msg)

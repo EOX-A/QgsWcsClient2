@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_qgswcsclient2.ui'
 #
-# Created: Mon Apr 10 15:51:03 2017
+# Created: Fri Jun 22 19:44:12 2018
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_QgsWcsClient2(object):
     def setupUi(self, QgsWcsClient2):
         QgsWcsClient2.setObjectName(_fromUtf8("QgsWcsClient2"))
-        QgsWcsClient2.resize(824, 748)
+        QgsWcsClient2.resize(830, 748)
         self.verticalLayout_6 = QtGui.QVBoxLayout(QgsWcsClient2)
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
         self.tabWidget_EOWcsClient2 = QtGui.QTabWidget(QgsWcsClient2)
@@ -435,22 +435,25 @@ class Ui_QgsWcsClient2(object):
         self.checkBox_DCSAll.setSizePolicy(sizePolicy)
         self.checkBox_DCSAll.setObjectName(_fromUtf8("checkBox_DCSAll"))
         self.horizontalLayout_13.addWidget(self.checkBox_DCSAll)
-        self.checkBox_DCSDatSerSum = QtGui.QCheckBox(self.gridLayoutWidget_5)
+        self.checkBox_DCSDatSerDesc = QtGui.QCheckBox(self.gridLayoutWidget_5)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBox_DCSDatSerSum.sizePolicy().hasHeightForWidth())
-        self.checkBox_DCSDatSerSum.setSizePolicy(sizePolicy)
-        self.checkBox_DCSDatSerSum.setObjectName(_fromUtf8("checkBox_DCSDatSerSum"))
-        self.horizontalLayout_13.addWidget(self.checkBox_DCSDatSerSum)
-        self.checkBox_DCSCovSum = QtGui.QCheckBox(self.gridLayoutWidget_5)
+        sizePolicy.setHeightForWidth(self.checkBox_DCSDatSerDesc.sizePolicy().hasHeightForWidth())
+        self.checkBox_DCSDatSerDesc.setSizePolicy(sizePolicy)
+        self.checkBox_DCSDatSerDesc.setObjectName(_fromUtf8("checkBox_DCSDatSerDesc"))
+        self.horizontalLayout_13.addWidget(self.checkBox_DCSDatSerDesc)
+        self.checkBox_DCSCovDesc = QtGui.QCheckBox(self.gridLayoutWidget_5)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.checkBox_DCSCovSum.sizePolicy().hasHeightForWidth())
-        self.checkBox_DCSCovSum.setSizePolicy(sizePolicy)
-        self.checkBox_DCSCovSum.setObjectName(_fromUtf8("checkBox_DCSCovSum"))
-        self.horizontalLayout_13.addWidget(self.checkBox_DCSCovSum)
+        sizePolicy.setHeightForWidth(self.checkBox_DCSCovDesc.sizePolicy().hasHeightForWidth())
+        self.checkBox_DCSCovDesc.setSizePolicy(sizePolicy)
+        self.checkBox_DCSCovDesc.setObjectName(_fromUtf8("checkBox_DCSCovDesc"))
+        self.horizontalLayout_13.addWidget(self.checkBox_DCSCovDesc)
+        self.label_8 = QtGui.QLabel(self.GroupBox_10)
+        self.label_8.setGeometry(QtCore.QRect(95, 43, 181, 17))
+        self.label_8.setObjectName(_fromUtf8("label_8"))
         self.gridLayout_2.addWidget(self.GroupBox_10, 0, 0, 1, 2)
         self.groupBox_21 = QtGui.QGroupBox(self.tab_DCS)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
@@ -603,7 +606,7 @@ class Ui_QgsWcsClient2(object):
         spacerItem13 = QtGui.QSpacerItem(158, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_12.addItem(spacerItem13)
         self.verticalLayout_18.addLayout(self.horizontalLayout_12)
-        self.gridLayout_2.addWidget(self.groupBox_21, 2, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.groupBox_21, 3, 0, 1, 2)
         self.groupBox_12 = QtGui.QGroupBox(self.tab_DCS)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -637,11 +640,11 @@ class Ui_QgsWcsClient2(object):
         font.setBold(False)
         font.setWeight(50)
         self.dateTimeEdit_DCSEnd.setFont(font)
-        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2017, 1, 1), QtCore.QTime(0, 59, 59)))
-        self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2017, 1, 1))
-        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(0, 59, 59))
-        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1899, 12, 31), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(0, 59, 59))
+        self.dateTimeEdit_DCSEnd.setDateTime(QtCore.QDateTime(QtCore.QDate(2016, 12, 31), QtCore.QTime(22, 59, 59)))
+        self.dateTimeEdit_DCSEnd.setDate(QtCore.QDate(2016, 12, 31))
+        self.dateTimeEdit_DCSEnd.setTime(QtCore.QTime(22, 59, 59))
+        self.dateTimeEdit_DCSEnd.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1899, 12, 30), QtCore.QTime(23, 0, 0)))
+        self.dateTimeEdit_DCSEnd.setMaximumTime(QtCore.QTime(22, 59, 59))
         self.dateTimeEdit_DCSEnd.setCurrentSection(QtGui.QDateTimeEdit.YearSection)
         self.dateTimeEdit_DCSEnd.setCalendarPopup(True)
         self.dateTimeEdit_DCSEnd.setTimeSpec(QtCore.Qt.UTC)
@@ -653,10 +656,10 @@ class Ui_QgsWcsClient2(object):
         font.setWeight(50)
         self.dateTimeEdit_DCSBegin.setFont(font)
         self.dateTimeEdit_DCSBegin.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedKingdom))
-        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2016, 12, 31), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2016, 12, 31))
-        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1899, 12, 31), QtCore.QTime(1, 0, 0)))
-        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(1, 0, 0))
+        self.dateTimeEdit_DCSBegin.setDateTime(QtCore.QDateTime(QtCore.QDate(2016, 12, 30), QtCore.QTime(23, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setDate(QtCore.QDate(2016, 12, 30))
+        self.dateTimeEdit_DCSBegin.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1899, 12, 30), QtCore.QTime(23, 0, 0)))
+        self.dateTimeEdit_DCSBegin.setMinimumTime(QtCore.QTime(23, 0, 0))
         self.dateTimeEdit_DCSBegin.setCalendarPopup(True)
         self.dateTimeEdit_DCSBegin.setTimeSpec(QtCore.Qt.UTC)
         self.dateTimeEdit_DCSBegin.setObjectName(_fromUtf8("dateTimeEdit_DCSBegin"))
@@ -670,7 +673,7 @@ class Ui_QgsWcsClient2(object):
         self.horizontalLayout_7.addLayout(self.gridLayout_3)
         spacerItem15 = QtGui.QSpacerItem(118, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_7.addItem(spacerItem15)
-        self.gridLayout_2.addWidget(self.groupBox_12, 1, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.groupBox_12, 1, 0, 1, 1)
         self.gridLayout_2.setRowStretch(0, 1)
         self.gridLayout_2.setRowStretch(1, 2)
         self.gridLayout_2.setRowStretch(2, 4)
@@ -1285,9 +1288,9 @@ class Ui_QgsWcsClient2(object):
         QgsWcsClient2.setTabOrder(self.radioButton_ContCont, self.spinBox_DCSCount)
         QgsWcsClient2.setTabOrder(self.spinBox_DCSCount, self.checkBox_DCS_ActiveCount)
         QgsWcsClient2.setTabOrder(self.checkBox_DCS_ActiveCount, self.checkBox_DCSAll)
-        QgsWcsClient2.setTabOrder(self.checkBox_DCSAll, self.checkBox_DCSDatSerSum)
-        QgsWcsClient2.setTabOrder(self.checkBox_DCSDatSerSum, self.checkBox_DCSCovSum)
-        QgsWcsClient2.setTabOrder(self.checkBox_DCSCovSum, self.pushButton_GCov)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSAll, self.checkBox_DCSDatSerDesc)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSDatSerDesc, self.checkBox_DCSCovDesc)
+        QgsWcsClient2.setTabOrder(self.checkBox_DCSCovDesc, self.pushButton_GCov)
         QgsWcsClient2.setTabOrder(self.pushButton_GCov, self.btnClose_GCov)
         QgsWcsClient2.setTabOrder(self.btnClose_GCov, self.treeWidget_GCov)
         QgsWcsClient2.setTabOrder(self.treeWidget_GCov, self.lineEdit_GCovMaxLat)
@@ -1376,8 +1379,9 @@ class Ui_QgsWcsClient2(object):
         self.treeWidget_DCS.headerItem().setText(4, _translate("QgsWcsClient2", "LowerCorner [WGS84]", None))
         self.GroupBox_10.setTitle(_translate("QgsWcsClient2", "EOCoverageSet Document - Select Sections:", None))
         self.checkBox_DCSAll.setText(_translate("QgsWcsClient2", "All", None))
-        self.checkBox_DCSDatSerSum.setText(_translate("QgsWcsClient2", "DatasetSeriesSummary", None))
-        self.checkBox_DCSCovSum.setText(_translate("QgsWcsClient2", "CoverageSummary", None))
+        self.checkBox_DCSDatSerDesc.setText(_translate("QgsWcsClient2", "DatasetSeriesDescriptions", None))
+        self.checkBox_DCSCovDesc.setText(_translate("QgsWcsClient2", "CoverageDescriptions", None))
+        self.label_8.setText(_translate("QgsWcsClient2", "(use only for XML viewing)", None))
         self.groupBox_21.setTitle(_translate("QgsWcsClient2", "Area of Interest  (AOI in WGS-84):", None))
         self.label_DCSMaxLat.setText(_translate("QgsWcsClient2", "Max. Latitude", None))
         self.label_DCSMinLon.setText(_translate("QgsWcsClient2", "Min. \n"
@@ -1511,13 +1515,13 @@ class Ui_QgsWcsClient2(object):
 "<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Furthermore, also some of the information required for subsetting (e.g. axis names, projection) is only availbale via a dedicated <span style=\" font-style:italic;\">DescribeCoverage</span> request. It therefroe highly recommended to issue <span style=\" font-style:italic;\">DescribeCoverage</span> before you continue to access a Coverage. </li></ul>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'arial,helvetica,sans-serif\'; font-size:medium; font-weight:600;\">DescribeEOCoverageSet tab</span></p>\n"
 "<ul style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;\"><li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">If one or more DatasetSeriesIDs have been selected in the &quot;Results of GetCapabilities Request&quot; field they will be shown in the &quot;Selections from the GetCapabilities Results&quot; field.    </li>\n"
-"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">For the <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> response document the following section restrictions are available:</li>\n"
+"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">For the <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> response document the following sections restrictions are available:</li>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'arial,helvetica,sans-serif\';\"><br />        </span></p>\n"
 "<ul type=\"circle\" style=\"margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;\"><li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">All:   Requests full information (equals to no selections)            </li>\n"
-"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DatasetSeriesSummary:   Summary about offered DatasetSeries            </li>\n"
-"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Coverage Summary:   Summary about offered Coverages        </li></ul>\n"
+"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">DatasetSeriesDescriptions:   Descriptions of the offered DatasetSeries        </li>\n"
+"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">CoverageDescriptions:   Descriptions of the offered Coverages        </li></ul>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'arial,helvetica,sans-serif\';\"><br />    </span></p>\n"
-"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-style:italic;\">DescribeEoCoverageSet</span> request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 !! coordinates (i.e. long/lat in degrees). To use an AOI just enter the desired coordinate values.    </li>\n"
+"<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-style:italic;\">DescribeEOCoverageSet</span> request can be limited to a user provided Area of Interest (AOI). Here, the AOI always has to be provided in WGS84 !! coordinates (i.e. long/lat in degrees). To use an AOI just enter the desired coordinate values.    </li>\n"
 "<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The <span style=\" font-style:italic;\">DescribeEoCoverageSet</span> request can also be limited to a user provided Time of Interest(TOI). The TOI has to be provided in ISO-Format. To activate the use of TOI click the respective check-box and choose the desired Date-Time values. You may modify the /DateTime values also manually. Providing a TOI will limit the returned results to the respective time period.    </li>\n"
 "<li style=\" font-family:\'arial,helvetica,sans-serif\';\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Containment:   This parameter allows to limit the hits according to:</li>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:1; text-indent:0px;\"><span style=\" font-family:\'arial,helvetica,sans-serif\';\"><br />        </span></p>\n"

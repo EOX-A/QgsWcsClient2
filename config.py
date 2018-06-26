@@ -63,7 +63,7 @@ def read_srv_list():
     return sl
 
 
-    # check if a insrvlst exists if not create a default one; this way we don't need to distrubute a sepaerate file 
+    # check if a insrvlst exists if not create a default one; this way we don't need to distribute a sepaerate file
     # and an already existing 'config_srvlist.pkl' doesn't get overwritten during the installation
 def chk_srvlist(insrvlst):
     print 'Creating a default Server-list file'
