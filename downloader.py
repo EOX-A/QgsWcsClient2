@@ -36,9 +36,11 @@
  *********************************************************************************/
  A donwload tool utilizing the QNetworkAccessManager instance
 """
+from __future__ import print_function
 
-from PyQt4.QtCore import QCoreApplication, QFile, QUrl
-from PyQt4.QtNetwork import QNetworkRequest, QNetworkReply
+from builtins import str
+from qgis.PyQt.QtCore import QCoreApplication, QFile, QUrl
+from qgis.PyQt.QtNetwork import QNetworkRequest, QNetworkReply
 
 
 def download_url(manager, url, output_path, progress_dialog=None):
@@ -65,8 +67,8 @@ def download_url(manager, url, output_path, progress_dialog=None):
         xml_result.append(reply.readAll().data())
 
     def read_data1():
-        xml_result1 = []
         global xml_result1
+        xml_result1 = []
         xml_result1.append(reply.readAll().data())
         return xml_result1
 
@@ -126,6 +128,7 @@ def download_url(manager, url, output_path, progress_dialog=None):
         def progress_event(received, total):
             QCoreApplication.processEvents()
 
+
             progress_dialog.setLabelText("%s / %s" % (received, total))
             progress_dialog.setMaximum(total)
             progress_dialog.setValue(received)
@@ -146,7 +149,9 @@ def download_url(manager, url, output_path, progress_dialog=None):
 
     if reply.attribute(QNetworkRequest.RedirectionTargetAttribute):
         redir_url = reply.attribute(QNetworkRequest.RedirectionTargetAttribute).toString().split('?')[0]+'?'
-        print 'Redirection-Url:',redir_url, type(redir_url)
+        # fix_print_with_import
+        # fix_print_with_import
+        print('Redirection-Url:',redir_url, type(redir_url))
         return True, None, 'Redirection-URL:\t'+redir_url
 
     if result == QNetworkReply.NoError:

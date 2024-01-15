@@ -37,19 +37,21 @@
  a popoup window to display the full-version of XML-Response messages and Error
  as well as Error or other messages
 """
+from __future__ import absolute_import
 
 import os, pickle
-#from PyQt4 import QtCore, QtGui
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from PyQt4 import QtCore, QtGui
-from ui_qgswcsclient2 import Ui_QgsWcsClient2
+#from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from qgis.PyQt import QtCore, QtGui
+from .ui_qgswcsclient2 import Ui_QgsWcsClient2
 # create the dialog for zoom to point
-from  display_txt import Ui_Dialog_Disp
+from .display_txt import Ui_Dialog_Disp
 
 #global setttings and saved server list
 global config
-import config
+from . import config
 
 
 

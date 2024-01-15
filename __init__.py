@@ -36,8 +36,9 @@
  *********************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import absolute_import
 
 def classFactory(iface):
     # load QgsWcsClient2 class from file QgsWcsClient2
-    from qgswcsclient2 import QgsWcsClient2
+    from .qgswcsclient2 import QgsWcsClient2
     return QgsWcsClient2(iface)
