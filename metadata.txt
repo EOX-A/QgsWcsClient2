@@ -9,7 +9,7 @@
 
 [general]
 name = QgsWcsClient2
-qgisMinimumVersion = 2.0
+qgisMinimumVersion = 3.0
 description = A OGC WCS 2.0/EO-WCS Client; a tool to download (and subset in space and time) a time-series of raster data.
 version = version 0.3.2
 

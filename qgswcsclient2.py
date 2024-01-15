@@ -36,24 +36,26 @@
  *********************************************************************************/
  initialisation, etc.  of the QgsWcsClient2 plugin
 """
+from __future__ import absolute_import
     # Import the PyQt and QGIS libraries
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from builtins import object
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 from qgis.core import *
     # Initialize Qt resources from file resources.py
-import resources_rc
     # Import the code for the dialog(s)
-from qgswcsclient2dialog import QgsWcsClient2Dialog
-from qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
-from EOxWCSClient.wcs_client  import wcsClient
+from .qgswcsclient2dialog import QgsWcsClient2Dialog
+from .qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
+from .EOxWCSClient.wcs_client  import wcsClient
 import os.path
 
     # global setttings and saved server list
 global config
-import config
+from . import config
 
 
-class QgsWcsClient2:
+class QgsWcsClient2(object):
 
     def __init__(self, iface):
         global config

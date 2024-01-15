@@ -36,6 +36,7 @@
  *********************************************************************************/
 configuration for the QgsWcsClient2 plugin
 """
+from __future__ import print_function
 
 # some global setttings
 settings = {}
@@ -66,23 +67,54 @@ def read_srv_list():
     # check if a insrvlst exists if not create a default one; this way we don't need to distribute a sepaerate file
     # and an already existing 'config_srvlist.pkl' doesn't get overwritten during the installation
 def chk_srvlist(insrvlst):
-    print 'Creating a default Server-list file'
-    f = open(insrvlst,'wb')
-    print >> f, "(dp0"
-    print >> f, "S'servers'"
-    print >> f, "p1"
-    print >> f, "(lp2"
-    print >> f, "(lp3"
-    print >> f, "VOGC: WCS 2.0/EO-WCS 1.0 - Reference Implemetation (EOxServer)"
-    print >> f, "p4"
-    print >> f, "aVhttp://ows.eox.at/cite/eoxserver/ows?"
-    print >> f, "p5"
-    print >> f, "aa(lp6"
-    print >> f, "VOGC: WCS 2.0 - Reference Implementation (MapServer)"
-    print >> f, "p7"
-    print >> f, "aVhttp://ows.eox.at/cite/mapserver/ows?"
-    print >> f, "p8"
-    print >> f, "aas.",
+    # fix_print_with_import
+    print('Creating a default Server-list file')
+    f = open(insrvlst,'w')
+    # fix_print_with_import
+    # fix_print_with_import
+    print("(dp0", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("S'servers'", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("p1", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("(lp2", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("(lp3", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("VOGC: WCS 2.0/EO-WCS 1.0 - Reference Implemetation (EOxServer)", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("p4", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("aVhttp://ows.eox.at/cite/eoxserver/ows?", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("p5", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("aa(lp6", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("VOGC: WCS 2.0 - Reference Implementation (MapServer)", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("p7", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("aVhttp://ows.eox.at/cite/mapserver/ows?", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("p8", file=f)
+    # fix_print_with_import
+    # fix_print_with_import
+    print("aas.", end=' ', file=f)
     f.close()
 
 
