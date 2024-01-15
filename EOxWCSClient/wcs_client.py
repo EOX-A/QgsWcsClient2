@@ -72,7 +72,6 @@
 from __future__ import print_function
 
 from future import standard_library
-
 standard_library.install_aliases()
 from builtins import str
 from builtins import object
@@ -80,21 +79,22 @@ import sys
 import os
 import time, datetime
 import urllib.request, urllib.error, urllib.parse, socket
-# from xml.dom import minidom
+#from xml.dom import minidom
 from lxml import etree
 
 global __version__
 __version__ = '0.1'
 
-# check for OS Platform and set the Directory-Separator to be used
+    # check for OS Platform and set the Directory-Separator to be used
 global dsep
 dsep = os.sep
 
-# sets the url where epsg CRSs are defined/referenced
+    # sets the url where epsg CRSs are defined/referenced
 global crs_url
 crs_url = 'http://www.opengis.net/def/crs/EPSG/0/'
 
-# sets a storage location in case the user doesn't provide one (to be on the save side) - eg. for error msgs.
+
+    # sets a storage location in case the user doesn't provide one (to be on the save side) - eg. for error msgs.
 global temp_storage
 temp_storage = None
 try_dir = ['TMP', 'TEMP', 'HOME', 'USER']
@@ -105,12 +105,14 @@ for elem in try_dir:
 
 if temp_storage is None:
     cur_dir = os.getcwd()
-    temp_storage = cur_dir  # +'/tmp'
+    temp_storage = cur_dir # +'/tmp'
 
 
-# /************************************************************************/
-# /*                              wcsClient()                             */
-# /************************************************************************/
+
+
+#/************************************************************************/
+#/*                              wcsClient()                             */
+#/************************************************************************/
 
 class wcsClient(object):
     """
@@ -155,16 +157,19 @@ class wcsClient(object):
         Detailed description of parameters associated with each Request are
         porvided with the respective request
     """
-    # default timeout for all sockets (in case a requests hangs)
+        # default timeout for all sockets (in case a requests hangs)
     _timeout = 180
     socket.setdefaulttimeout(_timeout)
+
+
 
     def __init__(self):
         pass
 
-    # /************************************************************************/
-    # /*                       _valid_time_wrapper()                           */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                       _valid_time_wrapper()                           */
+    #/************************************************************************/
 
     def _valid_time_wrapper(self, indate_list):
         """
@@ -177,7 +182,7 @@ class wcsClient(object):
            Returns:  a 2-element list of ISO-8601 formated dates
            Error:  if either, date is not valid or not in ISO-8601 format
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
         outdate = []
         for d in indate_list:
@@ -189,15 +194,15 @@ class wcsClient(object):
             fmonth = int(outdate[0][5:7])
             fday = int(outdate[0][8:10])
             time_stamp = datetime.datetime(day=fday, month=fmonth, year=fyear)
-            difference = time_stamp + datetime.timedelta(days=1)
-            to_date = '%.4d-%.2d-%.2d' % (difference.year, difference.month, difference.day)
+            difference = time_stamp+datetime.timedelta(days=1)
+            to_date = '%.4d-%.2d-%.2d' %  (difference.year, difference.month, difference.day)
             outdate.append(to_date)
 
         return outdate
 
-    # /************************************************************************/
-    # /*                          _validate_date()                            */
-    # /************************************************************************/
+    #/************************************************************************/
+    #/*                          _validate_date()                            */
+    #/************************************************************************/
 
     def _validate_date(self, indate):
         """
@@ -206,14 +211,15 @@ class wcsClient(object):
             _validate_date() is not intended to be called directly, only through the
             _valid_time_wrapper() function.
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
         if indate.endswith('Z'):
             testdate = indate[:-1]
         else:
             testdate = indate
             if len(indate) == 16 or len(indate) == 19:
-                indate = indate + 'Z'
+                indate = indate+'Z'
+
 
         dateformat = ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%dT%H:%M", "%Y-%m-%dT%H", "%Y-%m-%dT", "%Y-%m-%d"]
 
@@ -227,111 +233,115 @@ class wcsClient(object):
                 try:
                     cnt = next(dformat)
                 except StopIteration:
-                    raise ValueError("Could not parse date - either date not valid or date not in ISO-8601 format : ",
-                                     testdate)
+                    raise ValueError("Could not parse date - either date not valid or date not in ISO-8601 format : ", testdate)
 
-    # /************************************************************************/
-    # /*                           _set_base_request()                        */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                           _set_base_request()                        */
+    #/************************************************************************/
     def _set_base_request(self):
         """
             Returns the basic url components for any valid WCS request
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
         base_request = {'service': 'service=WCS'}
 
         return base_request
 
-    # /************************************************************************/
-    # /*                            _set_base_cap()                           */
-    # /************************************************************************/
+    #/************************************************************************/
+    #/*                            _set_base_cap()                           */
+    #/************************************************************************/
     def _set_base_cap(self):
         """
             Returns the basic url components for a valid GetCapabilities request
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
         base_cap = {'request': '&request=',
-                    'server_url': '',
-                    'updateSequence': '&updateSequence=',
-                    'sections': '&sections='}
+            'server_url': '',
+            'updateSequence': '&updateSequence=',
+            'sections' :'&sections='}
 
         return base_cap
 
-    # /************************************************************************/
-    # /*                            _set_base_desccov()                       */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                            _set_base_desccov()                       */
+    #/************************************************************************/
     def _set_base_desccov(self):
         """
             Returns the basic urls components for a valid DescribeCoverage Request
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
         base_desccov = {'version': '&version=',
-                        'request': '&request=',
-                        'server_url': '',
-                        'coverageID': '&coverageID='}
+            'request': '&request=',
+            'server_url': '',
+            'coverageID': '&coverageID='}
 
         return base_desccov
 
-    # /************************************************************************/
-    # /*                             _set_set_base_desceocovset()              */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                             _set_set_base_desceocovset()              */
+    #/************************************************************************/
     def _set_base_desceocoverageset(self):
         """
             Returns the basic urls components for a valid DescribeEOCoverageSet Request
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
         base_desceocoverageset = {'version': '&version=',
-                                  'request': '&request=',
-                                  'server_url': '',
-                                  'eoID': '&eoID=',
-                                  #            'subset_lon': '&subset=Long,'+crs_url+'4326(', #@@
-                                  #            'subset_lat': '&subset=Lat,'+crs_url+'4326(',  #@@
-                                  'subset_lon': '&subset=Long(',
-                                  'subset_lat': '&subset=Lat(',
-                                  'subset_time': '&subset=phenomenonTime(%22',
-                                  'containment': '&containment=',
-                                  'sections': '&sections=',
-                                  'count': '&count=',
-                                  'IDs_only': False}
+            'request': '&request=',
+            'server_url': '',
+            'eoID': '&eoID=',
+#            'subset_lon': '&subset=Long,'+crs_url+'4326(', #@@
+#            'subset_lat': '&subset=Lat,'+crs_url+'4326(',  #@@
+            'subset_lon': '&subset=Long(',
+            'subset_lat': '&subset=Lat(',
+            'subset_time': '&subset=phenomenonTime(%22',
+            'containment': '&containment=',
+            'sections': '&sections=',
+            'count': '&count=',
+            'IDs_only': False}
 
-        # print "base_desceocoverageset", base_desceocoverageset
+        #print "base_desceocoverageset", base_desceocoverageset
         return base_desceocoverageset
 
-    # /************************************************************************/
-    # /*                             _set_base_getcov()                        */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                             _set_base_getcov()                        */
+    #/************************************************************************/
     def _set_base_getcov(self):
         """
            Rreturns the basic urls components for a GetCoverage Request
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
         getcov_dict = {'version': '&version=',
-                       'request': '&request=',
-                       'server_url': '',
-                       'coverageID': '&coverageid=',
-                       'format': '&format=',
-                       'subset_x': '&subset=',
-                       'subset_y': '&subset=',
-                       'rangesubset': '&rangesubset=',
-                       'outputcrs': '&outputcrs=' + crs_url,
-                       'interpolation': '&interpolation=',  # @@
-                       #            'interpolation': '&interpolation=nearest-neighbour',  #@@
-                       'mediatype': '&mediatype=',
-                       'mask': '&mask=polygon,' + crs_url,
-                       'size_x': '&',
-                       'size_y': '&',
-                       'output': None}
+            'request': '&request=',
+            'server_url': '',
+            'coverageID': '&coverageid=',
+            'format': '&format=',
+            'subset_x': '&subset=',
+            'subset_y': '&subset=',
+            'rangesubset': '&rangesubset=',
+            'outputcrs': '&outputcrs='+crs_url,
+            'interpolation': '&interpolation=',     #@@
+#            'interpolation': '&interpolation=nearest-neighbour',  #@@
+            'mediatype': '&mediatype=',
+            'mask': '&mask=polygon,'+crs_url,
+            'size_x': '&',
+            'size_y': '&',
+            'output': None}
 
         return getcov_dict
 
-    # /************************************************************************/
-    # /*                           GetCapabilities()                          */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                           GetCapabilities()                          */
+    #/************************************************************************/
     def GetCapabilities(self, input_params):
         """
             Creates a GetCapabilitiy request url based on the input_parameters
@@ -354,7 +364,7 @@ class wcsClient(object):
                                'sections' : 'CoverageSummary' }
             Returns:  XML GetCapabilities resonse
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
         if 'updateSequence' in input_params and input_params['updateSequence'] is not None:
             res_in = self._valid_time_wrapper(list(input_params.get('updateSequence').split(',')))
@@ -366,9 +376,10 @@ class wcsClient(object):
 
         return result_xml
 
-    # /************************************************************************/
-    # /*                           DescribeCoverage()                         */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                           DescribeCoverage()                         */
+    #/************************************************************************/
     def DescribeCoverage(self, input_params):
         """
             Creates a DescribeCoverage request url based on the input_parameters
@@ -387,7 +398,7 @@ class wcsClient(object):
                                'coverageID': 'some_Coverage_ID_yxyxyx_yxyxyx' }
             Returns:   XML DescribeCoverage response
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
         procedure_dict = self._set_base_desccov()
 
@@ -396,9 +407,10 @@ class wcsClient(object):
 
         return result_xml
 
-    # /************************************************************************/
-    # /*                          DescribeEOCoverageSet()                     */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                          DescribeEOCoverageSet()                     */
+    #/************************************************************************/
     def DescribeEOCoverageSet(self, input_params):
         """
             Creates a DescribeEOCoverageSet request url based on the input_parameters
@@ -435,9 +447,9 @@ class wcsClient(object):
                               'IDs_only': True }
             Returns:    XML DescribeEOCoverageSet response  or  only a list of available coverageIDs
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
 
-        # validate that the provided date/time stings are in ISO8601
+            # validate that the provided date/time stings are in ISO8601
         if 'subset_time' in input_params and input_params['subset_time'] is not None:
             res_in = self._valid_time_wrapper(list(input_params.get('subset_time').split(',')))
             input_params['subset_time'] = ','.join(res_in)
@@ -452,9 +464,10 @@ class wcsClient(object):
             result_list = wcsClient._execute_xml_request(self, http_request)
             return result_list
 
-    # /************************************************************************/
-    # /*                              GetCoverage()                           */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                              GetCoverage()                           */
+    #/************************************************************************/
 
     def GetCoverage(self, input_params, use_wcs_GCo_call):
         """
@@ -502,59 +515,57 @@ class wcsClient(object):
                                  Syntax:  epsg:xxxx lat1,lon1,lat2,lon2, lat3,lon3,lat1,lon1
                                  e.g.  epsg:4326 42,10,43,12,39,13,38,9,42,10'
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
-        # provide the same functionality for input as for the cmd-line
-        # (to get around the url-notation for input)
-        if 'subset_x' in input_params and input_params['subset_x'] is not None and input_params['subset_x'].startswith(
-                'epsg'):
+            # provide the same functionality for input as for the cmd-line
+            # (to get around the url-notation for input)
+        if 'subset_x' in input_params and input_params['subset_x'] is not None and input_params['subset_x'].startswith('epsg') :
             crs = input_params['subset_x'].split(':')[1].split(' ')[0]
             label = input_params['subset_x'].split(':')[1].split(' ')[1]
             coord = input_params['subset_x'].split(':')[1].split(' ')[2]
-            #            out = label+','+crs_url+crs+'('+coord   #@@
-            out = label + '(' + coord
+#            out = label+','+crs_url+crs+'('+coord   #@@
+            out = label+'('+coord
             input_params['subset_x'] = out
-        elif 'subset_x' in input_params and input_params['subset_x'] is not None and (
-                input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori')):
+        elif 'subset_x' in input_params and input_params['subset_x'] is not None and (input_params['subset_x'].startswith('pix') or input_params['subset_x'].startswith('ori')):
             label = input_params['subset_x'].split(' ')[1]
             coord = input_params['subset_x'].split(' ')[2]
-            out = label + '(' + coord
+            out = label+'('+coord
             input_params['subset_x'] = out
         else:
             pass
 
-        if 'subset_y' in input_params and input_params['subset_y'] is not None and input_params['subset_y'].startswith(
-                'epsg'):
+        if 'subset_y' in input_params and input_params['subset_y'] is not None and input_params['subset_y'].startswith('epsg'):
             crs = input_params['subset_y'].split(':')[1].split(' ')[0]
             label = input_params['subset_y'].split(':')[1].split(' ')[1]
             coord = input_params['subset_y'].split(':')[1].split(' ')[2]
-            #            out = label+','+crs_url+crs+'('+coord  #@@
-            out = label + '(' + coord
+#            out = label+','+crs_url+crs+'('+coord  #@@
+            out = label+'('+coord
             input_params['subset_y'] = out
-        elif 'subset_y' in input_params and input_params['subset_y'] is not None and (
-                input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori')):
+        elif 'subset_y' in input_params and input_params['subset_y'] is not None and (input_params['subset_y'].startswith('pix') or input_params['subset_y'].startswith('ori')):
             label = input_params['subset_y'].split(' ')[1]
             coord = input_params['subset_y'].split(' ')[2]
-            out = label + '(' + coord
+            out = label+'('+coord
             input_params['subset_y'] = out
         else:
             pass
 
+
         if 'size_x' in input_params and input_params['size_x'] is not None:
             if input_params['size_x'].startswith('siz'):
-                out = "size=" + input_params['size_x'].split(" ")[1] + "(" + input_params['size_x'].split(" ")[2]
+                out = "size="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
             elif input_params['size_x'].startswith('res'):
-                out = "resolution=" + input_params['size_x'].split(" ")[1] + "(" + input_params['size_x'].split(" ")[2]
+                out = "resolution="+input_params['size_x'].split(" ")[1]+"("+input_params['size_x'].split(" ")[2]
                 input_params['size_x'] = out
 
         if 'size_y' in input_params and input_params['size_y'] is not None:
             if input_params['size_y'].startswith('siz'):
-                out = "size=" + input_params['size_y'].split(" ")[1] + "(" + input_params['size_y'].split(" ")[2]
+                out = "size="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
                 input_params['size_y'] = out
             elif input_params['size_y'].startswith('res'):
-                out = "resolution=" + input_params['size_y'].split(" ")[1] + "(" + input_params['size_y'].split(" ")[2]
+                out = "resolution="+input_params['size_y'].split(" ")[1]+"("+input_params['size_y'].split(" ")[2]
                 input_params['size_y'] = out
+
 
         procedure_dict = self._set_base_getcov()
         http_request = self._create_request(input_params, procedure_dict)
@@ -563,9 +574,10 @@ class wcsClient(object):
 
         return result
 
-    # /************************************************************************/
-    # /*                             parse_xml()                              */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                             parse_xml()                              */
+    #/************************************************************************/
     def _parse_xml(self, in_xml):
         """
             Function to parse the request results of a DescribeEOCoverageSet
@@ -576,23 +588,18 @@ class wcsClient(object):
         join_xml = ''.join(in_xml)
         tree = etree.fromstring(join_xml)
         try:
-            tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()",
-                                 namespaces=tree.nsmap)
-            # print tag_ids
+            tag_ids = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/wcs:CoverageId/text()", namespaces=tree.nsmap)
+            #print tag_ids
         except etree.XPathEvalError:
             raise IndexError
 
-        axis_labels = tree.xpath(
-            "wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels",
-            namespaces=tree.nsmap)
-        # print 'AxisLabels: ', type(axis_labels),len(axis_labels), axis_labels
+        axis_labels = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@axisLabels|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@axisLabels", namespaces=tree.nsmap)
+        #print 'AxisLabels: ', type(axis_labels),len(axis_labels), axis_labels
         axis_labels = axis_labels[0].encode().split(" ")
-        # print axis_labels
-        offered_crs = tree.xpath(
-            "wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName",
-            namespaces=tree.nsmap)
+        #print axis_labels
+        offered_crs = tree.xpath("wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:Envelope/@srsName|wcs:CoverageDescriptions/wcs:CoverageDescription/gml:boundedBy/gml:EnvelopeWithTimePeriod/@srsName", namespaces=tree.nsmap)
         offered_crs = os.path.basename(offered_crs[0])
-        # print offered_crs
+        #print offered_crs
         if len(axis_labels) == 0:
             axis_labels = ["", ""]
         if len(offered_crs) == 0:
@@ -600,9 +607,10 @@ class wcsClient(object):
 
         return tag_ids, axis_labels[0:2], offered_crs
 
-    # /************************************************************************/
-    # /*                         _execute_xml_request()                       */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                         _execute_xml_request()                       */
+    #/************************************************************************/
     def _execute_xml_request(self, http_request, IDs_only=False):
         """
             Executes the GetCapabilities, DescribeCoverage, DescribeEOCoverageSet
@@ -610,27 +618,28 @@ class wcsClient(object):
             Returns:  either XML response document  or  a list of coverageIDs
             Output: prints out the submitted http_request  or Error_XML in case of failure
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
         # fix_print_with_import
         # fix_print_with_import
-        print('REQUEST: ', http_request)  # @@
+        print('REQUEST: ',http_request)  #@@
 
         try:
-            # create a request object,
-            request_handle = urllib.request.Request(http_request,
-                                                    headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
+                # create a request object,
+            request_handle = urllib.request.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
             response = urllib.request.urlopen(request_handle)
             xml_result = response.read()
             status = response.code
-            # headers = response.headers.dict
-            # print 'HEADERS ', headers
-            # print 'XML-ResponseStatus: ', status
+            #headers = response.headers.dict
+            #print 'HEADERS ', headers
+            #print 'XML-ResponseStatus: ', status
 
-            # extract only the CoverageIDs and provide them as a list for further usage
+
+
+                # extract only the CoverageIDs and provide them as a list for further usage
             if IDs_only == True:
                 try:
                     cids, axis_labels, offered_crs = self._parse_xml(xml_result)
-                    #                request_handle.close()
+    #                request_handle.close()
                     return cids, axis_labels, offered_crs
                 except IndexError:
                     raise IndexError
@@ -640,8 +649,8 @@ class wcsClient(object):
         except urllib.error.URLError as url_ERROR:
             if hasattr(url_ERROR, 'reason'):
                 # fix_print_with_import
-                print('\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -", url_ERROR.reason)
-                err_msg = ['ERROR', url_ERROR.read()]
+                print('\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -" , url_ERROR.reason)
+                err_msg=['ERROR', url_ERROR.read()]
                 return err_msg
 
                 try:
@@ -653,17 +662,16 @@ class wcsClient(object):
 
             elif hasattr(url_ERROR, 'code'):
                 # fix_print_with_import
-                print(time.strftime("%Y-%m-%dT%H:%M:%S%Z"),
-                      "- ERROR:  The server couldn\'t fulfill the request - Code returned:  ", url_ERROR.code,
-                      url_ERROR.read())
-                err_msg = str(url_ERROR.code) + '--' + url_ERROR.read()
+                print(time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  The server couldn\'t fulfill the request - Code returned:  ", url_ERROR.code, url_ERROR.read())
+                err_msg = str(url_ERROR.code)+'--'+url_ERROR.read()
                 return err_msg
 
         return
 
-    # /************************************************************************/
-    # /*                     _execute_getcov_request()                        */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                     _execute_getcov_request()                        */
+    #/************************************************************************/
 
     def _execute_getcov_request(self, http_request, input_params):
         """
@@ -679,14 +687,14 @@ class wcsClient(object):
                     saves Error-XML (-> access_error_"TimeStamp".xml) at output location (in case of failure)
             Returns:  HttpCode (if success)
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+       # print "I'm in "+sys._getframe().f_code.co_name
         # fix_print_with_import
         # fix_print_with_import
         print('REQUEST:', http_request)
 
         now = time.strftime('_%Y%m%dT%H%M%S')
 
-        # set some common extension to a more 'useful' type
+            # set some common extension to a more 'useful' type
         if input_params['format'].find('/') != -1:
             out_format_ext = os.path.basename(input_params['format'])
             if out_format_ext == "tiff":
@@ -702,26 +710,26 @@ class wcsClient(object):
         else:
             out_format_ext = input_params['format']
 
-        out_coverageID = input_params['coverageID'] + now + '.' + out_format_ext  # input_params['format']
+
+        out_coverageID = input_params['coverageID']+now+'.'+out_format_ext  # input_params['format']
 
         if 'output' in input_params and input_params['output'] is not None:
-            outfile = input_params['output'] + dsep + out_coverageID
+            outfile = input_params['output']+dsep+out_coverageID
         else:
-            outfile = temp_storage + dsep + out_coverageID
+            outfile = temp_storage+dsep+out_coverageID
 
             # fix_print_with_import
             # fix_print_with_import
-            print('REQUEST-GetCov: ', http_request)  # @@
+            print('REQUEST-GetCov: ',http_request)  #@@
 
         try:
-            request_handle = urllib.request.Request(http_request,
-                                                    headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
+            request_handle = urllib.request.Request(http_request, headers={'User-Agent': 'Python-urllib/2.7,QgsWcsClient-plugin'})
             response = urllib.request.urlopen(request_handle)
             result = response.read()
             status = response.code
-            # headers = response.headers.dict
-            # print 'HEADERS ', headers
-            # print 'GCov-Status: ', status
+            #headers = response.headers.dict
+            #print 'HEADERS ', headers
+            #print 'GCov-Status: ', status
 
             try:
                 file_getcov = open(outfile, 'w+b')
@@ -746,38 +754,37 @@ class wcsClient(object):
             if hasattr(url_ERROR, 'reason'):
                 # fix_print_with_import
                 print('\n', time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  Server not accessible -", url_ERROR.reason)
-                # write out the servers return msg
-                errfile = outfile.rpartition(dsep)[0] + dsep + 'access_error' + now + '.xml'
+                    # write out the servers return msg
+                errfile = outfile.rpartition(dsep)[0]+dsep+'access_error'+now+'.xml'
                 access_err = open(errfile, 'w+b')
                 access_err.write(url_ERROR.read())
                 access_err.flush()
                 access_err.close()
             elif hasattr(url_ERROR, 'code'):
                 # fix_print_with_import
-                print(time.strftime("%Y-%m-%dT%H:%M:%S%Z"),
-                      "- ERROR:  The server couldn\'t fulfill the request - Code returned:  ", url_ERROR.code,
-                      url_ERROR.read())
-                err_msg = str(url_ERROR.code) + '--' + url_ERROR.read()
+                print(time.strftime("%Y-%m-%dT%H:%M:%S%Z"), "- ERROR:  The server couldn\'t fulfill the request - Code returned:  ", url_ERROR.code, url_ERROR.read())
+                err_msg = str(url_ERROR.code)+'--'+url_ERROR.read()
                 return err_msg
         except TypeError:
             pass
 
-        return  # status
+        return #status
 
-    # /************************************************************************/
-    # /*                              _merge_dicts()                           */
-    # /************************************************************************/
+
+    #/************************************************************************/
+    #/*                              _merge_dicts()                           */
+    #/************************************************************************/
     def _merge_dicts(self, input_params, procedure_dict):
         """
             Merge and harmonize the input_params-dict with the required request-dict
             e.g. the base_getcov-dict
         """
-        # print "I'm in "+sys._getframe().f_code.co_name
+        #print "I'm in "+sys._getframe().f_code.co_name
 
         request_dict = {}
         for k, v in input_params.items():
-            # print 'TTTT: ',  k,' -- ',v
-            # make sure there is always a version set
+            #print 'TTTT: ',  k,' -- ',v
+                # make sure there is always a version set
             if k == 'version' and (v == '' or v == None):
                 v = '2.0.0'
                 # skip all keys with None or True values
@@ -786,7 +793,7 @@ class wcsClient(object):
 
                 # create the request-dictionary but ensure there are no whitespaces left
                 # (which got inserted for argparse() to handle negativ input values correctly)
-            request_dict[k] = str(procedure_dict[k]) + str(v).strip()
+            request_dict[k] = str(procedure_dict[k])+str(v).strip()
 
             # get the basic request settings
         base_request = self._set_base_request()
@@ -794,72 +801,80 @@ class wcsClient(object):
 
         return request_dict
 
-    # /************************************************************************/
-    # /*                               _create_request()                      */
-    # /************************************************************************/
+
+
+    #/************************************************************************/
+    #/*                               _create_request()                      */
+    #/************************************************************************/
     def _create_request(self, input_params, procedure_dict):
         """
             Create the http-request according to the user selected Request-type
         """
-        #  print "I'm in "+sys._getframe().f_code.co_name
+      #  print "I'm in "+sys._getframe().f_code.co_name
 
         request_dict = self._merge_dicts(input_params, procedure_dict)
-        # print 'Request_Dict: ', request_dict  #@@
+        #print 'Request_Dict: ', request_dict  #@@
 
-        # this doesn't look so nice, but this way I can control the order within the generated request
+            # this doesn't look so nice, but this way I can control the order within the generated request
         http_request = ''
         if 'server_url' in request_dict:
-            http_request = http_request + request_dict.get('server_url')
+            http_request = http_request+request_dict.get('server_url')
         if 'service' in request_dict:
-            http_request = http_request + request_dict.get('service')
+            http_request = http_request+request_dict.get('service')
         if 'version' in request_dict:
-            http_request = http_request + request_dict.get('version')
+            http_request = http_request+request_dict.get('version')
         if 'request' in request_dict:
-            http_request = http_request + request_dict.get('request')
+            http_request = http_request+request_dict.get('request')
         if 'coverageID' in request_dict:
-            http_request = http_request + request_dict.get('coverageID')
+            http_request = http_request+request_dict.get('coverageID')
         if 'subset_x' in request_dict:
-            http_request = http_request + request_dict.get('subset_x') + ')'
+            http_request = http_request+request_dict.get('subset_x')+')'
         if 'subset_y' in request_dict:
-            http_request = http_request + request_dict.get('subset_y') + ')'
+            http_request = http_request+request_dict.get('subset_y')+')'
         if 'format' in request_dict:
-            http_request = http_request + request_dict.get('format')
+            http_request = http_request+request_dict.get('format')
         if 'rangesubset' in request_dict:
-            http_request = http_request + request_dict.get('rangesubset')
+            http_request = http_request+request_dict.get('rangesubset')
         if 'outputcrs' in request_dict:
-            http_request = http_request + request_dict.get('outputcrs')
+            http_request = http_request+request_dict.get('outputcrs')
         if 'interpolation' in request_dict:
-            http_request = http_request + request_dict.get('interpolation')
+            http_request = http_request+request_dict.get('interpolation')
         if 'mediatype' in request_dict:
-            http_request = http_request + request_dict.get('mediatype')
+            http_request = http_request+request_dict.get('mediatype')
         if 'size_x' in request_dict:
-            http_request = http_request + request_dict.get('size_x') + ')'
+            http_request = http_request+request_dict.get('size_x')+')'
         if 'size_y' in request_dict:
-            http_request = http_request + request_dict.get('size_y') + ')'
+            http_request = http_request+request_dict.get('size_y')+')'
         if 'mask' in request_dict:
-            http_request = http_request + request_dict.get('mask') + ')'
+            http_request = http_request+request_dict.get('mask')+')'
         if 'updateSequence' in request_dict:
-            http_request = http_request + request_dict.get('updateSequence')
+            http_request = http_request+request_dict.get('updateSequence')
         if 'sections' in request_dict:
-            http_request = http_request + request_dict.get('sections')
+            http_request = http_request+request_dict.get('sections')
         if 'eoID' in request_dict:
-            http_request = http_request + request_dict.get('eoID')
+            http_request = http_request+request_dict.get('eoID')
         if 'subset_lat' in request_dict:
-            http_request = http_request + request_dict.get('subset_lat') + ')'
+            http_request = http_request+request_dict.get('subset_lat')+')'
         if 'subset_lon' in request_dict:
-            http_request = http_request + request_dict.get('subset_lon') + ')'
+            http_request = http_request+request_dict.get('subset_lon')+')'
         if 'subset_time' in request_dict:
-            http_request = http_request + request_dict.get('subset_time').split(',')[0] \
-                           + '%22,%22' + request_dict.get('subset_time').split(',')[1] + '%22)'
+            http_request = http_request+request_dict.get('subset_time').split(',')[0] \
+                +'%22,%22'+request_dict.get('subset_time').split(',')[1]+'%22)'
         if 'containment' in request_dict:
-            http_request = http_request + request_dict.get('containment')
+            http_request = http_request+request_dict.get('containment')
         if 'section' in request_dict:
-            http_request = http_request + request_dict.get('section')
+            http_request = http_request+request_dict.get('section')
         if 'count' in request_dict:
-            http_request = http_request + request_dict.get('count')
+            http_request = http_request+request_dict.get('count')
+
 
         return http_request
 
-# /************************************************************************/
+
+#/************************************************************************/
 # /*            END OF:        wcs_Client()                              */
-# /************************************************************************/
+#/************************************************************************/
+
+
+
+

@@ -37,20 +37,20 @@
  initialisation, etc.  of the QgsWcsClient2 plugin
 """
 from __future__ import absolute_import
-# Import the PyQt and QGIS libraries
+    # Import the PyQt and QGIS libraries
 from builtins import object
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from qgis.core import *
-# Initialize Qt resources from file resources.py
-# Import the code for the dialog(s)
+    # Initialize Qt resources from file resources.py
+    # Import the code for the dialog(s)
 from .qgswcsclient2dialog import QgsWcsClient2Dialog
 from .qgsnewhttpconnectionbase import Ui_qgsnewhttpconnectionbase
-from .EOxWCSClient.wcs_client import wcsClient
+from .EOxWCSClient.wcs_client  import wcsClient
 import os.path
 
-# global setttings and saved server list
+    # global setttings and saved server list
 global config
 from . import config
 
@@ -59,10 +59,10 @@ class QgsWcsClient2(object):
 
     def __init__(self, iface):
         global config
-        # Save reference to the QGIS interface
+            # Save reference to the QGIS interface
         self.iface = iface
 
-        # initialize locale
+            # initialize locale
         locale = QSettings().value("locale/userLocale")[0:2]
         localePath = os.path.join(config.plugin_dir, 'i18n', 'qgswcsclient2_{}.qm'.format(locale))
 
@@ -76,32 +76,38 @@ class QgsWcsClient2(object):
             # Create the dialog (after translation) and keep reference
         self.dlg = QgsWcsClient2Dialog(iface)
 
+
     def initGui(self):
-        # Create action that will start plugin configuration
+            # Create action that will start plugin configuration
         self.action = QAction(
             QIcon(":/plugins/qgswcsclient2/icon.png"),
             u"WCS 2.0/EO-WCS Client", self.iface.mainWindow())
-        # connect the action to the run method
+            # connect the action to the run method
         self.action.triggered.connect(self.run)
 
-        # Add toolbar button and menu item
+            # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
         self.iface.addPluginToMenu(u"&WcsClient2", self.action)
 
     def unload(self):
-        # Remove the plugin menu item and icon
+            # Remove the plugin menu item and icon
         self.iface.removePluginMenu(u"&WcsClient2", self.action)
         self.iface.removeToolBarIcon(self.action)
 
         # run method that performs all the real work
-
     def run(self):
-        # show the dialog
+            # show the dialog
         self.dlg.show()
-        # Run the dialog event loop
+            # Run the dialog event loop
         result = self.dlg.exec_()
-        # See if OK was pressed
+            # See if OK was pressed
         if result == 1:
-            # do something useful (delete the line containing pass and
-            # substitute with your code)
+                # do something useful (delete the line containing pass and
+                # substitute with your code)
             pass
+
+
+
+
+
+
